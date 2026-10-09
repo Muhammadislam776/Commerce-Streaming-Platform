@@ -1,25 +1,16 @@
-import express, { Request, Response } from 'express';
-import path from 'path';
-
-export * from './commerce/pakistan-payments';
-export * from './commerce/redis-inventory';
-export * from './commerce/webhook-validator';
-export * from './realtime/websocket-server';
-export * from './realtime/webrtc-sfu-client';
-export * from './ai/catalog-rag';
-export * from './data/mockProducts';
+const express = require('express');
+const path = require('path');
 
 const app = express();
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-// Serve static assets from public directory
-const publicDir = path.join(process.cwd(), 'public');
+const publicDir = path.join(__dirname, 'public');
 app.use(express.static(publicDir));
 
 // Pakistan In-Stream Mobile Checkout API
-app.post('/api/checkout/initiate', (req: Request, res: Response) => {
+app.post('/api/checkout/initiate', (req, res) => {
   const { gateway, totalAmountPkr, customerPhone } = req.body || {};
   const orderNumber = 'ORD-' + Math.floor(1000 + Math.random() * 9000);
   res.json({
@@ -34,19 +25,17 @@ app.post('/api/checkout/initiate', (req: Request, res: Response) => {
   });
 });
 
-app.post('/api/webhooks/jazzcash', (req: Request, res: Response) => {
+app.post('/api/webhooks/jazzcash', (req, res) => {
   res.json({ status: 'CONFIRMED', gateway: 'JazzCash', receivedAt: new Date().toISOString() });
 });
 
-app.post('/api/webhooks/easypaisa', (req: Request, res: Response) => {
+app.post('/api/webhooks/easypaisa', (req, res) => {
   res.json({ status: 'CONFIRMED', gateway: 'EasyPaisa', receivedAt: new Date().toISOString() });
 });
 
 // Catch-all: serve index.html for all frontend routes
-app.get('*', (req: Request, res: Response) => {
+app.get('*', (req, res) => {
   res.sendFile(path.join(publicDir, 'index.html'));
 });
 
-export default app;
-export { app };
 module.exports = app;
