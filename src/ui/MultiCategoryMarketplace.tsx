@@ -17,6 +17,12 @@ export const MultiCategoryMarketplace: React.FC<MultiCategoryMarketplaceProps> =
   const [selectedCategory, setSelectedCategory] = useState<CategoryKey>('All');
   const [activeProduct, setActiveProduct] = useState<Product | null>(null);
   const [activeGalleryIndex, setActiveGalleryIndex] = useState<number>(0);
+  const [showWriteReview, setShowWriteReview] = useState<boolean>(false);
+  const [newReviewAuthor, setNewReviewAuthor] = useState<string>('');
+  const [newReviewLocation, setNewReviewLocation] = useState<string>('');
+  const [newReviewText, setNewReviewText] = useState<string>('');
+  const [newReviewRating, setNewReviewRating] = useState<number>(5);
+  const [customReviews, setCustomReviews] = useState<Record<string, Array<{ author: string; location: string; rating: number; date: string; verified: boolean; text: string }>>>({});
 
   // Category counts
   const categoryCounts = useMemo(() => {
@@ -271,6 +277,120 @@ export const MultiCategoryMarketplace: React.FC<MultiCategoryMarketplaceProps> =
             </div>
           ))}
         </div>
+
+        {/* Collector Spotlights & Customer Reviews Showcase */}
+        <div className="mt-12 pt-8 border-t border-slate-200/80">
+          <div className="flex flex-col sm:flex-row sm:items-end justify-between mb-6 gap-2">
+            <div>
+              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-amber-50 text-amber-900 border border-amber-200/80 text-[11px] font-bold mb-1.5 shadow-2xs">
+                <span>⭐</span>
+                <span>AUTHENTIC BUYER TESTIMONIALS</span>
+                <span className="text-amber-300">·</span>
+                <span className="font-mono text-amber-800">4.92 / 5.0 Star Rating</span>
+              </div>
+              <h3 className="text-xl font-black text-slate-900 tracking-tight">Collector Spotlights & Customer Reviews</h3>
+              <p className="text-xs text-slate-500">Real verified impressions from Pakistani and international luxury connoisseurs</p>
+            </div>
+            <div className="flex items-center gap-2 text-xs font-mono font-bold text-slate-500">
+              <span className="w-2 h-2 rounded-full bg-emerald-500" />
+              <span>1,420+ Verified Deliveries</span>
+            </div>
+          </div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+            <div className="p-4 rounded-2xl bg-white border border-slate-200/90 shadow-sm flex flex-col justify-between">
+              <div>
+                <div className="flex items-center justify-between text-xs mb-2">
+                  <div className="flex text-amber-400 text-xs">★★★★★</div>
+                  <span className="text-[10px] text-slate-400 font-mono">2 days ago</span>
+                </div>
+                <p className="text-xs text-slate-700 leading-relaxed font-medium italic">
+                  "The Grade 5 titanium feel on the Aura Chrono is breathtaking. Weightless on wrist and the micro-adjust clasp is a game changer. Arrived in Lahore via express in 24 hours!"
+                </p>
+              </div>
+              <div className="mt-4 pt-3 border-t border-slate-100 flex items-center gap-2.5">
+                <img src="https://i.pravatar.cc/100?img=11" className="w-8 h-8 rounded-full object-cover" alt="Reviewer" />
+                <div className="min-w-0 flex-1">
+                  <h5 className="text-xs font-bold text-slate-900 truncate">Hamza Tariq</h5>
+                  <p className="text-[10px] text-emerald-600 font-semibold flex items-center gap-1">
+                    <span>✓ Verified Buyer</span>
+                    <span className="text-slate-300">·</span>
+                    <span className="text-slate-400 font-normal">Islamabad</span>
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <div className="p-4 rounded-2xl bg-white border border-slate-200/90 shadow-sm flex flex-col justify-between">
+              <div>
+                <div className="flex items-center justify-between text-xs mb-2">
+                  <div className="flex text-amber-400 text-xs">★★★★★</div>
+                  <span className="text-[10px] text-slate-400 font-mono">Yesterday</span>
+                </div>
+                <p className="text-xs text-slate-700 leading-relaxed font-medium italic">
+                  "Bought the Elysian Diamond Pavé Ring during the live stream. Sparkle under sunlight is pure fire. EasyPaisa checkout was completely seamless. Highly recommended!"
+                </p>
+              </div>
+              <div className="mt-4 pt-3 border-t border-slate-100 flex items-center gap-2.5">
+                <img src="https://i.pravatar.cc/100?img=47" className="w-8 h-8 rounded-full object-cover" alt="Reviewer" />
+                <div className="min-w-0 flex-1">
+                  <h5 className="text-xs font-bold text-slate-900 truncate">Ayesha Malik</h5>
+                  <p className="text-[10px] text-emerald-600 font-semibold flex items-center gap-1">
+                    <span>✓ Verified Buyer</span>
+                    <span className="text-slate-300">·</span>
+                    <span className="text-slate-400 font-normal">Karachi</span>
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <div className="p-4 rounded-2xl bg-white border border-slate-200/90 shadow-sm flex flex-col justify-between">
+              <div>
+                <div className="flex items-center justify-between text-xs mb-2">
+                  <div className="flex text-amber-400 text-xs">★★★★★</div>
+                  <span className="text-[10px] text-slate-400 font-mono">4 days ago</span>
+                </div>
+                <p className="text-xs text-slate-700 leading-relaxed font-medium italic">
+                  "Cashmere Overcoat has impeccable Italian drape. The horn buttons and horn lining finish are top-tier sartorial art. Live host accurately described the sizing fit."
+                </p>
+              </div>
+              <div className="mt-4 pt-3 border-t border-slate-100 flex items-center gap-2.5">
+                <img src="https://i.pravatar.cc/100?img=68" className="w-8 h-8 rounded-full object-cover" alt="Reviewer" />
+                <div className="min-w-0 flex-1">
+                  <h5 className="text-xs font-bold text-slate-900 truncate">Zubair Khan</h5>
+                  <p className="text-[10px] text-emerald-600 font-semibold flex items-center gap-1">
+                    <span>✓ Verified Buyer</span>
+                    <span className="text-slate-300">·</span>
+                    <span className="text-slate-400 font-normal">Lahore</span>
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <div className="p-4 rounded-2xl bg-white border border-slate-200/90 shadow-sm flex flex-col justify-between">
+              <div>
+                <div className="flex items-center justify-between text-xs mb-2">
+                  <div className="flex text-amber-400 text-xs">★★★★★</div>
+                  <span className="text-[10px] text-slate-400 font-mono">5 days ago</span>
+                </div>
+                <p className="text-xs text-slate-700 leading-relaxed font-medium italic">
+                  "Audiophile Planar Magnetic Headphones soundstage is unreal. Beryllium drivers reproduce every micro-detail in acoustic and classical tracks. 10/10 purchase."
+                </p>
+              </div>
+              <div className="mt-4 pt-3 border-t border-slate-100 flex items-center gap-2.5">
+                <img src="https://i.pravatar.cc/100?img=52" className="w-8 h-8 rounded-full object-cover" alt="Reviewer" />
+                <div className="min-w-0 flex-1">
+                  <h5 className="text-xs font-bold text-slate-900 truncate">Dr. Bilal Qureshi</h5>
+                  <p className="text-[10px] text-emerald-600 font-semibold flex items-center gap-1">
+                    <span>✓ Verified Buyer</span>
+                    <span className="text-slate-300">·</span>
+                    <span className="text-slate-400 font-normal">Rawalpindi</span>
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
       </section>
 
       {/* ============================================================= */}
@@ -444,6 +564,248 @@ export const MultiCategoryMarketplace: React.FC<MultiCategoryMarketplaceProps> =
                       </p>
                     </div>
                   ))}
+                </div>
+              </div>
+
+              {/* ========================================================= */}
+              {/* VERIFIED CUSTOMER REVIEWS & RATINGS SCORECARD             */}
+              {/* ========================================================= */}
+              <div className="pt-6 border-t border-slate-200">
+                <div className="flex flex-col sm:flex-row sm:items-center justify-between mb-4 gap-2">
+                  <div>
+                    <div className="flex items-center gap-2">
+                      <h3 className="text-sm font-extrabold text-slate-900 tracking-tight">Customer Reviews & Ratings</h3>
+                      <span className="px-2 py-0.5 rounded-full bg-emerald-50 text-emerald-700 text-[10px] font-bold border border-emerald-200">
+                        ✓ 100% Verified Purchases
+                      </span>
+                    </div>
+                    <p className="text-xs text-slate-500">Authentic buyer feedback from Pakistan & global collectors</p>
+                  </div>
+                  <button
+                    onClick={() => setShowWriteReview(!showWriteReview)}
+                    className="px-3.5 py-1.5 rounded-xl bg-slate-900 hover:bg-slate-800 text-white text-xs font-bold transition-all shadow-sm active:scale-95 flex items-center gap-1.5 self-start sm:self-auto"
+                  >
+                    <span>✍️</span>
+                    <span>{showWriteReview ? 'Close Form' : 'Write a Review'}</span>
+                  </button>
+                </div>
+
+                {/* Scorecard */}
+                <div className="p-4 rounded-2xl bg-slate-50/80 border border-slate-200/80 grid grid-cols-1 md:grid-cols-3 gap-6 items-center">
+                  <div className="flex flex-col items-center md:items-start text-center md:text-left border-b md:border-b-0 md:border-r border-slate-200/80 pb-4 md:pb-0 md:pr-4">
+                    <span className="text-4xl font-black text-slate-900 font-mono">{activeProduct.rating}</span>
+                    <div className="flex items-center gap-1 text-amber-500 text-sm my-1">
+                      <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
+                    </div>
+                    <span className="text-xs font-semibold text-slate-600">Based on {activeProduct.reviewsCount} verified buyers</span>
+                    <span className="text-[11px] text-emerald-600 font-bold mt-1">98% of customers recommend this item</span>
+                  </div>
+
+                  <div className="space-y-1.5 text-xs text-slate-600">
+                    <div className="flex items-center gap-2">
+                      <span className="w-12 font-bold text-[11px]">5 Stars</span>
+                      <div className="flex-1 h-2 bg-slate-200 rounded-full overflow-hidden">
+                        <div className="h-full bg-amber-400 rounded-full" style={{ width: '88%' }} />
+                      </div>
+                      <span className="w-8 text-right font-mono text-[10px] font-bold text-slate-700">88%</span>
+                    </div>
+                    <div className="flex items-center gap-2">
+                      <span className="w-12 font-bold text-[11px]">4 Stars</span>
+                      <div className="flex-1 h-2 bg-slate-200 rounded-full overflow-hidden">
+                        <div className="h-full bg-amber-400 rounded-full" style={{ width: '9%' }} />
+                      </div>
+                      <span className="w-8 text-right font-mono text-[10px] font-bold text-slate-700">9%</span>
+                    </div>
+                    <div className="flex items-center gap-2">
+                      <span className="w-12 font-bold text-[11px]">3 Stars</span>
+                      <div className="flex-1 h-2 bg-slate-200 rounded-full overflow-hidden">
+                        <div className="h-full bg-amber-400 rounded-full" style={{ width: '2%' }} />
+                      </div>
+                      <span className="w-8 text-right font-mono text-[10px] font-bold text-slate-700">2%</span>
+                    </div>
+                    <div className="flex items-center gap-2">
+                      <span className="w-12 font-bold text-[11px]">2 Stars</span>
+                      <div className="flex-1 h-2 bg-slate-200 rounded-full overflow-hidden">
+                        <div className="h-full bg-amber-400 rounded-full" style={{ width: '1%' }} />
+                      </div>
+                      <span className="w-8 text-right font-mono text-[10px] font-bold text-slate-700">1%</span>
+                    </div>
+                    <div className="flex items-center gap-2">
+                      <span className="w-12 font-bold text-[11px]">1 Star</span>
+                      <div className="flex-1 h-2 bg-slate-200 rounded-full overflow-hidden">
+                        <div className="h-full bg-amber-400 rounded-full" style={{ width: '0%' }} />
+                      </div>
+                      <span className="w-8 text-right font-mono text-[10px] font-bold text-slate-700">0%</span>
+                    </div>
+                  </div>
+
+                  <div className="border-t md:border-t-0 md:border-l border-slate-200/80 pt-4 md:pt-0 md:pl-4 space-y-2">
+                    <div className="flex items-center gap-2 text-xs">
+                      <span className="w-5 h-5 rounded-md bg-emerald-100 text-emerald-700 flex items-center justify-center font-bold text-[10px]">✓</span>
+                      <span className="text-slate-700 font-semibold">100% Genuine Atelier Origin</span>
+                    </div>
+                    <div className="flex items-center gap-2 text-xs">
+                      <span className="w-5 h-5 rounded-md bg-emerald-100 text-emerald-700 flex items-center justify-center font-bold text-[10px]">✓</span>
+                      <span className="text-slate-700 font-semibold">Express 24h Pakistan Dispatch</span>
+                    </div>
+                    <div className="flex items-center gap-2 text-xs">
+                      <span className="w-5 h-5 rounded-md bg-emerald-100 text-emerald-700 flex items-center justify-center font-bold text-[10px]">✓</span>
+                      <span className="text-slate-700 font-semibold">30-Day Hassle-Free Returns</span>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Interactive Write Review Form */}
+                {showWriteReview && (
+                  <form
+                    onSubmit={(e) => {
+                      e.preventDefault();
+                      if (!newReviewAuthor || !newReviewText) return;
+                      const rev = {
+                        author: newReviewAuthor,
+                        location: newReviewLocation || 'Pakistan',
+                        rating: newReviewRating,
+                        date: 'Just now',
+                        verified: true,
+                        text: newReviewText,
+                      };
+                      setCustomReviews((prev) => ({
+                        ...prev,
+                        [activeProduct.id]: [rev, ...(prev[activeProduct.id] || [])],
+                      }));
+                      setShowWriteReview(false);
+                      setNewReviewAuthor('');
+                      setNewReviewLocation('');
+                      setNewReviewText('');
+                      setNewReviewRating(5);
+                    }}
+                    className="mt-4 p-4 rounded-2xl bg-white border-2 border-indigo-200 shadow-sm space-y-3"
+                  >
+                    <div className="flex items-center justify-between pb-2 mb-2 border-b border-slate-100">
+                      <h4 className="text-xs font-extrabold text-slate-900 uppercase">Write Your Verified Review</h4>
+                      <button type="button" onClick={() => setShowWriteReview(false)} className="text-slate-400 text-xs font-bold">✕ Close</button>
+                    </div>
+
+                    <div>
+                      <label className="block text-xs font-semibold text-slate-700 mb-1">Rating</label>
+                      <div className="flex items-center gap-1.5">
+                        {[1, 2, 3, 4, 5].map((star) => (
+                          <button
+                            key={star}
+                            type="button"
+                            onClick={() => setNewReviewRating(star)}
+                            className={`text-2xl transition-transform ${star <= newReviewRating ? 'text-amber-400' : 'text-slate-300'}`}
+                          >
+                            ★
+                          </button>
+                        ))}
+                        <span className="text-xs font-bold text-slate-700 ml-2">{newReviewRating} Stars</span>
+                      </div>
+                    </div>
+
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                      <input
+                        type="text"
+                        placeholder="Your Name (e.g. Asad Malik)"
+                        value={newReviewAuthor}
+                        onChange={(e) => setNewReviewAuthor(e.target.value)}
+                        required
+                        className="text-xs p-2.5 rounded-xl border border-slate-200 bg-slate-50 focus:outline-none focus:ring-2 focus:ring-slate-900/10"
+                      />
+                      <input
+                        type="text"
+                        placeholder="Location (e.g. Lahore, Pakistan)"
+                        value={newReviewLocation}
+                        onChange={(e) => setNewReviewLocation(e.target.value)}
+                        className="text-xs p-2.5 rounded-xl border border-slate-200 bg-slate-50 focus:outline-none focus:ring-2 focus:ring-slate-900/10"
+                      />
+                    </div>
+
+                    <textarea
+                      placeholder="Share your experience with craftsmanship, packaging, and delivery speed..."
+                      value={newReviewText}
+                      onChange={(e) => setNewReviewText(e.target.value)}
+                      required
+                      rows={3}
+                      className="w-full text-xs p-2.5 rounded-xl border border-slate-200 bg-slate-50 focus:outline-none focus:ring-2 focus:ring-slate-900/10"
+                    />
+
+                    <div className="flex justify-end gap-2">
+                      <button type="button" onClick={() => setShowWriteReview(false)} className="px-3 py-2 rounded-xl text-xs font-bold text-slate-600 hover:bg-slate-100">Cancel</button>
+                      <button type="submit" className="px-4 py-2 rounded-xl bg-slate-900 text-white text-xs font-bold hover:bg-slate-800">Submit Verified Review</button>
+                    </div>
+                  </form>
+                )}
+
+                {/* Reviews List */}
+                <div className="mt-4 space-y-3">
+                  <div className="flex items-center justify-between pb-2 border-b border-slate-100">
+                    <span className="text-xs font-bold text-slate-900">Buyer Reviews ({(customReviews[activeProduct.id]?.length || 0) + 2} Verified)</span>
+                    <span className="text-[11px] text-slate-400">Sorted by Most Recent</span>
+                  </div>
+
+                  {/* Custom Submitted Reviews */}
+                  {(customReviews[activeProduct.id] || []).map((rev, i) => (
+                    <div key={`custom-${i}`} className="p-3.5 rounded-2xl bg-indigo-50/40 border border-indigo-100">
+                      <div className="flex items-center justify-between mb-2">
+                        <div className="flex items-center gap-2">
+                          <div className="w-7 h-7 rounded-full bg-indigo-600 text-white flex items-center justify-center font-bold text-xs uppercase">
+                            {rev.author.charAt(0)}
+                          </div>
+                          <div>
+                            <div className="flex items-center gap-1.5">
+                              <span className="font-bold text-xs text-slate-900">{rev.author}</span>
+                              <span className="px-1.5 py-0.2 rounded text-[8px] font-black bg-emerald-100 text-emerald-800 border border-emerald-300">✓ VERIFIED BUYER</span>
+                            </div>
+                            <span className="text-[10px] text-slate-400 font-medium">{rev.location} · {rev.date}</span>
+                          </div>
+                        </div>
+                        <div className="text-amber-400 text-xs font-mono font-bold">
+                          {'★'.repeat(rev.rating)}{'☆'.repeat(5 - rev.rating)}
+                        </div>
+                      </div>
+                      <p className="text-xs text-slate-700 leading-relaxed font-medium">"{rev.text}"</p>
+                    </div>
+                  ))}
+
+                  {/* Default Verified Reviews */}
+                  <div className="p-3.5 rounded-2xl bg-slate-50/70 border border-slate-200/80">
+                    <div className="flex items-center justify-between mb-2">
+                      <div className="flex items-center gap-2">
+                        <div className="w-7 h-7 rounded-full bg-slate-900 text-white flex items-center justify-center font-bold text-xs uppercase">H</div>
+                        <div>
+                          <div className="flex items-center gap-1.5">
+                            <span className="font-bold text-xs text-slate-900">Hamza Tariq</span>
+                            <span className="px-1.5 py-0.2 rounded text-[8px] font-black bg-emerald-100 text-emerald-800 border border-emerald-300">✓ VERIFIED BUYER</span>
+                          </div>
+                          <span className="text-[10px] text-slate-400 font-medium">Islamabad, Pakistan · 2 days ago</span>
+                        </div>
+                      </div>
+                      <div className="text-amber-400 text-xs font-mono font-bold">★★★★★</div>
+                    </div>
+                    <p className="text-xs text-slate-700 leading-relaxed font-medium">
+                      "Craftsmanship and finish exceeded all expectations. Packaging had authentic sealed certificates and arrived within 24 hours via express insured courier."
+                    </p>
+                  </div>
+
+                  <div className="p-3.5 rounded-2xl bg-slate-50/70 border border-slate-200/80">
+                    <div className="flex items-center justify-between mb-2">
+                      <div className="flex items-center gap-2">
+                        <div className="w-7 h-7 rounded-full bg-slate-900 text-white flex items-center justify-center font-bold text-xs uppercase">Z</div>
+                        <div>
+                          <div className="flex items-center gap-1.5">
+                            <span className="font-bold text-xs text-slate-900">Zubair Khan</span>
+                            <span className="px-1.5 py-0.2 rounded text-[8px] font-black bg-emerald-100 text-emerald-800 border border-emerald-300">✓ VERIFIED BUYER</span>
+                          </div>
+                          <span className="text-[10px] text-slate-400 font-medium">Lahore, Pakistan · 4 days ago</span>
+                        </div>
+                      </div>
+                      <div className="text-amber-400 text-xs font-mono font-bold">★★★★★</div>
+                    </div>
+                    <p className="text-xs text-slate-700 leading-relaxed font-medium">
+                      "EasyPaisa in-stream checkout was instant. No redirect friction. The product is 100% genuine atelier grade."
+                    </p>
+                  </div>
                 </div>
               </div>
 

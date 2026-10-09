@@ -268,103 +268,107 @@
             <!-- Subtle Edge Vignette -->
             <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-black/50 pointer-events-none"></div>
 
-            <!-- TOP LEFT OVERLAYS: Host profile, GMV Ticker, AI Mod status -->
-            <div class="absolute top-4 left-4 flex flex-col gap-2 z-20 pointer-events-auto">
-              <!-- Host Pill -->
-              <div class="flex items-center gap-2.5 p-1.5 pr-3.5 rounded-full glassmorphic shadow-lg">
+            <!-- ========================================================= -->
+            <!-- 1. TOP BROADCAST CONTROL & TELEMETRY TOOLBAR                -->
+            <!-- ========================================================= -->
+            <div class="absolute top-3 inset-x-3 z-30 pointer-events-auto flex items-center justify-between gap-2">
+              
+              <!-- Left: Host Profile Pill -->
+              <div class="flex items-center gap-2 p-1.5 pr-3 rounded-full bg-slate-950/75 backdrop-blur-xl border border-white/20 text-white shadow-xl">
                 <div class="relative">
                   <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=100&auto=format&fit=crop&q=80" alt="Host" class="w-8 h-8 rounded-full object-cover ring-2 ring-rose-500">
-                  <span class="absolute bottom-0 right-0 w-2 h-2 rounded-full bg-emerald-500 ring-1 ring-white"></span>
+                  <span class="absolute bottom-0 right-0 w-2.5 h-2.5 rounded-full bg-emerald-500 ring-2 ring-slate-950"></span>
                 </div>
-                <div>
+                <div class="leading-tight">
                   <div class="flex items-center gap-1">
-                    <span class="text-xs font-bold text-slate-900">Maison Horlogère</span>
-                    <svg class="w-3.5 h-3.5 text-blue-500 fill-current" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg>
+                    <span class="text-xs font-extrabold text-white">Maison Horlogère</span>
+                    <svg class="w-3.5 h-3.5 text-sky-400 fill-current" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg>
                   </div>
-                  <p class="text-[9px] text-slate-500 font-medium">Paris Live Showcase</p>
+                  <p class="text-[9px] text-slate-300 font-medium">Paris Studio · Live Host</p>
                 </div>
-                <button class="ml-1 px-3 py-1 rounded-full bg-slate-900 text-white text-[10px] font-bold hover:bg-slate-800 shadow-sm transition-all">
+                <button onclick="alert('You are now following Maison Horlogère!')" class="ml-1 px-3 py-1 rounded-full bg-white text-slate-950 text-[10px] font-black hover:bg-slate-200 transition-all shadow active:scale-95">
                   Follow
                 </button>
               </div>
 
-              <!-- Metrics & Status Pills -->
+              <!-- Center: Stream Metrics & Telemetry Chips -->
+              <div class="hidden md:flex items-center gap-2.5 p-1.5 px-3.5 rounded-full bg-slate-950/75 backdrop-blur-xl border border-white/20 text-white shadow-xl text-xs font-bold">
+                <!-- Live Pulse & Viewers -->
+                <div class="flex items-center gap-1.5">
+                  <span class="w-2 h-2 rounded-full bg-rose-500 animate-ping"></span>
+                  <span class="text-rose-400 font-black">LIVE</span>
+                  <span class="text-white/30">|</span>
+                  <svg class="w-3.5 h-3.5 text-slate-400" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/></svg>
+                  <span id="viewerCounterBadge" class="font-mono text-white tracking-wide">14.8k</span>
+                </div>
+                <span class="text-white/20">·</span>
+                <!-- GMV -->
+                <div class="flex items-center gap-1">
+                  <span class="text-slate-400 text-[11px] font-medium">GMV:</span>
+                  <span id="liveGmvTicker" class="font-mono text-emerald-400 font-black">$34,820</span>
+                </div>
+                <span class="text-white/20">·</span>
+                <!-- SFU Latency -->
+                <div class="flex items-center gap-1.5 text-[11px] text-slate-300">
+                  <span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span>
+                  <span id="streamLatencyBadge">WebRTC · 185ms</span>
+                </div>
+                <span class="text-white/20">·</span>
+                <!-- AI Guard -->
+                <span class="text-[10px] text-indigo-300 bg-indigo-500/25 px-2 py-0.5 rounded-full border border-indigo-400/40">
+                  🛡️ AI Guard
+                </span>
+              </div>
+
+              <!-- Right: Channel Switcher & Cart Buttons -->
               <div class="flex items-center gap-2">
-                <!-- GMV Ticker -->
-                <div class="flex items-center gap-1.5 px-2.5 py-1 rounded-full glassmorphic text-[11px] font-bold text-slate-900">
-                  <span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span>
-                  <span>GMV:</span>
-                  <span id="liveGmvTicker" class="font-mono text-emerald-600 font-extrabold">$34,820</span>
-                </div>
+                <button onclick="toggleOngoingStreams()" id="streamsToggleBtn" class="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-slate-950/75 backdrop-blur-xl border border-white/20 text-white text-xs font-bold hover:bg-slate-900 transition-all shadow-xl active:scale-95">
+                  <span class="w-2 h-2 rounded-full bg-rose-500 animate-pulse"></span>
+                  <span>Feeds (3)</span>
+                  <svg class="w-3.5 h-3.5 text-slate-400" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+                </button>
 
-                <!-- Stream Active Status -->
-                <div class="flex items-center gap-1 px-2.5 py-1 rounded-full glassmorphic text-[11px] font-bold text-slate-800">
-                  <span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span>
-                  <span>ACTIVE</span>
-                </div>
-
-                <!-- AI Moderation Badge -->
-                <div class="flex items-center gap-1 px-2.5 py-1 rounded-full glassmorphic text-[11px] font-bold text-emerald-700">
-                  <span>AI Mod:</span>
-                  <span class="text-emerald-600">ACTIVE</span>
-                </div>
+                <button onclick="openCart()" class="relative p-2 rounded-full bg-slate-950/75 backdrop-blur-xl border border-white/20 text-white hover:bg-slate-900 shadow-xl active:scale-95 transition-all">
+                  <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"/></svg>
+                  <span class="absolute -top-1 -right-1 w-4 h-4 rounded-full bg-rose-600 text-white text-[10px] font-black flex items-center justify-center ring-2 ring-slate-950">1</span>
+                </button>
               </div>
-            </div>
-
-            <!-- TOP RIGHT OVERLAYS: Live viewers, WebRTC latency, Cart counter -->
-            <div class="absolute top-4 right-4 flex items-center gap-2 z-20 pointer-events-auto">
-              <!-- Live Badge + Viewers -->
-              <div class="flex items-center gap-2 px-3 py-1.5 rounded-full glassmorphic text-xs font-bold text-slate-900 shadow-md">
-                <span class="w-2 h-2 rounded-full bg-rose-500 animate-ping"></span>
-                <span class="text-rose-600">LIVE</span>
-                <span class="text-slate-300">|</span>
-                <svg class="w-3.5 h-3.5 text-slate-500" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/></svg>
-                <span id="viewerCounterBadge" class="font-mono">14.8k</span>
-              </div>
-
-              <!-- Latency Spec -->
-              <div class="flex items-center gap-1.5 px-3 py-1.5 rounded-full glassmorphic text-[11px] font-semibold text-slate-700 shadow-sm">
-                <span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span>
-                <span>WebRTC · 185ms</span>
-              </div>
-
-              <!-- Cart Button -->
-              <button onclick="openCart()" class="relative p-2 rounded-full glassmorphic text-slate-800 hover:bg-white shadow-md active:scale-95 transition-transform">
-                <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"/></svg>
-                <span class="absolute -top-1 -right-1 w-4 h-4 rounded-full bg-rose-600 text-white text-[10px] font-bold flex items-center justify-center ring-2 ring-white">1</span>
-              </button>
             </div>
 
             <!-- REACTION FLOATING CANVAS -->
             <div id="reactionsCanvas" class="absolute inset-x-0 bottom-40 h-64 pointer-events-none overflow-hidden z-20"></div>
 
-            <!-- LIVE TOAST MINI-NOTIFICATIONS (Social Proof) -->
-            <div id="livePurchaseToast" class="absolute top-20 right-4 z-30 transition-all duration-300 transform translate-y-0 opacity-100">
-              <div class="flex items-center gap-2 px-3 py-1.5 rounded-full glassmorphic shadow-lg text-[11px] font-bold text-slate-800 border border-white/80 animate-in fade-in slide-in-from-top-2">
-                <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
-                <span class="text-slate-500 font-medium">Flash Order:</span>
-                <span id="toastCustomerName" class="text-slate-900 font-extrabold">Sarah J.</span>
-                <span class="text-emerald-600">just bought Aura Chrono!</span>
+            <!-- ========================================================= -->
+            <!-- 2. LIVE SOCIAL PROOF TOAST (ANCHORED ABOVE PINNED CARD)   -->
+            <!-- ========================================================= -->
+            <div id="livePurchaseToast" class="absolute bottom-[222px] left-4 z-30 transition-all duration-300 transform translate-y-0 opacity-100 pointer-events-none">
+              <div class="flex items-center gap-2.5 px-3.5 py-1.5 rounded-full bg-slate-950/90 backdrop-blur-xl shadow-2xl text-xs font-bold text-white border border-emerald-500/50 animate-in fade-in slide-in-from-bottom-2">
+                <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+                <span class="text-slate-400 font-medium">Flash Order:</span>
+                <span id="toastCustomerName" class="text-white font-extrabold">Sarah J. (Lahore)</span>
+                <span class="text-emerald-400 font-extrabold">just bought Aura Chrono! 🚀</span>
               </div>
             </div>
 
-            <!-- BOTTOM LEFT: HOST PINNED PRODUCT GLASSMORPHIC SHOWCASE -->
+            <!-- ========================================================= -->
+            <!-- 3. HOST PINNED PRODUCT SHOWCASE (BOTTOM LEFT)             -->
+            <!-- ========================================================= -->
             <div class="absolute bottom-4 left-4 z-30 pointer-events-auto max-w-sm w-full">
-              <div class="rounded-2xl glassmorphic p-4 transition-all duration-300 hover:shadow-2xl">
-                <!-- Ribbon & AI link -->
-                <div class="flex items-center justify-between mb-3">
-                  <div class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-rose-50 border border-rose-200 text-rose-700 text-[10px] font-bold tracking-wide">
-                    <span class="w-1.5 h-1.5 rounded-full bg-rose-500 animate-ping"></span>
-                    HOST PINNED ITEM
+              <div class="rounded-2xl bg-white/95 backdrop-blur-xl border border-slate-200/90 p-4 shadow-2xl transition-all duration-300 hover:shadow-indigo-500/10">
+                <!-- Ribbon & AI RAG Link -->
+                <div class="flex items-center justify-between mb-2.5">
+                  <div class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-rose-50 border border-rose-200 text-rose-700 text-[10px] font-black tracking-wide">
+                    <span class="w-1.5 h-1.5 rounded-full bg-rose-600 animate-ping"></span>
+                    HOST PINNED SHOWCASE
                   </div>
                   <button onclick="openAITab()" class="inline-flex items-center gap-1 text-xs font-bold text-indigo-600 hover:text-indigo-800 transition-colors">
                     <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
-                    Ask AI RAG
+                    <span>Ask AI RAG</span>
                   </button>
                 </div>
 
                 <div class="flex gap-3">
-                  <!-- Product Image with Discount -->
+                  <!-- Product Image with Badge -->
                   <div class="relative w-20 h-20 rounded-xl overflow-hidden bg-slate-100 flex-shrink-0 border border-slate-200/80">
                     <img src="https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=400&auto=format&fit=crop&q=80" alt="Product" class="w-full h-full object-cover">
                     <span class="absolute bottom-1 left-1 px-1.5 py-0.5 rounded text-[9px] font-black bg-rose-600 text-white shadow-sm">-41%</span>
@@ -373,18 +377,19 @@
                   <!-- Details -->
                   <div class="flex-1 min-w-0">
                     <p class="text-[10px] font-bold uppercase tracking-wider text-slate-400">Supernova Luxury</p>
-                    <h4 class="text-sm font-bold text-slate-900 truncate">Aura Chrono 44mm Titanium</h4>
+                    <h4 class="text-xs font-extrabold text-slate-900 truncate">Aura Chrono 44mm Titanium Edition</h4>
                     
                     <div class="mt-1 flex items-baseline gap-2">
-                      <span class="text-base font-extrabold text-slate-900 font-mono">$249.80</span>
-                      <span class="text-xs text-slate-400 line-through font-mono">$420.00</span>
+                      <span class="text-sm font-extrabold text-slate-900 font-mono">Rs. 69,900</span>
+                      <span class="text-[10px] text-slate-400 line-through font-mono">Rs. 117,600</span>
+                      <span class="text-[10px] font-bold text-emerald-600 font-mono ml-auto">$249.80</span>
                     </div>
 
-                    <!-- Flash Stock Remaining Progress Bar -->
+                    <!-- Flash Stock Bar -->
                     <div class="mt-2">
                       <div class="flex items-center justify-between text-[10px] mb-1">
-                        <span class="text-slate-500 font-medium">Flash Stock Remaining</span>
-                        <span id="pinnedStockText" class="font-bold text-amber-700 font-mono">14 left</span>
+                        <span class="text-slate-500 font-medium">Flash Stock Left</span>
+                        <span id="pinnedStockText" class="font-bold text-amber-700 font-mono">14 units remaining</span>
                       </div>
                       <div class="w-full h-1.5 bg-slate-100 rounded-full overflow-hidden">
                         <div id="pinnedStockProgressBar" class="h-full bg-amber-500 rounded-full transition-all duration-500" style="width: 28%;"></div>
@@ -394,85 +399,83 @@
                 </div>
 
                 <!-- CTAs -->
-                <div class="mt-3.5 pt-3 border-t border-slate-200/60 flex items-center gap-2">
-                  <button id="pinnedAddToCartBtn" onclick="triggerAddToCart('Aura Chrono 44mm Titanium', 249.80)" class="flex-1 py-2 px-3 rounded-xl text-xs font-bold transition-all border border-slate-200 bg-white hover:bg-slate-50 text-slate-800 shadow-sm active:scale-95">
+                <div class="mt-3 pt-2.5 border-t border-slate-100 flex items-center gap-2">
+                  <button id="pinnedAddToCartBtn" onclick="triggerAddToCart('Aura Chrono 44mm Titanium', 249.80)" class="flex-1 py-2.5 px-3 rounded-xl text-xs font-bold transition-all border border-slate-200 bg-white hover:bg-slate-50 text-slate-800 shadow-sm active:scale-95">
                     Add to Cart
                   </button>
-                  <button onclick="openPakistanCheckout()" class="flex-1 py-2 px-3 rounded-xl text-xs font-bold bg-slate-900 hover:bg-slate-800 text-white shadow-md transition-all active:scale-95 flex items-center justify-center gap-1">
+                  <button onclick="openPakistanCheckout()" class="flex-1 py-2.5 px-3 rounded-xl text-xs font-bold bg-slate-900 hover:bg-slate-800 text-white shadow-md transition-all active:scale-95 flex items-center justify-center gap-1.5">
                     <span>Instant Buy Now</span>
-                    <span class="text-[10px] text-emerald-400 font-mono">🇵🇰</span>
+                    <span class="text-[10px] text-emerald-400 font-mono font-bold">🇵🇰</span>
                   </button>
                 </div>
               </div>
             </div>
 
-            <!-- RIGHT OF MAIN VIDEO: ONGOING LIVE STREAMS CAROUSEL TRAY -->
-            <div class="absolute top-16 right-4 bottom-4 w-44 z-20 pointer-events-auto flex flex-col gap-2">
-              <div class="p-2 rounded-xl glassmorphic shadow-lg flex-1 flex flex-col overflow-hidden">
-                <div class="flex items-center justify-between pb-2 border-b border-slate-200/60">
-                  <span class="text-[10px] font-extrabold uppercase tracking-wider text-slate-700">Ongoing Live Streams</span>
-                  <span class="w-2 h-2 rounded-full bg-rose-500 animate-pulse"></span>
+            <!-- ========================================================= -->
+            <!-- 4. ONGOING LIVE STREAMS TRAY (RIGHT SIDE, COLLAPSIBLE)    -->
+            <!-- ========================================================= -->
+            <div id="ongoingStreamsTray" class="absolute top-14 right-3 bottom-4 w-48 z-20 pointer-events-auto flex flex-col gap-2 transition-all duration-300">
+              <div class="p-2.5 rounded-2xl bg-white/95 backdrop-blur-xl border border-slate-200/90 shadow-2xl flex-1 flex flex-col overflow-hidden">
+                <div class="flex items-center justify-between pb-2 border-b border-slate-100">
+                  <span class="text-[10px] font-black uppercase tracking-wider text-slate-800 flex items-center gap-1">
+                    <span class="w-2 h-2 rounded-full bg-rose-500 animate-pulse"></span>
+                    Live Feeds (3)
+                  </span>
+                  <button onclick="toggleOngoingStreams()" class="p-1 rounded-md text-slate-400 hover:text-slate-800 hover:bg-slate-100 text-[10px] font-bold">✕</button>
                 </div>
 
                 <!-- Scrollable Streams List -->
-                <div class="flex-1 overflow-y-auto space-y-2.5 pt-2 pr-0.5">
+                <div class="flex-1 overflow-y-auto space-y-2 pt-2 pr-0.5">
                   <!-- Mini Feed 1 -->
-                  <div onclick="switchStreamFeed('tokyo')" class="group relative rounded-xl overflow-hidden cursor-pointer border border-white/80 hover:border-indigo-400 shadow-sm transition-all hover:scale-[1.02]">
-                    <div class="h-20 bg-slate-800 relative">
+                  <div onclick="switchStreamFeed('tokyo')" class="group relative rounded-xl overflow-hidden cursor-pointer border border-slate-200 hover:border-indigo-500 shadow-sm transition-all hover:scale-[1.02]">
+                    <div class="h-16 bg-slate-800 relative">
                       <img src="https://images.unsplash.com/photo-1508057198894-247b23fe5ade?w=300&auto=format&fit=crop&q=80" class="w-full h-full object-cover">
                       <div class="absolute inset-0 bg-black/30 group-hover:bg-black/10 transition-colors flex items-center justify-center">
-                        <div class="w-6 h-6 rounded-full bg-white/80 flex items-center justify-center shadow">
-                          <svg class="w-3.5 h-3.5 text-slate-900 fill-current ml-0.5" viewBox="0 0 20 20"><path d="M4 4l12 6-12 6z"/></svg>
+                        <div class="w-5 h-5 rounded-full bg-white/90 flex items-center justify-center shadow">
+                          <svg class="w-3 h-3 text-slate-900 fill-current ml-0.5" viewBox="0 0 20 20"><path d="M4 4l12 6-12 6z"/></svg>
                         </div>
                       </div>
-                      <span class="absolute top-1.5 left-1.5 px-1.5 py-0.2 rounded text-[9px] font-bold bg-rose-600 text-white">LIVE</span>
+                      <span class="absolute top-1 left-1 px-1 py-0.2 rounded text-[8px] font-black bg-rose-600 text-white">LIVE</span>
                     </div>
-                    <div class="p-1.5 bg-white/95">
-                      <p class="text-[10px] font-bold text-slate-800 truncate">Aura Smartwatch Live</p>
-                      <p class="text-[9px] text-slate-400">Tokyo Tech Studio</p>
+                    <div class="p-1.5 bg-white">
+                      <p class="text-[10px] font-bold text-slate-800 truncate">Tokyo Tech Studio</p>
+                      <p class="text-[9px] text-slate-400">Titanium Smartwear</p>
                     </div>
                   </div>
 
                   <!-- Mini Feed 2 -->
-                  <div onclick="switchStreamFeed('geneva')" class="group relative rounded-xl overflow-hidden cursor-pointer border border-white/80 hover:border-indigo-400 shadow-sm transition-all hover:scale-[1.02]">
-                    <div class="h-20 bg-slate-800 relative">
+                  <div onclick="switchStreamFeed('geneva')" class="group relative rounded-xl overflow-hidden cursor-pointer border border-slate-200 hover:border-indigo-500 shadow-sm transition-all hover:scale-[1.02]">
+                    <div class="h-16 bg-slate-800 relative">
                       <img src="https://images.unsplash.com/photo-1547996160-71dfabbce5ed?w=300&auto=format&fit=crop&q=80" class="w-full h-full object-cover">
                       <div class="absolute inset-0 bg-black/30 group-hover:bg-black/10 transition-colors flex items-center justify-center">
-                        <div class="w-6 h-6 rounded-full bg-white/80 flex items-center justify-center shadow">
-                          <svg class="w-3.5 h-3.5 text-slate-900 fill-current ml-0.5" viewBox="0 0 20 20"><path d="M4 4l12 6-12 6z"/></svg>
+                        <div class="w-5 h-5 rounded-full bg-white/90 flex items-center justify-center shadow">
+                          <svg class="w-3 h-3 text-slate-900 fill-current ml-0.5" viewBox="0 0 20 20"><path d="M4 4l12 6-12 6z"/></svg>
                         </div>
                       </div>
-                      <span class="absolute top-1.5 left-1.5 px-1.5 py-0.2 rounded text-[9px] font-bold bg-rose-600 text-white">LIVE</span>
+                      <span class="absolute top-1 left-1 px-1 py-0.2 rounded text-[8px] font-black bg-rose-600 text-white">LIVE</span>
                     </div>
-                    <div class="p-1.5 bg-white/95">
-                      <p class="text-[10px] font-bold text-slate-800 truncate">Maison Horlogère</p>
-                      <p class="text-[9px] text-slate-400">Geneva Atelier</p>
+                    <div class="p-1.5 bg-white">
+                      <p class="text-[10px] font-bold text-slate-800 truncate">Geneva Atelier</p>
+                      <p class="text-[9px] text-slate-400">Skeleton Tourbillon</p>
                     </div>
                   </div>
 
                   <!-- Mini Feed 3 -->
-                  <div onclick="switchStreamFeed('milan')" class="group relative rounded-xl overflow-hidden cursor-pointer border border-white/80 hover:border-indigo-400 shadow-sm transition-all hover:scale-[1.02]">
-                    <div class="h-20 bg-slate-800 relative">
+                  <div onclick="switchStreamFeed('milan')" class="group relative rounded-xl overflow-hidden cursor-pointer border border-slate-200 hover:border-indigo-500 shadow-sm transition-all hover:scale-[1.02]">
+                    <div class="h-16 bg-slate-800 relative">
                       <img src="https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?w=300&auto=format&fit=crop&q=80" class="w-full h-full object-cover">
                       <div class="absolute inset-0 bg-black/30 group-hover:bg-black/10 transition-colors flex items-center justify-center">
-                        <div class="w-6 h-6 rounded-full bg-white/80 flex items-center justify-center shadow">
-                          <svg class="w-3.5 h-3.5 text-slate-900 fill-current ml-0.5" viewBox="0 0 20 20"><path d="M4 4l12 6-12 6z"/></svg>
+                        <div class="w-5 h-5 rounded-full bg-white/90 flex items-center justify-center shadow">
+                          <svg class="w-3 h-3 text-slate-900 fill-current ml-0.5" viewBox="0 0 20 20"><path d="M4 4l12 6-12 6z"/></svg>
                         </div>
                       </div>
-                      <span class="absolute top-1.5 left-1.5 px-1.5 py-0.2 rounded text-[9px] font-bold bg-rose-600 text-white">LIVE</span>
+                      <span class="absolute top-1 left-1 px-1 py-0.2 rounded text-[8px] font-black bg-rose-600 text-white">LIVE</span>
                     </div>
-                    <div class="p-1.5 bg-white/95">
-                      <p class="text-[10px] font-bold text-slate-800 truncate">Maison Horlogère</p>
-                      <p class="text-[9px] text-slate-400">Milan Diamond Lab</p>
+                    <div class="p-1.5 bg-white">
+                      <p class="text-[10px] font-bold text-slate-800 truncate">Milan Diamond Lab</p>
+                      <p class="text-[9px] text-slate-400">18K Pavé Rings</p>
                     </div>
                   </div>
-                </div>
-
-                <!-- Carousel Pagination Dots -->
-                <div class="flex items-center justify-center gap-1 pt-1.5 border-t border-slate-200/50">
-                  <span class="w-1.5 h-1.5 rounded-full bg-slate-800"></span>
-                  <span class="w-1.5 h-1.5 rounded-full bg-slate-300"></span>
-                  <span class="w-1.5 h-1.5 rounded-full bg-slate-300"></span>
                 </div>
               </div>
             </div>
@@ -613,6 +616,127 @@
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 mt-3" id="multiCategoryProductGrid">
           <!-- Dynamically populated cards -->
         </div>
+
+        <!-- ============================================================= -->
+        <!-- 4. COLLECTOR SPOTLIGHTS & VERIFIED REVIEWS SHOWCASE           -->
+        <!-- ============================================================= -->
+        <section class="mt-8 pt-6 border-t border-slate-200/80 flex-shrink-0">
+          <div class="flex flex-col sm:flex-row sm:items-end justify-between mb-4 gap-2">
+            <div>
+              <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-amber-50 text-amber-900 border border-amber-200/80 text-[11px] font-bold mb-1.5 shadow-2xs">
+                <span>⭐</span>
+                <span>AUTHENTIC BUYER TESTIMONIALS</span>
+                <span class="text-amber-300">·</span>
+                <span class="font-mono text-amber-800">4.92 / 5.0 Star Rating</span>
+              </div>
+              <h3 class="text-base font-black text-slate-900 tracking-tight">Collector Spotlights & Customer Reviews</h3>
+              <p class="text-xs text-slate-500">Real verified impressions from Pakistani and international luxury connoisseurs</p>
+            </div>
+            <div class="flex items-center gap-2 text-xs font-mono font-bold text-slate-500">
+              <span class="w-2 h-2 rounded-full bg-emerald-500"></span>
+              <span>1,420+ Verified Deliveries</span>
+            </div>
+          </div>
+
+          <!-- Testimonial Cards Grid (4 Cards Across Categories) -->
+          <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+            <!-- Review Card 1 (Watches) -->
+            <div class="p-4 rounded-2xl bg-white border border-slate-200/90 shadow-sm hover:shadow-md transition-all flex flex-col justify-between">
+              <div>
+                <div class="flex items-center justify-between text-xs mb-2">
+                  <div class="flex text-amber-400 text-xs">★★★★★</div>
+                  <span class="text-[10px] text-slate-400 font-mono">2 days ago</span>
+                </div>
+                <p class="text-xs text-slate-700 leading-relaxed font-medium italic">
+                  "The Grade 5 titanium feel on the Aura Chrono is breathtaking. Weightless on wrist and the micro-adjust clasp is a game changer. Arrived in Lahore via express in 24 hours!"
+                </p>
+              </div>
+              <div class="mt-4 pt-3 border-t border-slate-100 flex items-center gap-2.5">
+                <img src="https://i.pravatar.cc/100?img=11" class="w-8 h-8 rounded-full object-cover">
+                <div class="min-w-0 flex-1">
+                  <h5 class="text-xs font-bold text-slate-900 truncate">Hamza Tariq</h5>
+                  <p class="text-[10px] text-emerald-600 font-semibold flex items-center gap-1">
+                    <span>✓ Verified Buyer</span>
+                    <span class="text-slate-300">·</span>
+                    <span class="text-slate-400 font-normal">Islamabad</span>
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <!-- Review Card 2 (Jewelry) -->
+            <div class="p-4 rounded-2xl bg-white border border-slate-200/90 shadow-sm hover:shadow-md transition-all flex flex-col justify-between">
+              <div>
+                <div class="flex items-center justify-between text-xs mb-2">
+                  <div class="flex text-amber-400 text-xs">★★★★★</div>
+                  <span class="text-[10px] text-slate-400 font-mono">Yesterday</span>
+                </div>
+                <p class="text-xs text-slate-700 leading-relaxed font-medium italic">
+                  "Bought the Elysian Diamond Pavé Ring during the live stream. Sparkle under sunlight is pure fire. EasyPaisa checkout was completely seamless. Highly recommended!"
+                </p>
+              </div>
+              <div class="mt-4 pt-3 border-t border-slate-100 flex items-center gap-2.5">
+                <img src="https://i.pravatar.cc/100?img=47" class="w-8 h-8 rounded-full object-cover">
+                <div class="min-w-0 flex-1">
+                  <h5 class="text-xs font-bold text-slate-900 truncate">Ayesha Malik</h5>
+                  <p class="text-[10px] text-emerald-600 font-semibold flex items-center gap-1">
+                    <span>✓ Verified Buyer</span>
+                    <span class="text-slate-300">·</span>
+                    <span class="text-slate-400 font-normal">Karachi</span>
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <!-- Review Card 3 (Apparel) -->
+            <div class="p-4 rounded-2xl bg-white border border-slate-200/90 shadow-sm hover:shadow-md transition-all flex flex-col justify-between">
+              <div>
+                <div class="flex items-center justify-between text-xs mb-2">
+                  <div class="flex text-amber-400 text-xs">★★★★★</div>
+                  <span class="text-[10px] text-slate-400 font-mono">4 days ago</span>
+                </div>
+                <p class="text-xs text-slate-700 leading-relaxed font-medium italic">
+                  "Cashmere Overcoat has impeccable Italian drape. The horn buttons and horn lining finish are top-tier sartorial art. Live host accurately described the sizing fit."
+                </p>
+              </div>
+              <div class="mt-4 pt-3 border-t border-slate-100 flex items-center gap-2.5">
+                <img src="https://i.pravatar.cc/100?img=68" class="w-8 h-8 rounded-full object-cover">
+                <div class="min-w-0 flex-1">
+                  <h5 class="text-xs font-bold text-slate-900 truncate">Zubair Khan</h5>
+                  <p class="text-[10px] text-emerald-600 font-semibold flex items-center gap-1">
+                    <span>✓ Verified Buyer</span>
+                    <span class="text-slate-300">·</span>
+                    <span class="text-slate-400 font-normal">Lahore</span>
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <!-- Review Card 4 (Electronics) -->
+            <div class="p-4 rounded-2xl bg-white border border-slate-200/90 shadow-sm hover:shadow-md transition-all flex flex-col justify-between">
+              <div>
+                <div class="flex items-center justify-between text-xs mb-2">
+                  <div class="flex text-amber-400 text-xs">★★★★★</div>
+                  <span class="text-[10px] text-slate-400 font-mono">5 days ago</span>
+                </div>
+                <p class="text-xs text-slate-700 leading-relaxed font-medium italic">
+                  "Audiophile Planar Magnetic Headphones soundstage is unreal. Beryllium drivers reproduce every micro-detail in acoustic and classical tracks. 10/10 purchase."
+                </p>
+              </div>
+              <div class="mt-4 pt-3 border-t border-slate-100 flex items-center gap-2.5">
+                <img src="https://i.pravatar.cc/100?img=52" class="w-8 h-8 rounded-full object-cover">
+                <div class="min-w-0 flex-1">
+                  <h5 class="text-xs font-bold text-slate-900 truncate">Dr. Bilal Qureshi</h5>
+                  <p class="text-[10px] text-emerald-600 font-semibold flex items-center gap-1">
+                    <span>✓ Verified Buyer</span>
+                    <span class="text-slate-300">·</span>
+                    <span class="text-slate-400 font-normal">Rawalpindi</span>
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
 
       </div>
 
@@ -911,75 +1035,122 @@
       <!-- ------------------------------------------------------------- -->
       <div id="trayContent-chat" class="tray-panel flex-1 flex flex-col overflow-hidden">
         
+        <!-- Pinned Host Announcement Banner -->
+        <div class="p-2.5 px-3 bg-gradient-to-r from-amber-50 to-orange-50 border-b border-amber-200/80 flex items-start gap-2.5 text-xs flex-shrink-0">
+          <span class="text-amber-600 text-sm mt-0.5">📌</span>
+          <div class="flex-1 min-w-0">
+            <div class="flex items-center gap-1.5">
+              <span class="font-black text-amber-950 text-[10px] tracking-wide">PINNED BY HOST</span>
+              <span class="px-1.5 py-0.2 rounded text-[8px] font-black bg-rose-600 text-white animate-pulse">41% FLASH DROP</span>
+            </div>
+            <p class="text-[11px] text-amber-900 leading-snug mt-0.5">
+              Limited 14 pieces remaining! Instant checkout available with JazzCash, EasyPaisa & COD across Pakistan. Ask specs below for live camera demo!
+            </p>
+          </div>
+        </div>
+
+        <!-- Chat Activity Status Bar -->
+        <div class="px-3 py-1 bg-slate-50/80 border-b border-slate-100 flex items-center justify-between text-[10px] text-slate-500 font-medium flex-shrink-0">
+          <span class="flex items-center gap-1.5">
+            <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-ping"></span>
+            <span class="font-bold text-slate-700">Live Chat Stream</span>
+            <span class="text-slate-400">· 14.8k watching</span>
+          </span>
+          <span class="text-[9px] font-mono text-emerald-700 bg-emerald-50 px-1.5 py-0.2 rounded font-bold">Auto-Moderation ON</span>
+        </div>
+
         <!-- Messages List -->
-        <div id="chatMessagesStream" class="flex-1 overflow-y-auto p-3.5 space-y-3 text-xs">
+        <div id="chatMessagesStream" class="flex-1 overflow-y-auto p-3.5 space-y-2.5 text-xs">
           <!-- Message 1 -->
           <div class="flex items-start gap-2.5">
-            <img src="https://i.pravatar.cc/100?img=32" alt="User" class="w-7 h-7 rounded-full object-cover mt-0.5">
-            <div class="flex-1">
+            <img src="https://i.pravatar.cc/100?img=32" alt="User" class="w-7 h-7 rounded-full object-cover mt-0.5 border border-slate-200">
+            <div class="flex-1 min-w-0">
               <div class="flex items-center gap-1.5">
-                <span class="font-bold text-slate-800">Sarah Jenkins</span>
-                <span class="px-1.5 py-0.2 rounded text-[9px] font-bold bg-amber-100 text-amber-800">VIP</span>
+                <span class="font-bold text-slate-900">Sarah Jenkins</span>
+                <span class="px-1.5 py-0.2 rounded text-[8px] font-black bg-amber-100 text-amber-900 border border-amber-300">VIP</span>
+                <span class="text-[9px] text-slate-400 font-mono ml-auto">18:42</span>
               </div>
-              <p class="text-slate-600 mt-0.5 leading-snug">Does the bracelet have micro-adjustments for smaller wrists?</p>
+              <p class="text-slate-700 mt-0.5 leading-snug">Does the bracelet have micro-adjustments for smaller wrists?</p>
             </div>
           </div>
 
           <!-- Message 2 (Host) -->
-          <div class="flex items-start gap-2.5">
-            <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=100&auto=format&fit=crop&q=80" alt="Host" class="w-7 h-7 rounded-full object-cover mt-0.5 ring-1 ring-rose-500">
-            <div class="flex-1">
+          <div class="flex items-start gap-2.5 bg-rose-50/50 p-2 rounded-xl border border-rose-100">
+            <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=100&auto=format&fit=crop&q=80" alt="Host" class="w-7 h-7 rounded-full object-cover mt-0.5 ring-2 ring-rose-500">
+            <div class="flex-1 min-w-0">
               <div class="flex items-center gap-1.5">
-                <span class="font-bold text-slate-900">Maison Horlogère</span>
-                <span class="px-1.5 py-0.2 rounded text-[9px] font-bold bg-rose-600 text-white">HOST</span>
+                <span class="font-extrabold text-slate-900">Maison Horlogère</span>
+                <span class="px-1.5 py-0.2 rounded text-[8px] font-black bg-rose-600 text-white">HOST</span>
+                <span class="text-[9px] text-rose-500 font-mono ml-auto">18:42</span>
               </div>
-              <p class="text-slate-900 mt-0.5 font-medium leading-snug">Yes Sarah! 3-point toolless micro-adjust clasp included.</p>
+              <p class="text-slate-900 mt-0.5 font-medium leading-snug">Yes Sarah! 3-point toolless micro-adjust clasp included. Demonstrating on camera now!</p>
             </div>
           </div>
 
           <!-- Message 3 -->
           <div class="flex items-start gap-2.5">
-            <img src="https://i.pravatar.cc/100?img=11" alt="User" class="w-7 h-7 rounded-full object-cover mt-0.5">
-            <div class="flex-1">
+            <img src="https://i.pravatar.cc/100?img=11" alt="User" class="w-7 h-7 rounded-full object-cover mt-0.5 border border-slate-200">
+            <div class="flex-1 min-w-0">
               <div class="flex items-center gap-1.5">
-                <span class="font-bold text-slate-800">David Ross</span>
+                <span class="font-bold text-slate-900">Hamza Tariq (Islamabad)</span>
+                <span class="px-1.5 py-0.2 rounded text-[8px] font-black bg-emerald-100 text-emerald-800 border border-emerald-300">VERIFIED BUYER</span>
+                <span class="text-[9px] text-slate-400 font-mono ml-auto">18:43</span>
               </div>
-              <p class="text-slate-600 mt-0.5 leading-snug">Ordered one! Flash checkout was so fast 🔥🔥</p>
+              <p class="text-slate-700 mt-0.5 leading-snug">Just paid via EasyPaisa! Super smooth prompt 🚀 Can't wait for delivery.</p>
             </div>
           </div>
 
           <!-- Message 4 (With AI Translation Tag) -->
           <div class="flex items-start gap-2.5">
-            <img src="https://i.pravatar.cc/100?img=44" alt="User" class="w-7 h-7 rounded-full object-cover mt-0.5">
-            <div class="flex-1">
+            <img src="https://i.pravatar.cc/100?img=44" alt="User" class="w-7 h-7 rounded-full object-cover mt-0.5 border border-slate-200">
+            <div class="flex-1 min-w-0">
               <div class="flex items-center gap-1.5">
-                <span class="font-bold text-slate-800">Kenji Sato</span>
-                <span class="px-1.5 py-0.2 rounded text-[9px] font-bold bg-indigo-50 text-indigo-600 border border-indigo-200">AI auto-translated</span>
+                <span class="font-bold text-slate-900">Kenji Sato</span>
+                <span class="px-1.5 py-0.2 rounded text-[8px] font-bold bg-indigo-50 text-indigo-700 border border-indigo-200">AI auto-translated</span>
+                <span class="text-[9px] text-slate-400 font-mono ml-auto">18:44</span>
               </div>
-              <p class="text-slate-600 mt-0.5 leading-snug">How long is the international shipping to Tokyo? (Original: 東京への発送は何日かかりますか？)</p>
+              <p class="text-slate-700 mt-0.5 leading-snug">How long is international shipping to Tokyo? (Original: 東京への発送は何日かかりますか？)</p>
             </div>
           </div>
         </div>
 
         <!-- Quick Emoji Reaction Bar -->
-        <div class="px-3 py-1.5 border-t border-slate-100 flex items-center justify-around bg-slate-50/50">
-          <button onclick="sendReaction('❤️')" class="text-lg hover:scale-125 transition-transform active:scale-95">❤️</button>
-          <button onclick="sendReaction('🔥')" class="text-lg hover:scale-125 transition-transform active:scale-95">🔥</button>
-          <button onclick="sendReaction('👏')" class="text-lg hover:scale-125 transition-transform active:scale-95">👏</button>
-          <button onclick="sendReaction('💎')" class="text-lg hover:scale-125 transition-transform active:scale-95">💎</button>
-          <button onclick="sendReaction('🚀')" class="text-lg hover:scale-125 transition-transform active:scale-95">🚀</button>
+        <div class="px-3 py-1.5 border-t border-slate-100 flex items-center justify-around bg-slate-50/50 flex-shrink-0">
+          <button onclick="sendReaction('❤️')" class="text-lg hover:scale-125 transition-transform active:scale-95" title="Love">❤️</button>
+          <button onclick="sendReaction('🔥')" class="text-lg hover:scale-125 transition-transform active:scale-95" title="Fire">🔥</button>
+          <button onclick="sendReaction('👏')" class="text-lg hover:scale-125 transition-transform active:scale-95" title="Clap">👏</button>
+          <button onclick="sendReaction('💎')" class="text-lg hover:scale-125 transition-transform active:scale-95" title="Diamond">💎</button>
+          <button onclick="sendReaction('🚀')" class="text-lg hover:scale-125 transition-transform active:scale-95" title="Rocket">🚀</button>
+          <button onclick="sendReaction('🇵🇰')" class="text-lg hover:scale-125 transition-transform active:scale-95" title="Pakistan">🇵🇰</button>
+        </div>
+
+        <!-- Quick Inquiries Chips Bar -->
+        <div class="px-2.5 py-1.5 bg-slate-50 border-t border-slate-100 flex items-center gap-1.5 overflow-x-auto scrollbar-none flex-shrink-0">
+          <span class="text-[9px] font-black text-slate-400 uppercase tracking-wider flex-shrink-0">Ask:</span>
+          <button type="button" onclick="sendQuickChatMessage('🚚 What is the delivery time across Pakistan?')" class="flex-shrink-0 px-2 py-0.5 rounded-full bg-white hover:bg-slate-100 border border-slate-200 text-[10px] font-bold text-slate-700 shadow-2xs transition-all active:scale-95">
+            🚚 Delivery Time?
+          </button>
+          <button type="button" onclick="sendQuickChatMessage('🇵🇰 Can I pay via JazzCash / EasyPaisa?')" class="flex-shrink-0 px-2 py-0.5 rounded-full bg-white hover:bg-slate-100 border border-slate-200 text-[10px] font-bold text-slate-700 shadow-2xs transition-all active:scale-95">
+            🇵🇰 JazzCash?
+          </button>
+          <button type="button" onclick="sendQuickChatMessage('🛡️ Is 5-year international warranty included?')" class="flex-shrink-0 px-2 py-0.5 rounded-full bg-white hover:bg-slate-100 border border-slate-200 text-[10px] font-bold text-slate-700 shadow-2xs transition-all active:scale-95">
+            🛡️ 5-Yr Warranty?
+          </button>
+          <button type="button" onclick="sendQuickChatMessage('🔍 Can the host zoom in on the clasp?')" class="flex-shrink-0 px-2 py-0.5 rounded-full bg-white hover:bg-slate-100 border border-slate-200 text-[10px] font-bold text-slate-700 shadow-2xs transition-all active:scale-95">
+            🔍 Zoom Clasp
+          </button>
         </div>
 
         <!-- Chat Input Form -->
-        <form id="chatForm" class="p-3 border-t border-slate-100 flex items-center gap-2 bg-white">
+        <form id="chatForm" class="p-2.5 border-t border-slate-100 flex items-center gap-2 bg-white flex-shrink-0">
           <button type="button" onclick="openAITab()" class="p-2 rounded-xl bg-indigo-50 hover:bg-indigo-100 text-indigo-600 transition-colors" title="Ask AI RAG Concierge">
             <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
           </button>
           <input
             id="chatInput"
             type="text"
-            placeholder="Chat or ask product specs... / Ask AI RAG"
-            class="flex-1 text-xs py-2 px-3 bg-slate-50 border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-slate-900/10 focus:border-slate-400 text-slate-800 placeholder-slate-400"
+            placeholder="Type a message or click preset chips..."
+            class="flex-1 text-xs py-2 px-3 bg-slate-50 border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-slate-900/10 focus:border-slate-400 text-slate-800 placeholder-slate-400 font-medium"
           >
           <button type="submit" class="p-2 rounded-xl bg-slate-900 hover:bg-slate-800 text-white transition-colors">
             <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 12h14M12 5l7 7-7 7"/></svg>
@@ -1354,6 +1525,156 @@
           <!-- Related Cards Horizontal Grid (4 to 6 items) -->
           <div id="modalRelatedProductsGrid" class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4">
             <!-- Dynamically populated -->
+          </div>
+        </div>
+
+        <!-- ============================================================= -->
+        <!-- VERIFIED CUSTOMER REVIEWS & RATINGS SCORECARD                  -->
+        <!-- ============================================================= -->
+        <div class="pt-6 border-t border-slate-200" id="productReviewsSection">
+          <!-- Section Title & Write Review Button -->
+          <div class="flex flex-col sm:flex-row sm:items-center justify-between mb-4 gap-2">
+            <div>
+              <div class="flex items-center gap-2">
+                <h3 class="text-sm font-extrabold text-slate-900 tracking-tight">Customer Reviews & Ratings</h3>
+                <span class="px-2 py-0.5 rounded-full bg-emerald-50 text-emerald-700 text-[10px] font-bold border border-emerald-200">
+                  ✓ 100% Verified Purchases
+                </span>
+              </div>
+              <p class="text-xs text-slate-500">Authentic buyer feedback from Pakistan & global collectors</p>
+            </div>
+            <button onclick="toggleWriteReviewForm()" id="btnToggleWriteReview" class="px-3.5 py-1.5 rounded-xl bg-slate-900 hover:bg-slate-800 text-white text-xs font-bold transition-all shadow-sm active:scale-95 flex items-center gap-1.5 self-start sm:self-auto">
+              <span>✍️</span>
+              <span>Write a Review</span>
+            </button>
+          </div>
+
+          <!-- Overall Rating Scorecard & Breakdown -->
+          <div class="p-4 rounded-2xl bg-slate-50/80 border border-slate-200/80 grid grid-cols-1 md:grid-cols-3 gap-6 items-center">
+            <!-- Col 1: Big Score -->
+            <div class="flex flex-col items-center md:items-start text-center md:text-left border-b md:border-b-0 md:border-r border-slate-200/80 pb-4 md:pb-0 md:pr-4">
+              <span id="scorecardRatingNum" class="text-4xl font-black text-slate-900 font-mono">4.9</span>
+              <div class="flex items-center gap-1 text-amber-500 text-sm my-1">
+                <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
+              </div>
+              <span id="scorecardTotalReviews" class="text-xs font-semibold text-slate-600">Based on 324 verified buyers</span>
+              <span class="text-[11px] text-emerald-600 font-bold mt-1">98% of customers recommend this item</span>
+            </div>
+
+            <!-- Col 2: Star Distribution Progress Bars -->
+            <div class="space-y-1.5 text-xs text-slate-600">
+              <div class="flex items-center gap-2">
+                <span class="w-12 font-bold text-[11px]">5 Stars</span>
+                <div class="flex-1 h-2 bg-slate-200 rounded-full overflow-hidden">
+                  <div class="h-full bg-amber-400 rounded-full" style="width: 88%;"></div>
+                </div>
+                <span class="w-8 text-right font-mono text-[10px] font-bold text-slate-700">88%</span>
+              </div>
+              <div class="flex items-center gap-2">
+                <span class="w-12 font-bold text-[11px]">4 Stars</span>
+                <div class="flex-1 h-2 bg-slate-200 rounded-full overflow-hidden">
+                  <div class="h-full bg-amber-400 rounded-full" style="width: 9%;"></div>
+                </div>
+                <span class="w-8 text-right font-mono text-[10px] font-bold text-slate-700">9%</span>
+              </div>
+              <div class="flex items-center gap-2">
+                <span class="w-12 font-bold text-[11px]">3 Stars</span>
+                <div class="flex-1 h-2 bg-slate-200 rounded-full overflow-hidden">
+                  <div class="h-full bg-amber-400 rounded-full" style="width: 2%;"></div>
+                </div>
+                <span class="w-8 text-right font-mono text-[10px] font-bold text-slate-700">2%</span>
+              </div>
+              <div class="flex items-center gap-2">
+                <span class="w-12 font-bold text-[11px]">2 Stars</span>
+                <div class="flex-1 h-2 bg-slate-200 rounded-full overflow-hidden">
+                  <div class="h-full bg-amber-400 rounded-full" style="width: 1%;"></div>
+                </div>
+                <span class="w-8 text-right font-mono text-[10px] font-bold text-slate-700">1%</span>
+              </div>
+              <div class="flex items-center gap-2">
+                <span class="w-12 font-bold text-[11px]">1 Star</span>
+                <div class="flex-1 h-2 bg-slate-200 rounded-full overflow-hidden">
+                  <div class="h-full bg-amber-400 rounded-full" style="width: 0%;"></div>
+                </div>
+                <span class="w-8 text-right font-mono text-[10px] font-bold text-slate-700">0%</span>
+              </div>
+            </div>
+
+            <!-- Col 3: Trust Badges -->
+            <div class="border-t md:border-t-0 md:border-l border-slate-200/80 pt-4 md:pt-0 md:pl-4 space-y-2">
+              <div class="flex items-center gap-2 text-xs">
+                <span class="w-5 h-5 rounded-md bg-emerald-100 text-emerald-700 flex items-center justify-center font-bold text-[10px]">✓</span>
+                <span class="text-slate-700 font-semibold">100% Genuine Atelier Origin</span>
+              </div>
+              <div class="flex items-center gap-2 text-xs">
+                <span class="w-5 h-5 rounded-md bg-emerald-100 text-emerald-700 flex items-center justify-center font-bold text-[10px]">✓</span>
+                <span class="text-slate-700 font-semibold">Express 24h Pakistan Dispatch</span>
+              </div>
+              <div class="flex items-center gap-2 text-xs">
+                <span class="w-5 h-5 rounded-md bg-emerald-100 text-emerald-700 flex items-center justify-center font-bold text-[10px]">✓</span>
+                <span class="text-slate-700 font-semibold">30-Day Hassle-Free Returns</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Interactive Review Submission Box (Initially Hidden) -->
+          <div id="writeReviewFormWrapper" class="hidden mt-4 p-4 rounded-2xl bg-white border-2 border-indigo-200 shadow-sm transition-all duration-300">
+            <div class="flex items-center justify-between pb-2 mb-3 border-b border-slate-100">
+              <h4 class="text-xs font-extrabold text-slate-900 uppercase tracking-wide">Write Your Verified Review</h4>
+              <button type="button" onclick="toggleWriteReviewForm()" class="text-slate-400 hover:text-slate-700 text-xs font-bold">✕ Close</button>
+            </div>
+            
+            <form id="productReviewForm" onsubmit="handleReviewSubmit(event)" class="space-y-3">
+              <!-- Rating Selector -->
+              <div>
+                <label class="block text-xs font-semibold text-slate-700 mb-1">Your Rating</label>
+                <div class="flex items-center gap-1.5" id="starPickerContainer">
+                  <button type="button" onclick="setReviewRating(1)" class="star-pick text-2xl text-amber-400 hover:scale-125 transition-transform">★</button>
+                  <button type="button" onclick="setReviewRating(2)" class="star-pick text-2xl text-amber-400 hover:scale-125 transition-transform">★</button>
+                  <button type="button" onclick="setReviewRating(3)" class="star-pick text-2xl text-amber-400 hover:scale-125 transition-transform">★</button>
+                  <button type="button" onclick="setReviewRating(4)" class="star-pick text-2xl text-amber-400 hover:scale-125 transition-transform">★</button>
+                  <button type="button" onclick="setReviewRating(5)" class="star-pick text-2xl text-amber-400 hover:scale-125 transition-transform">★</button>
+                  <span id="starRatingLabel" class="ml-2 text-xs font-bold text-slate-700">5 Stars · Outstanding!</span>
+                </div>
+              </div>
+
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                <div>
+                  <label class="block text-xs font-semibold text-slate-700 mb-1">Your Name</label>
+                  <input type="text" id="reviewAuthorInput" required placeholder="e.g. Asad Malik" class="w-full text-xs p-2.5 rounded-xl border border-slate-200 bg-slate-50 focus:outline-none focus:ring-2 focus:ring-slate-900/10 text-slate-900 font-medium">
+                </div>
+                <div>
+                  <label class="block text-xs font-semibold text-slate-700 mb-1">Location / City</label>
+                  <input type="text" id="reviewLocationInput" placeholder="e.g. Lahore, Pakistan" class="w-full text-xs p-2.5 rounded-xl border border-slate-200 bg-slate-50 focus:outline-none focus:ring-2 focus:ring-slate-900/10 text-slate-900 font-medium">
+                </div>
+              </div>
+
+              <div>
+                <label class="block text-xs font-semibold text-slate-700 mb-1">Review Details</label>
+                <textarea id="reviewTextInput" required rows="3" placeholder="Share your experience with craftsmanship, packaging, and delivery speed..." class="w-full text-xs p-2.5 rounded-xl border border-slate-200 bg-slate-50 focus:outline-none focus:ring-2 focus:ring-slate-900/10 text-slate-900 font-medium"></textarea>
+              </div>
+
+              <div class="flex items-center justify-end gap-2 pt-1">
+                <button type="button" onclick="toggleWriteReviewForm()" class="px-3 py-2 rounded-xl text-xs font-bold text-slate-600 hover:bg-slate-100">Cancel</button>
+                <button type="submit" class="px-4 py-2 rounded-xl bg-slate-900 hover:bg-slate-800 text-white text-xs font-bold shadow-sm">Submit Verified Review</button>
+              </div>
+            </form>
+          </div>
+
+          <!-- Reviews Filter Tabs & List -->
+          <div class="mt-4 space-y-3">
+            <div class="flex items-center justify-between pb-2 border-b border-slate-100">
+              <div class="flex items-center gap-1.5 text-xs font-bold text-slate-600">
+                <span class="text-slate-900">Buyer Reviews</span>
+                <span id="reviewsFilterCountBadge" class="px-2 py-0.5 rounded-full bg-slate-100 text-slate-700 font-mono text-[10px]">3 Verified</span>
+              </div>
+              <div class="text-[11px] text-slate-400 font-medium">Sorted by Most Recent</div>
+            </div>
+
+            <!-- Dynamic Customer Reviews Container -->
+            <div id="modalReviewsList" class="space-y-3">
+              <!-- Dynamically populated via JS renderProductReviews -->
+            </div>
           </div>
         </div>
       </div>
@@ -1995,6 +2316,7 @@
       startSocialProofToasts();
       startReservationCountdown();
       startTelemetryJitter();
+      startRealisticChatStream();
     });
 
     // 1. Sidebar Navigation Switcher
@@ -2181,31 +2503,127 @@
       input.value = '';
     }
 
-    // 7. Chat Message Stream
+    // 7. Dynamic Real-Based Chat Engine
     const chatForm = document.getElementById('chatForm');
     const chatInput = document.getElementById('chatInput');
     const chatMessagesStream = document.getElementById('chatMessagesStream');
 
+    const realisticIncomingChatList = [
+      { name: 'Hamza Tariq (Islamabad)', role: 'VERIFIED BUYER', badgeClass: 'bg-emerald-100 text-emerald-800 border-emerald-300', avatar: 'https://i.pravatar.cc/100?img=11', text: 'Just received my tracking SMS! TCS express delivery is fast 🚀' },
+      { name: 'Ayesha Malik (Karachi)', role: 'VIP', badgeClass: 'bg-amber-100 text-amber-900 border-amber-300', avatar: 'https://i.pravatar.cc/100?img=47', text: 'Does the dial have Swiss Super-LumiNova luminescence in the dark?' },
+      { name: 'Zubair Khan (Lahore)', role: 'VERIFIED BUYER', badgeClass: 'bg-emerald-100 text-emerald-800 border-emerald-300', avatar: 'https://i.pravatar.cc/100?img=68', text: 'Cash on Delivery option bhi check out mein available hai?' },
+      { name: 'Marcus Vance (London)', role: 'MODERATOR', badgeClass: 'bg-indigo-100 text-indigo-800 border-indigo-300', avatar: 'https://i.pravatar.cc/100?img=53', text: 'Grade 5 titanium finish is immaculate. Looks incredible on video.' },
+      { name: 'Dr. Bilal Qureshi (Rawalpindi)', role: 'VIP', badgeClass: 'bg-amber-100 text-amber-900 border-amber-300', avatar: 'https://i.pravatar.cc/100?img=52', text: 'Ordered the Aura Chrono! 41% discount during live drop is unbeatable.' },
+      { name: 'Elena Rostova (Geneva)', role: 'WATCHMAKER', badgeClass: 'bg-purple-100 text-purple-800 border-purple-300', avatar: 'https://i.pravatar.cc/100?img=26', text: 'Movement beat rate is 28,800 vph — super smooth sweeping second hand.' },
+      { name: 'Usman Ghani (Peshawar)', role: 'BUYER', badgeClass: 'bg-slate-100 text-slate-700 border-slate-200', avatar: 'https://i.pravatar.cc/100?img=33', text: 'JazzCash se payment ki hai, confirmation turant mil gaya!' },
+      { name: 'Chloe Martin (Paris)', role: 'COLLECTOR', badgeClass: 'bg-rose-100 text-rose-800 border-rose-300', avatar: 'https://i.pravatar.cc/100?img=49', text: 'Sublime pièce! Can the host show the sapphire case back openwork?' },
+      { name: 'Saad Farooq (Multan)', role: 'VERIFIED BUYER', badgeClass: 'bg-emerald-100 text-emerald-800 border-emerald-300', avatar: 'https://i.pravatar.cc/100?img=59', text: 'Delivery kitne din mein hogi Multan mein?' },
+      { name: 'Tariq Mehmood (Faisalabad)', role: 'BUYER', badgeClass: 'bg-slate-100 text-slate-700 border-slate-200', avatar: 'https://i.pravatar.cc/100?img=60', text: '5-year international warranty card package ke sath aayega?' },
+      { name: 'Kenji Sato (Tokyo)', role: 'AI auto-translated', badgeClass: 'bg-indigo-50 text-indigo-700 border-indigo-200', avatar: 'https://i.pravatar.cc/100?img=44', text: 'Very impressive anti-reflective sapphire coating. Zero glare.' }
+    ];
+
+    let chatStreamIndex = 0;
+    function startRealisticChatStream() {
+      setInterval(() => {
+        if (!chatMessagesStream) return;
+        const msg = realisticIncomingChatList[chatStreamIndex % realisticIncomingChatList.length];
+        chatStreamIndex++;
+
+        const item = document.createElement('div');
+        item.className = 'flex items-start gap-2.5 animate-in fade-in duration-300';
+        const now = new Date();
+        const timeStr = now.getHours().toString().padStart(2, '0') + ':' + now.getMinutes().toString().padStart(2, '0');
+
+        item.innerHTML = `
+          <img src="${msg.avatar}" alt="${msg.name}" class="w-7 h-7 rounded-full object-cover mt-0.5 border border-slate-200">
+          <div class="flex-1 min-w-0">
+            <div class="flex items-center gap-1.5">
+              <span class="font-bold text-slate-900 truncate">${msg.name}</span>
+              <span class="px-1.5 py-0.2 rounded text-[8px] font-black border ${msg.badgeClass}">${msg.role}</span>
+              <span class="text-[9px] text-slate-400 font-mono ml-auto">${timeStr}</span>
+            </div>
+            <p class="text-slate-700 mt-0.5 leading-snug">${msg.text}</p>
+          </div>
+        `;
+
+        chatMessagesStream.appendChild(item);
+
+        // Keep max 50 chat nodes to maintain super fast rendering
+        if (chatMessagesStream.children.length > 50) {
+          chatMessagesStream.removeChild(chatMessagesStream.children[0]);
+        }
+        chatMessagesStream.scrollTop = chatMessagesStream.scrollHeight;
+      }, 4000);
+    }
+
+    // Quick Inquiry Chip Trigger
+    function sendQuickChatMessage(text) {
+      if (chatInput) {
+        chatInput.value = text;
+        chatForm.dispatchEvent(new Event('submit', { cancelable: true }));
+      }
+    }
+
+    // Form Submit with Intelligent Host Auto-Reply
     chatForm.addEventListener('submit', (e) => {
       e.preventDefault();
       const val = chatInput.value.trim();
       if (!val) return;
 
+      const now = new Date();
+      const timeStr = now.getHours().toString().padStart(2, '0') + ':' + now.getMinutes().toString().padStart(2, '0');
+
+      // Add User Message
       const item = document.createElement('div');
-      item.className = 'flex items-start gap-2.5 animate-in fade-in duration-200';
+      item.className = 'flex items-start gap-2.5 bg-indigo-50/70 p-2 rounded-xl border border-indigo-200/80 animate-in fade-in duration-200';
       item.innerHTML = `
-        <img src="https://i.pravatar.cc/100?img=12" alt="You" class="w-7 h-7 rounded-full object-cover mt-0.5">
-        <div class="flex-1">
+        <img src="https://i.pravatar.cc/100?img=12" alt="You" class="w-7 h-7 rounded-full object-cover mt-0.5 ring-2 ring-indigo-500">
+        <div class="flex-1 min-w-0">
           <div class="flex items-center gap-1.5">
-            <span class="font-bold text-slate-800">You</span>
-            <span class="px-1.5 py-0.2 rounded text-[9px] font-bold bg-slate-100 text-slate-600">VIEWER</span>
+            <span class="font-bold text-indigo-950">You</span>
+            <span class="px-1.5 py-0.2 rounded text-[8px] font-black bg-indigo-600 text-white shadow-2xs">YOU (VIEWER)</span>
+            <span class="text-[9px] text-indigo-500 font-mono ml-auto">${timeStr}</span>
           </div>
-          <p class="text-slate-700 mt-0.5 leading-snug">${val}</p>
+          <p class="text-slate-800 mt-0.5 font-medium leading-snug">${val}</p>
         </div>
       `;
       chatMessagesStream.appendChild(item);
       chatMessagesStream.scrollTop = chatMessagesStream.scrollHeight;
       chatInput.value = '';
+
+      // Intelligent Host / Concierge Auto-Reply after 1.1s
+      setTimeout(() => {
+        let replyText = "@You Thank you for asking! The host has noted your question and is demonstrating this live right now!";
+        const queryLower = val.toLowerCase();
+
+        if (queryLower.includes('delivery') || queryLower.includes('time') || queryLower.includes('din')) {
+          replyText = "@You Express delivery takes 24-48 hours across Karachi, Lahore, Islamabad, and all cities in Pakistan via insured courier! 🚚";
+        } else if (queryLower.includes('jazzcash') || queryLower.includes('easypaisa') || queryLower.includes('payment') || queryLower.includes('pay')) {
+          replyText = "@You Yes! In-stream checkout supports instant USSD push prompt for JazzCash & EasyPaisa without leaving the video! 🇵🇰";
+        } else if (queryLower.includes('warranty') || queryLower.includes('guarantee')) {
+          replyText = "@You Official 5-Year international warranty certificate is stamped and included inside the luxury presentation box! 🛡️";
+        } else if (queryLower.includes('clasp') || queryLower.includes('wrist') || queryLower.includes('zoom')) {
+          replyText = "@You Host is zooming in on the 3-point toolless micro-adjust clasp right now! Fits any wrist dimension perfectly. ✨";
+        } else if (queryLower.includes('price') || queryLower.includes('discount') || queryLower.includes('off')) {
+          replyText = "@You Today's live stream price is discounted by 41% (Rs. 69,900 / $249.80). Lock your stock with Instant Buy! 🔥";
+        }
+
+        const hostReply = document.createElement('div');
+        hostReply.className = 'flex items-start gap-2.5 bg-rose-50/70 p-2 rounded-xl border border-rose-200 animate-in fade-in duration-200';
+        hostReply.innerHTML = `
+          <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=100&auto=format&fit=crop&q=80" alt="Host" class="w-7 h-7 rounded-full object-cover mt-0.5 ring-2 ring-rose-500">
+          <div class="flex-1 min-w-0">
+            <div class="flex items-center gap-1.5">
+              <span class="font-extrabold text-slate-900">Maison Horlogère</span>
+              <span class="px-1.5 py-0.2 rounded text-[8px] font-black bg-rose-600 text-white">HOST</span>
+              <span class="text-[9px] text-rose-500 font-mono ml-auto">Just now</span>
+            </div>
+            <p class="text-slate-900 mt-0.5 font-medium leading-snug">${replyText}</p>
+          </div>
+        `;
+        chatMessagesStream.appendChild(hostReply);
+        chatMessagesStream.scrollTop = chatMessagesStream.scrollHeight;
+      }, 1100);
     });
 
     // 8. Reactions
@@ -2220,7 +2638,14 @@
       setTimeout(() => el.remove(), 2000);
     }
 
-    // 9. Ongoing Streams Switcher
+    // 9. Ongoing Streams Switcher & Tray Toggle
+    function toggleOngoingStreams() {
+      const tray = document.getElementById('ongoingStreamsTray');
+      if (tray) {
+        tray.classList.toggle('hidden');
+      }
+    }
+
     function switchStreamFeed(streamKey) {
       const video = document.getElementById('mainLiveVideo');
       if (streamKey === 'tokyo') {
@@ -2433,6 +2858,9 @@
       // Related Products (Strictly 4 to 6 items sharing the same category)
       renderRelatedProducts(product.category, product.id);
 
+      // Customer Reviews & Ratings
+      renderProductReviews(product.id);
+
       // Open Modal Animation
       const backdrop = document.getElementById('productDetailBackdrop');
       const modal = document.getElementById('productDetailModal');
@@ -2512,6 +2940,154 @@
       } else {
         openPakistanCheckout();
       }
+    }
+
+    // =================================================================
+    // 13. PRODUCT REVIEWS & CUSTOMER RATINGS SYSTEM
+    // =================================================================
+    const productReviewsMap = {
+      'prod_w1': [
+        { author: 'Hamza Tariq', location: 'Islamabad, Pakistan', rating: 5, date: '2 days ago', verified: true, text: 'The Grade 5 titanium feel on the Aura Chrono is breathtaking. Weightless on wrist and the micro-adjust clasp is a game changer. Arrived in Islamabad via express courier in 24 hours!', helpful: 34 },
+        { author: 'Zubair Khan', location: 'Lahore, Pakistan', rating: 5, date: '4 days ago', verified: true, text: 'Authentic Swiss craftsmanship. Sapphire glass has zero glare in sunlight. Paid via EasyPaisa and confirmation was instantaneous!', helpful: 21 },
+        { author: 'Elena Rostova', location: 'Geneva, Switzerland', rating: 5, date: '1 week ago', verified: true, text: 'Movement beat rate is 28,800 vph with high precision. Exceptional finishing at this price tier.', helpful: 16 }
+      ],
+      'prod_w2': [
+        { author: 'Sarah Jenkins', location: 'London, UK', rating: 5, date: '3 days ago', verified: true, text: 'Skeleton dial openwork is mesmerizing. You can see the balance wheel oscillating with perfection.', helpful: 29 },
+        { author: 'Ali Raza', location: 'Karachi, Pakistan', rating: 5, date: '5 days ago', verified: true, text: 'Platinum case weight and luxury box set exceeded expectations. Outstanding concierge service.', helpful: 14 }
+      ],
+      'prod_j1': [
+        { author: 'Ayesha Malik', location: 'Karachi, Pakistan', rating: 5, date: 'Yesterday', verified: true, text: 'Elysian Diamond Pavé Ring sparkles like pure fire. 18K solid yellow gold hallmark verified. JazzCash checkout was seamless!', helpful: 42 },
+        { author: 'Chloe Martin', location: 'Paris, France', rating: 5, date: '3 days ago', verified: true, text: 'Pave setting is flawless under 10x loupe. Delightful luxury unboxing experience.', helpful: 19 }
+      ],
+      'prod_a1': [
+        { author: 'Dr. Bilal Qureshi', location: 'Rawalpindi, Pakistan', rating: 5, date: '4 days ago', verified: true, text: 'Italian cashmere has rich tactile hand-feel and drape. Fit is true to European tailored sizing.', helpful: 18 },
+        { author: 'Marcus Vance', location: 'New York, USA', rating: 5, date: '1 week ago', verified: true, text: 'Warm, lightweight, and exquisitely structured. Will order the charcoal colorway next.', helpful: 12 }
+      ],
+      'prod_e1': [
+        { author: 'Saad Farooq', location: 'Multan, Pakistan', rating: 5, date: '5 days ago', verified: true, text: 'Planar magnetic headphone drivers deliver pristine audio resolution. Micro-details in acoustic instruments are incredible.', helpful: 25 },
+        { author: 'Kenji Sato', location: 'Tokyo, Japan', rating: 5, date: '1 week ago', verified: true, text: 'CNC aluminum chassis with lambskin ear cushions. Supreme comfort for long listening sessions.', helpful: 17 }
+      ]
+    };
+
+    let currentReviewFormRating = 5;
+
+    function renderProductReviews(productId) {
+      const reviewsList = productReviewsMap[productId] || [
+        { author: 'Verified Connoisseur', location: 'Pakistan', rating: 5, date: '2 days ago', verified: true, text: 'Exceptional luxury quality, direct atelier packaging, and rapid domestic delivery. 10/10 recommended.', helpful: 19 },
+        { author: 'Luxury Collector', location: 'International', rating: 5, date: '5 days ago', verified: true, text: 'Craftsmanship completely matches live stream presentation. Seamless checkout process.', helpful: 11 }
+      ];
+
+      const container = document.getElementById('modalReviewsList');
+      if (!container) return;
+
+      const countBadge = document.getElementById('reviewsFilterCountBadge');
+      if (countBadge) countBadge.innerText = `${reviewsList.length} Verified`;
+
+      container.innerHTML = reviewsList.map(rev => `
+        <div class="p-3.5 rounded-2xl bg-slate-50/70 border border-slate-200/80 hover:bg-slate-50 transition-colors">
+          <div class="flex items-center justify-between mb-2">
+            <div class="flex items-center gap-2">
+              <div class="w-7 h-7 rounded-full bg-slate-900 text-white flex items-center justify-center font-bold text-xs uppercase">
+                ${rev.author.charAt(0)}
+              </div>
+              <div>
+                <div class="flex items-center gap-1.5">
+                  <span class="font-bold text-xs text-slate-900">${rev.author}</span>
+                  ${rev.verified ? `
+                    <span class="px-1.5 py-0.2 rounded text-[8px] font-black bg-emerald-100 text-emerald-800 border border-emerald-300">
+                      ✓ VERIFIED BUYER
+                    </span>
+                  ` : ''}
+                </div>
+                <span class="text-[10px] text-slate-400 font-medium">${rev.location} · ${rev.date}</span>
+              </div>
+            </div>
+            <div class="flex items-center gap-1 text-amber-400 text-xs font-mono font-bold">
+              ${'★'.repeat(rev.rating)}${'☆'.repeat(5 - rev.rating)}
+            </div>
+          </div>
+          <p class="text-xs text-slate-700 leading-relaxed font-medium">
+            "${rev.text}"
+          </p>
+          <div class="mt-2.5 pt-2 border-t border-slate-100 flex items-center justify-between text-[10px] text-slate-400">
+            <span>Verified Purchase via Supernova Live</span>
+            <button onclick="this.classList.toggle('text-indigo-600'); this.innerHTML = '👍 Helpful (' + (${rev.helpful} + 1) + ')'" class="hover:text-slate-700 transition-colors font-medium">
+              👍 Helpful (${rev.helpful})
+            </button>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    function toggleWriteReviewForm() {
+      const formWrap = document.getElementById('writeReviewFormWrapper');
+      if (formWrap) {
+        formWrap.classList.toggle('hidden');
+        if (!formWrap.classList.contains('hidden')) {
+          formWrap.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        }
+      }
+    }
+
+    function setReviewRating(stars) {
+      currentReviewFormRating = stars;
+      const labels = {
+        1: '1 Star · Poor',
+        2: '2 Stars · Fair',
+        3: '3 Stars · Good',
+        4: '4 Stars · Very Good',
+        5: '5 Stars · Outstanding!'
+      };
+      const labelEl = document.getElementById('starRatingLabel');
+      if (labelEl) labelEl.innerText = labels[stars] || `${stars} Stars`;
+
+      const buttons = document.querySelectorAll('#starPickerContainer .star-pick');
+      buttons.forEach((btn, idx) => {
+        if (idx < stars) {
+          btn.className = 'star-pick text-2xl text-amber-400 hover:scale-125 transition-transform';
+        } else {
+          btn.className = 'star-pick text-2xl text-slate-300 hover:scale-125 transition-transform';
+        }
+      });
+    }
+
+    function handleReviewSubmit(e) {
+      e.preventDefault();
+      const author = document.getElementById('reviewAuthorInput').value.trim();
+      const location = document.getElementById('reviewLocationInput').value.trim() || 'Pakistan';
+      const text = document.getElementById('reviewTextInput').value.trim();
+
+      if (!author || !text) return;
+
+      const targetId = activeModalProduct ? activeModalProduct.id : 'prod_w1';
+      if (!productReviewsMap[targetId]) {
+        productReviewsMap[targetId] = [];
+      }
+
+      const newRev = {
+        author: author,
+        location: location,
+        rating: currentReviewFormRating,
+        date: 'Just now',
+        verified: true,
+        text: text,
+        helpful: 1
+      };
+
+      productReviewsMap[targetId].unshift(newRev);
+
+      // Update modal reviews count
+      if (activeModalProduct) {
+        activeModalProduct.reviewsCount = (activeModalProduct.reviewsCount || 0) + 1;
+        document.getElementById('modalReviewsText').innerText = `(${activeModalProduct.reviewsCount} customer reviews)`;
+      }
+
+      renderProductReviews(targetId);
+      toggleWriteReviewForm();
+      document.getElementById('productReviewForm').reset();
+      setReviewRating(5);
+
+      alert(`Thank you, ${author}! Your verified review has been published.`);
     }
 
     // 13. Pakistan In-Stream Checkout Logic
