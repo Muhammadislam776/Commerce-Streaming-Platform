@@ -39,13 +39,13 @@ export const CommunityTray: React.FC<CommunityTrayProps> = ({ products, onAddToC
   return (
     <aside className="w-80 lg:w-[380px] bg-white border-l border-slate-200/80 flex flex-col z-20 flex-shrink-0 shadow-[-10px_0_30px_rgba(0,0,0,0.02)]">
       {/* Top Header & Tabs */}
-      <div class="p-3.5 border-b border-slate-100 flex flex-col gap-2.5 bg-slate-50/40">
-        <div class="flex items-center justify-between">
-          <div class="flex items-center gap-2">
-            <h2 class="text-xs font-extrabold text-slate-900 tracking-tight">Live Broadcast Community</h2>
-            <span class="w-2 h-2 rounded-full bg-emerald-500" />
+      <div className="p-3.5 border-b border-slate-100 flex flex-col gap-2.5 bg-slate-50/40">
+        <div className="flex items-center justify-between">
+          <div className="flex items-center gap-2">
+            <h2 className="text-xs font-extrabold text-slate-900 tracking-tight">Live Broadcast Community</h2>
+            <span className="w-2 h-2 rounded-full bg-emerald-500" />
           </div>
-          <div class="flex items-center gap-1 text-[10px] font-bold text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded-full">
+          <div className="flex items-center gap-1 text-[10px] font-bold text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded-full">
             AI Guard (Active)
           </div>
         </div>
