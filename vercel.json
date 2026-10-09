@@ -2,7 +2,29 @@
   "version": 2,
   "outputDirectory": "public",
   "cleanUrls": true,
-  "rewrites": [
-    { "source": "/live", "destination": "/live-room-preview" }
+  "routes": [
+    {
+      "src": "/api/checkout/initiate",
+      "dest": "/api/checkout/initiate.js"
+    },
+    {
+      "src": "/api/webhooks/jazzcash",
+      "dest": "/api/webhooks/jazzcash.js"
+    },
+    {
+      "src": "/api/webhooks/easypaisa",
+      "dest": "/api/webhooks/easypaisa.js"
+    },
+    {
+      "handle": "filesystem"
+    },
+    {
+      "src": "/live",
+      "dest": "/live-room-preview.html"
+    },
+    {
+      "src": "/(.*)",
+      "dest": "/index.html"
+    }
   ]
 }

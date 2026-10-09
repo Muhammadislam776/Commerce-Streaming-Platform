@@ -2,7 +2,6 @@
   "name": "supernova-live-commerce",
   "version": "1.0.0",
   "description": "Next-Gen Ultra-Premium Live Video Commerce Platform with WebRTC/LL-HLS, Redis flash inventory, AI RAG catalog, and Enhanced Professional Light Theme.",
-  "main": "src/index.ts",
   "scripts": {
     "build": "tsc && node build.js",
     "start": "node dev-server.js",
