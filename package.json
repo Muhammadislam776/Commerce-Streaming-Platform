@@ -4,7 +4,7 @@
   "description": "Next-Gen Ultra-Premium Live Video Commerce Platform with WebRTC/LL-HLS, Redis flash inventory, AI RAG catalog, and Enhanced Professional Light Theme.",
   "main": "src/index.ts",
   "scripts": {
-    "build": "tsc",
+    "build": "tsc && node build.js",
     "start": "ts-node src/index.ts",
     "test": "jest",
     "test:load": "k6 run tests/load/live-flash-sale.js"

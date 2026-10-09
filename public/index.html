@@ -1,0 +1,3219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Project Supernova - Ultimate Live Commerce Ecosystem</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;600;700&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+    }
+    .font-mono {
+      font-family: 'JetBrains Mono', monospace;
+    }
+    @keyframes floatUp {
+      0% { transform: translateY(0) scale(0.8); opacity: 1; }
+      80% { opacity: 0.9; }
+      100% { transform: translateY(-220px) scale(1.3); opacity: 0; }
+    }
+    .reaction-bubble {
+      animation: floatUp 2s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+    }
+    .glassmorphic {
+      background: rgba(255, 255, 255, 0.88);
+      backdrop-filter: blur(20px) saturate(180%);
+      -webkit-backdrop-filter: blur(20px) saturate(180%);
+      border: 1px solid rgba(255, 255, 255, 0.75);
+      box-shadow: 0 20px 40px -15px rgba(15, 23, 42, 0.12), 0 0 1px 1px rgba(15, 23, 42, 0.05);
+    }
+    .glassmorphic-dark {
+      background: rgba(15, 23, 42, 0.75);
+      backdrop-filter: blur(20px) saturate(180%);
+      -webkit-backdrop-filter: blur(20px) saturate(180%);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.35);
+    }
+    .glassmorphic-subtle {
+      background: rgba(255, 255, 255, 0.65);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      border: 1px solid rgba(255, 255, 255, 0.6);
+    }
+    .logo-gradient-orb {
+      background: linear-gradient(135deg, #FF6B6B 0%, #4ECDC4 50%, #45B649 100%);
+      filter: drop-shadow(0 0 8px rgba(78, 205, 196, 0.5));
+    }
+    /* Custom scrollbar */
+    ::-webkit-scrollbar {
+      width: 5px;
+      height: 5px;
+    }
+    ::-webkit-scrollbar-track {
+      background: transparent;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: rgba(148, 163, 184, 0.3);
+      border-radius: 9999px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: rgba(100, 116, 139, 0.5);
+    }
+  </style>
+</head>
+<body class="bg-[#F8FAFC] text-slate-900 antialiased overflow-hidden h-screen flex flex-col select-none">
+
+  <!-- ================================================================= -->
+  <!-- TOP GLOBAL HEADER BAR                                             -->
+  <!-- ================================================================= -->
+  <header class="h-16 bg-white border-b border-slate-200/80 px-4 flex items-center justify-between z-30 flex-shrink-0 shadow-[0_1px_3px_rgba(0,0,0,0.03)]">
+    <!-- Left: Brand Logo Capsule -->
+    <div class="flex items-center gap-3 w-64">
+      <div class="relative w-8 h-8 rounded-full logo-gradient-orb p-[2px] flex items-center justify-center animate-pulse">
+        <div class="w-full h-full bg-white rounded-full flex items-center justify-center">
+          <div class="w-4 h-4 rounded-full bg-gradient-to-tr from-rose-500 via-indigo-500 to-teal-400"></div>
+        </div>
+      </div>
+      <div>
+        <h1 class="text-sm font-extrabold tracking-tight text-slate-900 flex items-center gap-1.5">
+          <span>SUPERNOVA</span>
+          <span class="text-xs px-1.5 py-0.2 rounded font-bold bg-indigo-50 text-indigo-600 border border-indigo-200/60">LIVE</span>
+        </h1>
+        <p class="text-[9px] uppercase tracking-wider font-semibold text-slate-400">Next-Gen Live Commerce</p>
+      </div>
+    </div>
+
+    <!-- Center: Global Search & Upcoming Drop Pill -->
+    <div class="flex-1 max-w-2xl px-4 flex items-center gap-3">
+      <!-- Search Input -->
+      <div class="relative flex-1">
+        <svg class="w-4 h-4 text-slate-400 absolute left-3.5 top-1/2 -translate-y-1/2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
+        </svg>
+        <input
+          type="text"
+          id="globalSearchInput"
+          placeholder="Search lives, products, or creators..."
+          class="w-full pl-9 pr-4 py-2 bg-slate-50 hover:bg-slate-100/70 focus:bg-white border border-slate-200/80 rounded-full text-xs font-medium text-slate-800 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-slate-900/10 focus:border-slate-400 transition-all"
+        >
+      </div>
+
+      <!-- Upcoming Event Pill -->
+      <div class="hidden lg:flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-slate-50 border border-slate-200 text-xs font-semibold text-slate-700 hover:bg-slate-100 cursor-pointer transition-colors shadow-sm">
+        <svg class="w-3.5 h-3.5 text-slate-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/>
+        </svg>
+        <span>Upcoming: <strong class="text-slate-900">'Paris Winter Luxury Event'</strong> in 2h</span>
+        <svg class="w-3 h-3 text-slate-400" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+      </div>
+    </div>
+
+    <!-- Right: Telemetry, Notifications, Language & Global Cart Pill -->
+    <div class="flex items-center gap-3">
+      <!-- Notification Bell -->
+      <button class="relative p-2 rounded-full hover:bg-slate-100 text-slate-600 transition-colors">
+        <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"/>
+        </svg>
+        <span class="absolute top-1 right-1 w-4 h-4 bg-rose-500 text-white text-[10px] font-bold rounded-full flex items-center justify-center ring-2 ring-white">3</span>
+      </button>
+
+      <!-- Language Switcher -->
+      <div class="flex items-center gap-1 px-2.5 py-1.5 rounded-lg border border-slate-200 text-xs font-semibold text-slate-700 bg-slate-50 cursor-pointer hover:bg-slate-100">
+        <svg class="w-3.5 h-3.5 text-slate-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9"/>
+        </svg>
+        <span>EN / FR / UR</span>
+      </div>
+
+      <!-- Global Cart Preview Widget -->
+      <div id="topCartPreviewWidget" class="relative group cursor-pointer" onclick="openCart()">
+        <div class="flex items-center gap-2.5 p-1.5 pr-3 rounded-full bg-white border border-slate-200 shadow-sm hover:shadow transition-all">
+          <div class="relative w-7 h-7 rounded-full bg-slate-100 overflow-hidden border border-slate-200">
+            <img src="https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=100&auto=format&fit=crop&q=80" alt="Cart Item" class="w-full h-full object-cover">
+          </div>
+          <div class="text-left">
+            <p class="text-[10px] font-bold text-slate-900 leading-tight">Global cart preview</p>
+            <p class="text-[9px] text-slate-500">Live purchases widget</p>
+          </div>
+          <div class="w-6 h-6 rounded-full bg-rose-600 text-white flex items-center justify-center text-[10px] font-bold shadow-sm">
+            <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"/></svg>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- ================================================================= -->
+  <!-- MAIN LAYOUT: SIDEBAR + CONTENT VIEWPORT + COMMUNITY TRAY          -->
+  <!-- ================================================================= -->
+  <div class="flex-1 flex overflow-hidden">
+
+    <!-- --------------------------------------------------------------- -->
+    <!-- 1. LEFT SIDEBAR NAVIGATION HUB                                  -->
+    <!-- --------------------------------------------------------------- -->
+    <aside class="w-64 bg-white border-r border-slate-200/80 flex flex-col justify-between p-3.5 flex-shrink-0 z-20">
+      <div class="space-y-1">
+        <p class="px-3 pt-1 pb-2 text-[10px] font-bold uppercase tracking-wider text-slate-400">Navigation Hub</p>
+
+        <!-- Tab 1: Live Marketplace (Active) -->
+        <button onclick="switchTab('marketplace')" id="nav-marketplace" class="nav-item w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-xs font-bold transition-all bg-slate-900 text-white shadow-sm">
+          <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z"/>
+          </svg>
+          <span>Live Marketplace</span>
+          <span class="ml-auto text-[10px] px-1.5 py-0.2 rounded-full font-bold bg-white/20 text-white">Active</span>
+        </button>
+
+        <!-- Tab 2: Creator Studio -->
+        <button onclick="switchTab('creator')" id="nav-creator" class="nav-item w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-xs font-semibold text-slate-600 hover:text-slate-900 hover:bg-slate-50 transition-all">
+          <svg class="w-4 h-4 text-slate-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"/>
+          </svg>
+          <span>Creator Studio</span>
+          <span class="ml-auto text-[10px] text-slate-400">Stream</span>
+        </button>
+
+        <!-- Tab 3: AI Grounding Catalog -->
+        <button onclick="switchTab('ai-catalog')" id="nav-ai-catalog" class="nav-item w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-xs font-semibold text-slate-600 hover:text-slate-900 hover:bg-slate-50 transition-all">
+          <svg class="w-4 h-4 text-indigo-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/>
+          </svg>
+          <span>AI Grounding Catalog</span>
+          <span class="ml-auto w-2 h-2 rounded-full bg-indigo-500"></span>
+        </button>
+
+        <!-- Tab 4: Events Scheduler -->
+        <button onclick="switchTab('scheduler')" id="nav-scheduler" class="nav-item w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-xs font-semibold text-slate-600 hover:text-slate-900 hover:bg-slate-50 transition-all">
+          <svg class="w-4 h-4 text-slate-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/>
+          </svg>
+          <span>Events Scheduler</span>
+        </button>
+
+        <!-- Tab 5: Order History & Cart -->
+        <button onclick="switchTab('orders')" id="nav-orders" class="nav-item w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-xs font-semibold text-slate-600 hover:text-slate-900 hover:bg-slate-50 transition-all">
+          <svg class="w-4 h-4 text-slate-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
+          </svg>
+          <span>Order History & Cart</span>
+        </button>
+
+        <!-- Tab 6: Analytics Insight -->
+        <button onclick="switchTab('analytics')" id="nav-analytics" class="nav-item w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-xs font-semibold text-slate-600 hover:text-slate-900 hover:bg-slate-50 transition-all">
+          <svg class="w-4 h-4 text-slate-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/>
+          </svg>
+          <span>Analytics Insight</span>
+        </button>
+
+        <!-- Tab 7: Settings -->
+        <button onclick="switchTab('settings')" id="nav-settings" class="nav-item w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-xs font-semibold text-slate-600 hover:text-slate-900 hover:bg-slate-50 transition-all">
+          <svg class="w-4 h-4 text-slate-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"/>
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
+          </svg>
+          <span>Settings</span>
+        </button>
+      </div>
+
+      <!-- Bottom Host Switcher Capsule -->
+      <div class="pt-3 border-t border-slate-100">
+        <div class="flex items-center justify-between p-2 rounded-xl bg-slate-50 border border-slate-200/60 hover:bg-slate-100 cursor-pointer transition-colors">
+          <div class="flex items-center gap-2.5 min-w-0">
+            <div class="relative flex-shrink-0">
+              <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=100&auto=format&fit=crop&q=80" alt="Host Avatar" class="w-8 h-8 rounded-full object-cover ring-2 ring-indigo-500">
+              <span class="absolute bottom-0 right-0 w-2 h-2 rounded-full bg-emerald-500 ring-1 ring-white"></span>
+            </div>
+            <div class="min-w-0">
+              <div class="flex items-center gap-1">
+                <span class="text-xs font-bold text-slate-900 truncate">Maison Horlogère</span>
+                <svg class="w-3.5 h-3.5 text-blue-500 fill-current flex-shrink-0" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg>
+              </div>
+              <p class="text-[10px] text-slate-400 font-medium">(Host Studio)</p>
+            </div>
+          </div>
+          <svg class="w-4 h-4 text-slate-400 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 9l4-4 4 4m0 6l-4 4-4-4"/></svg>
+        </div>
+      </div>
+    </aside>
+
+    <!-- --------------------------------------------------------------- -->
+    <!-- 2. CENTRAL VIEWPORT: MULTI-PAGE CONTAINER                       -->
+    <!-- --------------------------------------------------------------- -->
+    <main class="flex-1 flex flex-col overflow-hidden relative">
+
+      <!-- ============================================================= -->
+      <!-- VIEW 1: LIVE MARKETPLACE (PORTAL & STREAMING CAROUSEL)         -->
+      <!-- ============================================================= -->
+      <div id="view-marketplace" class="page-view flex-1 flex flex-col p-4 gap-3 overflow-y-auto">
+        
+        <!-- Video Player & Ongoing Streams Grid Container -->
+        <div class="relative flex-1 min-h-[540px] rounded-2xl overflow-hidden bg-slate-950 flex shadow-xl border border-slate-200/80">
+          
+          <!-- MAIN VIDEO STREAM CANVAS -->
+          <div class="relative flex-1 h-full flex items-center justify-center overflow-hidden">
+            <video
+              id="mainLiveVideo"
+              class="w-full h-full object-cover"
+              autoplay loop muted playsinline
+              poster="https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=1600&auto=format&fit=crop&q=80"
+            >
+              <source src="https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4" type="video/mp4">
+            </video>
+
+            <!-- Subtle Edge Vignette -->
+            <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-black/50 pointer-events-none"></div>
+
+            <!-- ========================================================= -->
+            <!-- 1. TOP BROADCAST CONTROL & TELEMETRY TOOLBAR                -->
+            <!-- ========================================================= -->
+            <div class="absolute top-3 inset-x-3 z-30 pointer-events-auto flex items-center justify-between gap-2">
+              
+              <!-- Left: Host Profile Pill -->
+              <div class="flex items-center gap-2 p-1.5 pr-3 rounded-full bg-slate-950/75 backdrop-blur-xl border border-white/20 text-white shadow-xl">
+                <div class="relative">
+                  <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=100&auto=format&fit=crop&q=80" alt="Host" class="w-8 h-8 rounded-full object-cover ring-2 ring-rose-500">
+                  <span class="absolute bottom-0 right-0 w-2.5 h-2.5 rounded-full bg-emerald-500 ring-2 ring-slate-950"></span>
+                </div>
+                <div class="leading-tight">
+                  <div class="flex items-center gap-1">
+                    <span class="text-xs font-extrabold text-white">Maison Horlogère</span>
+                    <svg class="w-3.5 h-3.5 text-sky-400 fill-current" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg>
+                  </div>
+                  <p class="text-[9px] text-slate-300 font-medium">Paris Studio · Live Host</p>
+                </div>
+                <button onclick="alert('You are now following Maison Horlogère!')" class="ml-1 px-3 py-1 rounded-full bg-white text-slate-950 text-[10px] font-black hover:bg-slate-200 transition-all shadow active:scale-95">
+                  Follow
+                </button>
+              </div>
+
+              <!-- Center: Stream Metrics & Telemetry Chips -->
+              <div class="hidden md:flex items-center gap-2.5 p-1.5 px-3.5 rounded-full bg-slate-950/75 backdrop-blur-xl border border-white/20 text-white shadow-xl text-xs font-bold">
+                <!-- Live Pulse & Viewers -->
+                <div class="flex items-center gap-1.5">
+                  <span class="w-2 h-2 rounded-full bg-rose-500 animate-ping"></span>
+                  <span class="text-rose-400 font-black">LIVE</span>
+                  <span class="text-white/30">|</span>
+                  <svg class="w-3.5 h-3.5 text-slate-400" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/></svg>
+                  <span id="viewerCounterBadge" class="font-mono text-white tracking-wide">14.8k</span>
+                </div>
+                <span class="text-white/20">·</span>
+                <!-- GMV -->
+                <div class="flex items-center gap-1">
+                  <span class="text-slate-400 text-[11px] font-medium">GMV:</span>
+                  <span id="liveGmvTicker" class="font-mono text-emerald-400 font-black">$34,820</span>
+                </div>
+                <span class="text-white/20">·</span>
+                <!-- SFU Latency -->
+                <div class="flex items-center gap-1.5 text-[11px] text-slate-300">
+                  <span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span>
+                  <span id="streamLatencyBadge">WebRTC · 185ms</span>
+                </div>
+                <span class="text-white/20">·</span>
+                <!-- AI Guard -->
+                <span class="text-[10px] text-indigo-300 bg-indigo-500/25 px-2 py-0.5 rounded-full border border-indigo-400/40">
+                  🛡️ AI Guard
+                </span>
+              </div>
+
+              <!-- Right: Channel Switcher & Cart Buttons -->
+              <div class="flex items-center gap-2">
+                <button onclick="toggleOngoingStreams()" id="streamsToggleBtn" class="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-slate-950/75 backdrop-blur-xl border border-white/20 text-white text-xs font-bold hover:bg-slate-900 transition-all shadow-xl active:scale-95">
+                  <span class="w-2 h-2 rounded-full bg-rose-500 animate-pulse"></span>
+                  <span>Feeds (3)</span>
+                  <svg class="w-3.5 h-3.5 text-slate-400" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+                </button>
+
+                <button onclick="openCart()" class="relative p-2 rounded-full bg-slate-950/75 backdrop-blur-xl border border-white/20 text-white hover:bg-slate-900 shadow-xl active:scale-95 transition-all">
+                  <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"/></svg>
+                  <span class="absolute -top-1 -right-1 w-4 h-4 rounded-full bg-rose-600 text-white text-[10px] font-black flex items-center justify-center ring-2 ring-slate-950">1</span>
+                </button>
+              </div>
+            </div>
+
+            <!-- REACTION FLOATING CANVAS -->
+            <div id="reactionsCanvas" class="absolute inset-x-0 bottom-40 h-64 pointer-events-none overflow-hidden z-20"></div>
+
+            <!-- ========================================================= -->
+            <!-- 2. LIVE SOCIAL PROOF TOAST (ANCHORED ABOVE PINNED CARD)   -->
+            <!-- ========================================================= -->
+            <div id="livePurchaseToast" class="absolute bottom-[222px] left-4 z-30 transition-all duration-300 transform translate-y-0 opacity-100 pointer-events-none">
+              <div class="flex items-center gap-2.5 px-3.5 py-1.5 rounded-full bg-slate-950/90 backdrop-blur-xl shadow-2xl text-xs font-bold text-white border border-emerald-500/50 animate-in fade-in slide-in-from-bottom-2">
+                <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+                <span class="text-slate-400 font-medium">Flash Order:</span>
+                <span id="toastCustomerName" class="text-white font-extrabold">Sarah J. (Lahore)</span>
+                <span class="text-emerald-400 font-extrabold">just bought Aura Chrono! 🚀</span>
+              </div>
+            </div>
+
+            <!-- ========================================================= -->
+            <!-- 3. HOST PINNED PRODUCT SHOWCASE (BOTTOM LEFT)             -->
+            <!-- ========================================================= -->
+            <div class="absolute bottom-4 left-4 z-30 pointer-events-auto max-w-sm w-full">
+              <div class="rounded-2xl bg-white/95 backdrop-blur-xl border border-slate-200/90 p-4 shadow-2xl transition-all duration-300 hover:shadow-indigo-500/10">
+                <!-- Ribbon & AI RAG Link -->
+                <div class="flex items-center justify-between mb-2.5">
+                  <div class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-rose-50 border border-rose-200 text-rose-700 text-[10px] font-black tracking-wide">
+                    <span class="w-1.5 h-1.5 rounded-full bg-rose-600 animate-ping"></span>
+                    HOST PINNED SHOWCASE
+                  </div>
+                  <button onclick="openAITab()" class="inline-flex items-center gap-1 text-xs font-bold text-indigo-600 hover:text-indigo-800 transition-colors">
+                    <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
+                    <span>Ask AI RAG</span>
+                  </button>
+                </div>
+
+                <div class="flex gap-3">
+                  <!-- Product Image with Badge -->
+                  <div class="relative w-20 h-20 rounded-xl overflow-hidden bg-slate-100 flex-shrink-0 border border-slate-200/80">
+                    <img src="https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=400&auto=format&fit=crop&q=80" alt="Product" class="w-full h-full object-cover">
+                    <span class="absolute bottom-1 left-1 px-1.5 py-0.5 rounded text-[9px] font-black bg-rose-600 text-white shadow-sm">-41%</span>
+                  </div>
+
+                  <!-- Details -->
+                  <div class="flex-1 min-w-0">
+                    <p class="text-[10px] font-bold uppercase tracking-wider text-slate-400">Supernova Luxury</p>
+                    <h4 class="text-xs font-extrabold text-slate-900 truncate">Aura Chrono 44mm Titanium Edition</h4>
+                    
+                    <div class="mt-1 flex items-baseline gap-2">
+                      <span class="text-sm font-extrabold text-slate-900 font-mono">Rs. 69,900</span>
+                      <span class="text-[10px] text-slate-400 line-through font-mono">Rs. 117,600</span>
+                      <span class="text-[10px] font-bold text-emerald-600 font-mono ml-auto">$249.80</span>
+                    </div>
+
+                    <!-- Flash Stock Bar -->
+                    <div class="mt-2">
+                      <div class="flex items-center justify-between text-[10px] mb-1">
+                        <span class="text-slate-500 font-medium">Flash Stock Left</span>
+                        <span id="pinnedStockText" class="font-bold text-amber-700 font-mono">14 units remaining</span>
+                      </div>
+                      <div class="w-full h-1.5 bg-slate-100 rounded-full overflow-hidden">
+                        <div id="pinnedStockProgressBar" class="h-full bg-amber-500 rounded-full transition-all duration-500" style="width: 28%;"></div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- CTAs -->
+                <div class="mt-3 pt-2.5 border-t border-slate-100 flex items-center gap-2">
+                  <button id="pinnedAddToCartBtn" onclick="triggerAddToCart('Aura Chrono 44mm Titanium', 249.80)" class="flex-1 py-2.5 px-3 rounded-xl text-xs font-bold transition-all border border-slate-200 bg-white hover:bg-slate-50 text-slate-800 shadow-sm active:scale-95">
+                    Add to Cart
+                  </button>
+                  <button onclick="openPakistanCheckout()" class="flex-1 py-2.5 px-3 rounded-xl text-xs font-bold bg-slate-900 hover:bg-slate-800 text-white shadow-md transition-all active:scale-95 flex items-center justify-center gap-1.5">
+                    <span>Instant Buy Now</span>
+                    <span class="text-[10px] text-emerald-400 font-mono font-bold">🇵🇰</span>
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            <!-- ========================================================= -->
+            <!-- 4. ONGOING LIVE STREAMS TRAY (RIGHT SIDE, COLLAPSIBLE)    -->
+            <!-- ========================================================= -->
+            <div id="ongoingStreamsTray" class="absolute top-14 right-3 bottom-4 w-48 z-20 pointer-events-auto flex flex-col gap-2 transition-all duration-300">
+              <div class="p-2.5 rounded-2xl bg-white/95 backdrop-blur-xl border border-slate-200/90 shadow-2xl flex-1 flex flex-col overflow-hidden">
+                <div class="flex items-center justify-between pb-2 border-b border-slate-100">
+                  <span class="text-[10px] font-black uppercase tracking-wider text-slate-800 flex items-center gap-1">
+                    <span class="w-2 h-2 rounded-full bg-rose-500 animate-pulse"></span>
+                    Live Feeds (3)
+                  </span>
+                  <button onclick="toggleOngoingStreams()" class="p-1 rounded-md text-slate-400 hover:text-slate-800 hover:bg-slate-100 text-[10px] font-bold">✕</button>
+                </div>
+
+                <!-- Scrollable Streams List -->
+                <div class="flex-1 overflow-y-auto space-y-2 pt-2 pr-0.5">
+                  <!-- Mini Feed 1 -->
+                  <div onclick="switchStreamFeed('tokyo')" class="group relative rounded-xl overflow-hidden cursor-pointer border border-slate-200 hover:border-indigo-500 shadow-sm transition-all hover:scale-[1.02]">
+                    <div class="h-16 bg-slate-800 relative">
+                      <img src="https://images.unsplash.com/photo-1508057198894-247b23fe5ade?w=300&auto=format&fit=crop&q=80" class="w-full h-full object-cover">
+                      <div class="absolute inset-0 bg-black/30 group-hover:bg-black/10 transition-colors flex items-center justify-center">
+                        <div class="w-5 h-5 rounded-full bg-white/90 flex items-center justify-center shadow">
+                          <svg class="w-3 h-3 text-slate-900 fill-current ml-0.5" viewBox="0 0 20 20"><path d="M4 4l12 6-12 6z"/></svg>
+                        </div>
+                      </div>
+                      <span class="absolute top-1 left-1 px-1 py-0.2 rounded text-[8px] font-black bg-rose-600 text-white">LIVE</span>
+                    </div>
+                    <div class="p-1.5 bg-white">
+                      <p class="text-[10px] font-bold text-slate-800 truncate">Tokyo Tech Studio</p>
+                      <p class="text-[9px] text-slate-400">Titanium Smartwear</p>
+                    </div>
+                  </div>
+
+                  <!-- Mini Feed 2 -->
+                  <div onclick="switchStreamFeed('geneva')" class="group relative rounded-xl overflow-hidden cursor-pointer border border-slate-200 hover:border-indigo-500 shadow-sm transition-all hover:scale-[1.02]">
+                    <div class="h-16 bg-slate-800 relative">
+                      <img src="https://images.unsplash.com/photo-1547996160-71dfabbce5ed?w=300&auto=format&fit=crop&q=80" class="w-full h-full object-cover">
+                      <div class="absolute inset-0 bg-black/30 group-hover:bg-black/10 transition-colors flex items-center justify-center">
+                        <div class="w-5 h-5 rounded-full bg-white/90 flex items-center justify-center shadow">
+                          <svg class="w-3 h-3 text-slate-900 fill-current ml-0.5" viewBox="0 0 20 20"><path d="M4 4l12 6-12 6z"/></svg>
+                        </div>
+                      </div>
+                      <span class="absolute top-1 left-1 px-1 py-0.2 rounded text-[8px] font-black bg-rose-600 text-white">LIVE</span>
+                    </div>
+                    <div class="p-1.5 bg-white">
+                      <p class="text-[10px] font-bold text-slate-800 truncate">Geneva Atelier</p>
+                      <p class="text-[9px] text-slate-400">Skeleton Tourbillon</p>
+                    </div>
+                  </div>
+
+                  <!-- Mini Feed 3 -->
+                  <div onclick="switchStreamFeed('milan')" class="group relative rounded-xl overflow-hidden cursor-pointer border border-slate-200 hover:border-indigo-500 shadow-sm transition-all hover:scale-[1.02]">
+                    <div class="h-16 bg-slate-800 relative">
+                      <img src="https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?w=300&auto=format&fit=crop&q=80" class="w-full h-full object-cover">
+                      <div class="absolute inset-0 bg-black/30 group-hover:bg-black/10 transition-colors flex items-center justify-center">
+                        <div class="w-5 h-5 rounded-full bg-white/90 flex items-center justify-center shadow">
+                          <svg class="w-3 h-3 text-slate-900 fill-current ml-0.5" viewBox="0 0 20 20"><path d="M4 4l12 6-12 6z"/></svg>
+                        </div>
+                      </div>
+                      <span class="absolute top-1 left-1 px-1 py-0.2 rounded text-[8px] font-black bg-rose-600 text-white">LIVE</span>
+                    </div>
+                    <div class="p-1.5 bg-white">
+                      <p class="text-[10px] font-bold text-slate-800 truncate">Milan Diamond Lab</p>
+                      <p class="text-[9px] text-slate-400">18K Pavé Rings</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- LOWER REGION: LIVE STATS DASHBOARD PANEL -->
+        <div class="h-16 bg-white rounded-2xl border border-slate-200/80 p-3.5 px-5 flex items-center justify-between shadow-sm flex-shrink-0">
+          <div class="flex items-center gap-6">
+            <div class="flex items-center gap-2">
+              <div class="w-6 h-6 rounded-lg bg-indigo-50 text-indigo-600 flex items-center justify-center font-bold text-xs">
+                ✨
+              </div>
+              <span class="text-xs font-bold text-slate-900">Live Dashboard</span>
+            </div>
+
+            <div class="h-6 w-px bg-slate-200"></div>
+
+            <!-- Stat 1: Sales Velocity -->
+            <div class="flex items-center gap-2">
+              <span class="text-xs text-slate-500 font-medium">Sales Velocity</span>
+              <span id="salesVelocityMetric" class="text-xs font-bold text-slate-900 font-mono">14.8K/hr</span>
+            </div>
+
+            <!-- Stat 2: Chat Sentiment -->
+            <div class="flex items-center gap-2">
+              <span class="text-xs text-slate-500 font-medium">Chat Sentiment</span>
+              <span class="text-xs font-bold text-emerald-600 bg-emerald-50 px-2 py-0.5 rounded-full flex items-center gap-1">
+                Positive 😊
+              </span>
+            </div>
+
+            <!-- Stat 3: AI Moderation -->
+            <div class="flex items-center gap-2">
+              <span class="text-xs text-slate-500 font-medium">AI Moderation</span>
+              <span class="text-xs font-bold text-slate-800">3 spam auto-moderated</span>
+            </div>
+          </div>
+
+          <!-- Actions -->
+          <button class="p-1.5 text-slate-400 hover:text-slate-700 hover:bg-slate-50 rounded-lg">
+            <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 12h.01M12 12h.01M19 12h.01M6 12a1 1 0 11-2 0 1 1 0 012 0zm7 0a1 1 0 11-2 0 1 1 0 012 0zm7 0a1 1 0 11-2 0 1 1 0 012 0z"/></svg>
+          </button>
+        </div>
+
+        <!-- ============================================================= -->
+        <!-- 1. HERO SECTION (HOMEPAGE BANNER)                             -->
+        <!-- ============================================================= -->
+        <section class="relative w-full h-[360px] lg:h-[420px] rounded-2xl overflow-hidden shadow-xl border border-slate-200/80 mt-2 flex-shrink-0">
+          <img
+            src="https://images.unsplash.com/photo-1490481651871-ab68de25d43d?w=1600&auto=format&fit=crop&q=80"
+            alt="Winter Luxury Collection"
+            class="w-full h-full object-cover object-center filter brightness-[0.88]"
+          />
+          <div class="absolute inset-0 bg-gradient-to-r from-slate-950/90 via-slate-950/65 to-transparent flex items-center p-8 lg:p-12">
+            <div class="max-w-xl space-y-3.5">
+              <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/15 backdrop-blur-md border border-white/25 text-white text-xs font-bold tracking-wide">
+                <span class="w-2 h-2 rounded-full bg-rose-500 animate-ping"></span>
+                <span class="text-rose-400">EXCLUSIVE WINTER DROP</span>
+                <span class="text-white/40">|</span>
+                <span class="font-mono text-white/90">22 Artisanal Pieces</span>
+              </div>
+
+              <h2 class="text-2xl lg:text-4xl font-black text-white tracking-tight leading-tight">
+                Discover The Winter <br>
+                <span class="text-transparent bg-clip-text bg-gradient-to-r from-rose-200 via-white to-teal-200">
+                  Luxury Collection
+                </span>
+              </h2>
+
+              <p class="text-xs lg:text-sm text-slate-200/90 leading-relaxed font-medium">
+                Artisanal horology, bespoke tailoring, hi-fi electronics, and fine jewelry direct from Paris, Geneva, and Milan ateliers. Verified authenticity with instant Pakistan & global checkout.
+              </p>
+
+              <div class="pt-2 flex items-center gap-3">
+                <button onclick="document.getElementById('marketplace-category-bar').scrollIntoView({ behavior: 'smooth' })" class="px-5 py-2.5 rounded-xl bg-white text-slate-950 font-extrabold text-xs shadow-lg hover:bg-slate-100 transition-all active:scale-95 flex items-center gap-2">
+                  <span>Explore Catalog</span>
+                  <span class="w-1.5 h-1.5 rounded-full bg-rose-500 animate-pulse"></span>
+                </button>
+                <button onclick="document.getElementById('mainLiveVideo').scrollIntoView({ behavior: 'smooth' })" class="px-5 py-2.5 rounded-xl bg-white/15 hover:bg-white/25 backdrop-blur-md border border-white/30 text-white font-bold text-xs transition-all">
+                  Watch Live Feed
+                </button>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- ============================================================= -->
+        <!-- 2. DYNAMIC CATEGORY NAVIGATION (FILTER BAR)                  -->
+        <!-- ============================================================= -->
+        <div id="marketplace-category-bar" class="mt-4 pt-2 border-t border-slate-200/80">
+          <div class="flex items-center justify-between mb-3">
+            <div>
+              <h3 class="text-sm font-extrabold text-slate-900 tracking-tight">Category Navigation</h3>
+              <p class="text-[11px] text-slate-500">Filter multi-category luxury drops in real time</p>
+            </div>
+            <span id="gridItemCountBadge" class="text-xs font-mono font-bold text-slate-500">22 Items</span>
+          </div>
+
+          <!-- Horizontal Pill Bar -->
+          <div class="flex items-center gap-2 overflow-x-auto pb-2 scrollbar-none" id="categoryPillContainer">
+            <button onclick="filterGridCategory('All')" id="catPill-All" class="cat-pill flex-shrink-0 flex items-center gap-2 px-4 py-2 rounded-full text-xs font-bold transition-all bg-slate-900 text-white border border-slate-900 shadow-sm">
+              <span>✨</span>
+              <span>All Items</span>
+              <span class="text-[10px] px-1.5 py-0.2 rounded-full bg-white/20 font-mono">22</span>
+            </button>
+            <button onclick="filterGridCategory('Watches')" id="catPill-Watches" class="cat-pill flex-shrink-0 flex items-center gap-2 px-4 py-2 rounded-full text-xs font-bold transition-all bg-white text-slate-600 border border-slate-200 hover:border-slate-300">
+              <span>⌚</span>
+              <span>Watches</span>
+              <span class="text-[10px] px-1.5 py-0.2 rounded-full bg-slate-100 font-mono">6</span>
+            </button>
+            <button onclick="filterGridCategory('Apparel')" id="catPill-Apparel" class="cat-pill flex-shrink-0 flex items-center gap-2 px-4 py-2 rounded-full text-xs font-bold transition-all bg-white text-slate-600 border border-slate-200 hover:border-slate-300">
+              <span>🧥</span>
+              <span>Apparel</span>
+              <span class="text-[10px] px-1.5 py-0.2 rounded-full bg-slate-100 font-mono">4</span>
+            </button>
+            <button onclick="filterGridCategory('Electronics')" id="catPill-Electronics" class="cat-pill flex-shrink-0 flex items-center gap-2 px-4 py-2 rounded-full text-xs font-bold transition-all bg-white text-slate-600 border border-slate-200 hover:border-slate-300">
+              <span>🎧</span>
+              <span>Electronics</span>
+              <span class="text-[10px] px-1.5 py-0.2 rounded-full bg-slate-100 font-mono">4</span>
+            </button>
+            <button onclick="filterGridCategory('Beauty')" id="catPill-Beauty" class="cat-pill flex-shrink-0 flex items-center gap-2 px-4 py-2 rounded-full text-xs font-bold transition-all bg-white text-slate-600 border border-slate-200 hover:border-slate-300">
+              <span>💄</span>
+              <span>Beauty</span>
+              <span class="text-[10px] px-1.5 py-0.2 rounded-full bg-slate-100 font-mono">4</span>
+            </button>
+            <button onclick="filterGridCategory('Jewelry')" id="catPill-Jewelry" class="cat-pill flex-shrink-0 flex items-center gap-2 px-4 py-2 rounded-full text-xs font-bold transition-all bg-white text-slate-600 border border-slate-200 hover:border-slate-300">
+              <span>💎</span>
+              <span>Jewelry</span>
+              <span class="text-[10px] px-1.5 py-0.2 rounded-full bg-slate-100 font-mono">4</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- ============================================================= -->
+        <!-- 3. PRODUCT GRID                                               -->
+        <!-- ============================================================= -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 mt-3" id="multiCategoryProductGrid">
+          <!-- Dynamically populated cards -->
+        </div>
+
+        <!-- ============================================================= -->
+        <!-- 4. COLLECTOR SPOTLIGHTS & VERIFIED REVIEWS SHOWCASE           -->
+        <!-- ============================================================= -->
+        <section class="mt-8 pt-6 border-t border-slate-200/80 flex-shrink-0">
+          <div class="flex flex-col sm:flex-row sm:items-end justify-between mb-4 gap-2">
+            <div>
+              <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-amber-50 text-amber-900 border border-amber-200/80 text-[11px] font-bold mb-1.5 shadow-2xs">
+                <span>⭐</span>
+                <span>AUTHENTIC BUYER TESTIMONIALS</span>
+                <span class="text-amber-300">·</span>
+                <span class="font-mono text-amber-800">4.92 / 5.0 Star Rating</span>
+              </div>
+              <h3 class="text-base font-black text-slate-900 tracking-tight">Collector Spotlights & Customer Reviews</h3>
+              <p class="text-xs text-slate-500">Real verified impressions from Pakistani and international luxury connoisseurs</p>
+            </div>
+            <div class="flex items-center gap-2 text-xs font-mono font-bold text-slate-500">
+              <span class="w-2 h-2 rounded-full bg-emerald-500"></span>
+              <span>1,420+ Verified Deliveries</span>
+            </div>
+          </div>
+
+          <!-- Testimonial Cards Grid (4 Cards Across Categories) -->
+          <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+            <!-- Review Card 1 (Watches) -->
+            <div class="p-4 rounded-2xl bg-white border border-slate-200/90 shadow-sm hover:shadow-md transition-all flex flex-col justify-between">
+              <div>
+                <div class="flex items-center justify-between text-xs mb-2">
+                  <div class="flex text-amber-400 text-xs">★★★★★</div>
+                  <span class="text-[10px] text-slate-400 font-mono">2 days ago</span>
+                </div>
+                <p class="text-xs text-slate-700 leading-relaxed font-medium italic">
+                  "The Grade 5 titanium feel on the Aura Chrono is breathtaking. Weightless on wrist and the micro-adjust clasp is a game changer. Arrived in Lahore via express in 24 hours!"
+                </p>
+              </div>
+              <div class="mt-4 pt-3 border-t border-slate-100 flex items-center gap-2.5">
+                <img src="https://i.pravatar.cc/100?img=11" class="w-8 h-8 rounded-full object-cover">
+                <div class="min-w-0 flex-1">
+                  <h5 class="text-xs font-bold text-slate-900 truncate">Hamza Tariq</h5>
+                  <p class="text-[10px] text-emerald-600 font-semibold flex items-center gap-1">
+                    <span>✓ Verified Buyer</span>
+                    <span class="text-slate-300">·</span>
+                    <span class="text-slate-400 font-normal">Islamabad</span>
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <!-- Review Card 2 (Jewelry) -->
+            <div class="p-4 rounded-2xl bg-white border border-slate-200/90 shadow-sm hover:shadow-md transition-all flex flex-col justify-between">
+              <div>
+                <div class="flex items-center justify-between text-xs mb-2">
+                  <div class="flex text-amber-400 text-xs">★★★★★</div>
+                  <span class="text-[10px] text-slate-400 font-mono">Yesterday</span>
+                </div>
+                <p class="text-xs text-slate-700 leading-relaxed font-medium italic">
+                  "Bought the Elysian Diamond Pavé Ring during the live stream. Sparkle under sunlight is pure fire. EasyPaisa checkout was completely seamless. Highly recommended!"
+                </p>
+              </div>
+              <div class="mt-4 pt-3 border-t border-slate-100 flex items-center gap-2.5">
+                <img src="https://i.pravatar.cc/100?img=47" class="w-8 h-8 rounded-full object-cover">
+                <div class="min-w-0 flex-1">
+                  <h5 class="text-xs font-bold text-slate-900 truncate">Ayesha Malik</h5>
+                  <p class="text-[10px] text-emerald-600 font-semibold flex items-center gap-1">
+                    <span>✓ Verified Buyer</span>
+                    <span class="text-slate-300">·</span>
+                    <span class="text-slate-400 font-normal">Karachi</span>
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <!-- Review Card 3 (Apparel) -->
+            <div class="p-4 rounded-2xl bg-white border border-slate-200/90 shadow-sm hover:shadow-md transition-all flex flex-col justify-between">
+              <div>
+                <div class="flex items-center justify-between text-xs mb-2">
+                  <div class="flex text-amber-400 text-xs">★★★★★</div>
+                  <span class="text-[10px] text-slate-400 font-mono">4 days ago</span>
+                </div>
+                <p class="text-xs text-slate-700 leading-relaxed font-medium italic">
+                  "Cashmere Overcoat has impeccable Italian drape. The horn buttons and horn lining finish are top-tier sartorial art. Live host accurately described the sizing fit."
+                </p>
+              </div>
+              <div class="mt-4 pt-3 border-t border-slate-100 flex items-center gap-2.5">
+                <img src="https://i.pravatar.cc/100?img=68" class="w-8 h-8 rounded-full object-cover">
+                <div class="min-w-0 flex-1">
+                  <h5 class="text-xs font-bold text-slate-900 truncate">Zubair Khan</h5>
+                  <p class="text-[10px] text-emerald-600 font-semibold flex items-center gap-1">
+                    <span>✓ Verified Buyer</span>
+                    <span class="text-slate-300">·</span>
+                    <span class="text-slate-400 font-normal">Lahore</span>
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <!-- Review Card 4 (Electronics) -->
+            <div class="p-4 rounded-2xl bg-white border border-slate-200/90 shadow-sm hover:shadow-md transition-all flex flex-col justify-between">
+              <div>
+                <div class="flex items-center justify-between text-xs mb-2">
+                  <div class="flex text-amber-400 text-xs">★★★★★</div>
+                  <span class="text-[10px] text-slate-400 font-mono">5 days ago</span>
+                </div>
+                <p class="text-xs text-slate-700 leading-relaxed font-medium italic">
+                  "Audiophile Planar Magnetic Headphones soundstage is unreal. Beryllium drivers reproduce every micro-detail in acoustic and classical tracks. 10/10 purchase."
+                </p>
+              </div>
+              <div class="mt-4 pt-3 border-t border-slate-100 flex items-center gap-2.5">
+                <img src="https://i.pravatar.cc/100?img=52" class="w-8 h-8 rounded-full object-cover">
+                <div class="min-w-0 flex-1">
+                  <h5 class="text-xs font-bold text-slate-900 truncate">Dr. Bilal Qureshi</h5>
+                  <p class="text-[10px] text-emerald-600 font-semibold flex items-center gap-1">
+                    <span>✓ Verified Buyer</span>
+                    <span class="text-slate-300">·</span>
+                    <span class="text-slate-400 font-normal">Rawalpindi</span>
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+      </div>
+
+      <!-- ============================================================= -->
+      <!-- VIEW 2: CREATOR STUDIO (HOST CONTROL ROOM)                    -->
+      <!-- ============================================================= -->
+      <div id="view-creator" class="page-view hidden flex-1 flex flex-col p-6 gap-5 overflow-y-auto">
+        <div class="flex items-center justify-between pb-4 border-b border-slate-200">
+          <div>
+            <h2 class="text-lg font-extrabold text-slate-900">Creator Broadcast Studio</h2>
+            <p class="text-xs text-slate-500">Live controls, stream health telemetry & host teleprompter</p>
+          </div>
+          <div class="flex items-center gap-2">
+            <span class="px-3 py-1 rounded-full bg-rose-100 text-rose-700 text-xs font-bold flex items-center gap-1.5">
+              <span class="w-2 h-2 rounded-full bg-rose-600 animate-ping"></span>
+              BROADCASTING LIVE
+            </span>
+            <button class="px-4 py-2 rounded-xl bg-slate-900 text-white text-xs font-bold hover:bg-slate-800 shadow">End Stream</button>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+          <!-- Card 1: Broadcast Health -->
+          <div class="bg-white p-4 rounded-2xl border border-slate-200 shadow-sm space-y-3">
+            <h3 class="text-xs font-bold text-slate-900 uppercase tracking-wider">Stream Health & Telemetry</h3>
+            <div class="space-y-2 text-xs">
+              <div class="flex justify-between"><span class="text-slate-500">Video Ingest:</span><span class="font-mono font-bold text-emerald-600">1080p @ 60 FPS</span></div>
+              <div class="flex justify-between"><span class="text-slate-500">Bitrate:</span><span class="font-mono font-bold">5,820 kbps</span></div>
+              <div class="flex justify-between"><span class="text-slate-500">SFU Cluster Latency:</span><span class="font-mono font-bold text-indigo-600">182ms</span></div>
+              <div class="flex justify-between"><span class="text-slate-500">Audio Codec:</span><span class="font-mono font-bold">Opus 48kHz Stereo</span></div>
+            </div>
+          </div>
+
+          <!-- Card 2: Revenue & Orders -->
+          <div class="bg-white p-4 rounded-2xl border border-slate-200 shadow-sm space-y-3">
+            <h3 class="text-xs font-bold text-slate-900 uppercase tracking-wider">Live Revenue Metrics</h3>
+            <div class="space-y-2 text-xs">
+              <div class="flex justify-between"><span class="text-slate-500">Total Live GMV:</span><span class="font-mono font-bold text-emerald-600 text-sm">$34,820.00</span></div>
+              <div class="flex justify-between"><span class="text-slate-500">Orders Confirmed:</span><span class="font-mono font-bold">142 orders</span></div>
+              <div class="flex justify-between"><span class="text-slate-500">Conversion Rate:</span><span class="font-mono font-bold">8.42%</span></div>
+              <div class="flex justify-between"><span class="text-slate-500">Active Flash Locks:</span><span class="font-mono font-bold text-amber-600">18 carts</span></div>
+            </div>
+          </div>
+
+          <!-- Card 3: Host Quick Pin Actions -->
+          <div class="bg-white p-4 rounded-2xl border border-slate-200 shadow-sm space-y-3">
+            <h3 class="text-xs font-bold text-slate-900 uppercase tracking-wider">Active Pinned Showcase</h3>
+            <div class="flex items-center gap-3 p-2 rounded-xl bg-slate-50 border border-slate-200">
+              <img src="https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=100&auto=format&fit=crop&q=80" class="w-10 h-10 rounded-lg object-cover">
+              <div class="flex-1 min-w-0">
+                <p class="text-xs font-bold truncate">Aura Chrono 44mm Titanium</p>
+                <p class="text-[11px] font-mono text-emerald-600 font-bold">$249.80</p>
+              </div>
+              <button onclick="alert('Host product spotlight updated!')" class="px-2.5 py-1 text-xs font-bold bg-slate-900 text-white rounded-lg">Re-pin</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Teleprompter & Talking Points -->
+        <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm space-y-3">
+          <h3 class="text-xs font-bold text-slate-900 uppercase tracking-wider flex items-center justify-between">
+            <span>AI Host Teleprompter & Highlight Cue Cards</span>
+            <span class="text-[10px] text-indigo-600 font-bold bg-indigo-50 px-2 py-0.5 rounded-full">Grounded in Catalog</span>
+          </h3>
+          <div class="p-3.5 rounded-xl bg-slate-50 border border-slate-100 text-xs text-slate-700 space-y-2">
+            <p>• <strong>Craftsmanship:</strong> Emphasize the Grade 5 titanium alloy imported from Switzerland and double-anti-reflective sapphire crystal.</p>
+            <p>• <strong>Flash Urgency:</strong> Only 14 units left under today's 41% broadcast discount. Remind viewers about 5-year international warranty.</p>
+            <p>• <strong>Viewer Q&A Cue:</strong> Sarah J. asked about micro-adjustments — demonstrate the 3-point toolless clasp on camera now!</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- ============================================================= -->
+      <!-- VIEW 3: AI GROUNDING CATALOG (RAG DATA & VECTORS)             -->
+      <!-- ============================================================= -->
+      <div id="view-ai-catalog" class="page-view hidden flex-1 flex flex-col p-6 gap-5 overflow-y-auto">
+        <div class="flex items-center justify-between pb-4 border-b border-slate-200">
+          <div>
+            <h2 class="text-lg font-extrabold text-slate-900">AI Grounding Catalog & Vector Manager</h2>
+            <p class="text-xs text-slate-500">12 items indexed with pgvector 1536-dim embeddings for zero-hallucination multilingual RAG</p>
+          </div>
+          <button onclick="testRAGQuery()" class="px-4 py-2 rounded-xl bg-indigo-600 text-white text-xs font-bold hover:bg-indigo-700 shadow flex items-center gap-1.5">
+            <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
+            Run Vector Similarity Test
+          </button>
+        </div>
+
+        <!-- 12 Item RAG Table -->
+        <div class="bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-sm">
+          <table class="w-full text-left text-xs">
+            <thead class="bg-slate-50 border-b border-slate-200 text-slate-500 uppercase tracking-wider text-[10px]">
+              <tr>
+                <th class="p-3.5">Product / SKU</th>
+                <th class="p-3.5">Category</th>
+                <th class="p-3.5">Live Price</th>
+                <th class="p-3.5">Stock</th>
+                <th class="p-3.5">Vector Chunks</th>
+                <th class="p-3.5">Cosine Match</th>
+                <th class="p-3.5">Action</th>
+              </tr>
+            </thead>
+            <tbody id="ragTableBody" class="divide-y divide-slate-100">
+              <!-- Dynamically populated via JS -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- ============================================================= -->
+      <!-- VIEW 4: EVENTS SCHEDULER                                      -->
+      <!-- ============================================================= -->
+      <div id="view-scheduler" class="page-view hidden flex-1 flex flex-col p-6 gap-5 overflow-y-auto">
+        <div class="flex items-center justify-between pb-4 border-b border-slate-200">
+          <div>
+            <h2 class="text-lg font-extrabold text-slate-900">Upcoming Live Shopping Schedule</h2>
+            <p class="text-xs text-slate-500">Scheduled broadcasts, flash sales, and viewer RSVP pipelines</p>
+          </div>
+          <button class="px-4 py-2 rounded-xl bg-slate-900 text-white text-xs font-bold hover:bg-slate-800 shadow">+ Schedule New Drop</button>
+        </div>
+
+        <div class="space-y-3">
+          <div class="p-4 rounded-2xl bg-white border border-slate-200 shadow-sm flex items-center justify-between">
+            <div class="flex items-center gap-4">
+              <div class="w-12 h-12 rounded-xl bg-rose-50 text-rose-600 font-extrabold flex flex-col items-center justify-center text-xs">
+                <span>TODAY</span>
+                <span class="text-sm">LIVE</span>
+              </div>
+              <div>
+                <h3 class="text-sm font-bold text-slate-900">Paris Winter Luxury Chronograph Showcase</h3>
+                <p class="text-xs text-slate-500">Host: Maison Horlogère · 14,890 Active Viewers</p>
+              </div>
+            </div>
+            <span class="px-3 py-1 bg-emerald-50 text-emerald-700 text-xs font-bold rounded-full">Broadcasting Now</span>
+          </div>
+
+          <div class="p-4 rounded-2xl bg-white border border-slate-200 shadow-sm flex items-center justify-between">
+            <div class="flex items-center gap-4">
+              <div class="w-12 h-12 rounded-xl bg-slate-100 text-slate-700 font-extrabold flex flex-col items-center justify-center text-xs">
+                <span>2H</span>
+                <span class="text-[10px]">SOON</span>
+              </div>
+              <div>
+                <h3 class="text-sm font-bold text-slate-900">Geneva Atelier Platinum Ring Drop</h3>
+                <p class="text-xs text-slate-500">Host: Atelier Haute Joaillerie · 8,420 RSVPs</p>
+              </div>
+            </div>
+            <button class="px-3 py-1.5 border border-slate-200 rounded-xl text-xs font-bold hover:bg-slate-50">View Run of Show</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- ============================================================= -->
+      <!-- VIEW 5: ORDER HISTORY & CART                                  -->
+      <!-- ============================================================= -->
+      <div id="view-orders" class="page-view hidden flex-1 flex flex-col p-6 gap-5 overflow-y-auto">
+        <div class="flex items-center justify-between pb-4 border-b border-slate-200">
+          <div>
+            <h2 class="text-lg font-extrabold text-slate-900">Orders & Idempotent Checkout History</h2>
+            <p class="text-xs text-slate-500">Stripe payment intents, idempotency keys & real-time webhook audits</p>
+          </div>
+          <button onclick="openCart()" class="px-4 py-2 rounded-xl bg-slate-900 text-white text-xs font-bold">Open Cart Drawer</button>
+        </div>
+
+        <div class="bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-sm">
+          <table class="w-full text-left text-xs">
+            <thead class="bg-slate-50 border-b border-slate-200 text-slate-500 uppercase tracking-wider text-[10px]">
+              <tr>
+                <th class="p-3.5">Order Number</th>
+                <th class="p-3.5">Customer</th>
+                <th class="p-3.5">Items</th>
+                <th class="p-3.5">Total</th>
+                <th class="p-3.5">Status</th>
+                <th class="p-3.5">Idempotency Key</th>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-slate-100">
+              <tr>
+                <td class="p-3.5 font-mono font-bold">ORD-2026-9481</td>
+                <td class="p-3.5">Sarah Jenkins</td>
+                <td class="p-3.5">Aura Chrono 44mm Titanium (x1)</td>
+                <td class="p-3.5 font-mono font-bold">$249.80</td>
+                <td class="p-3.5"><span class="px-2 py-0.5 rounded-full bg-emerald-50 text-emerald-700 font-bold">PAID</span></td>
+                <td class="p-3.5 font-mono text-[10px] text-slate-500">idemp_sec_9942a1</td>
+              </tr>
+              <tr>
+                <td class="p-3.5 font-mono font-bold">ORD-2026-9480</td>
+                <td class="p-3.5">David Ross</td>
+                <td class="p-3.5">Atelier Tourbillon Platinum (x1)</td>
+                <td class="p-3.5 font-mono font-bold">$1,850.00</td>
+                <td class="p-3.5"><span class="px-2 py-0.5 rounded-full bg-emerald-50 text-emerald-700 font-bold">PAID</span></td>
+                <td class="p-3.5 font-mono text-[10px] text-slate-500">idemp_sec_8841b9</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- ============================================================= -->
+      <!-- VIEW 6: ANALYTICS INSIGHT                                     -->
+      <!-- ============================================================= -->
+      <div id="view-analytics" class="page-view hidden flex-1 flex flex-col p-6 gap-5 overflow-y-auto">
+        <div class="flex items-center justify-between pb-4 border-b border-slate-200">
+          <div>
+            <h2 class="text-lg font-extrabold text-slate-900">Real-Time Telemetry & Funnel Analytics</h2>
+            <p class="text-xs text-slate-500">Viewer retention, sales velocity, and drop conversion funnel</p>
+          </div>
+          <span class="text-xs font-mono font-bold text-slate-500">Updated: Just now</span>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
+          <div class="p-4 bg-white rounded-2xl border border-slate-200 shadow-sm">
+            <p class="text-xs text-slate-500">Peak Viewers</p>
+            <p class="text-xl font-bold font-mono mt-1 text-slate-900">15,420</p>
+            <p class="text-[10px] text-emerald-600 font-bold mt-1">↑ +24% vs last drop</p>
+          </div>
+          <div class="p-4 bg-white rounded-2xl border border-slate-200 shadow-sm">
+            <p class="text-xs text-slate-500">Gross Merchandise Value</p>
+            <p class="text-xl font-bold font-mono mt-1 text-emerald-600">$34,820</p>
+            <p class="text-[10px] text-emerald-600 font-bold mt-1">↑ Target exceeded</p>
+          </div>
+          <div class="p-4 bg-white rounded-2xl border border-slate-200 shadow-sm">
+            <p class="text-xs text-slate-500">Cart Lock Rate</p>
+            <p class="text-xl font-bold font-mono mt-1 text-indigo-600">12.6%</p>
+            <p class="text-[10px] text-slate-500 font-bold mt-1">Redis flash locks</p>
+          </div>
+          <div class="p-4 bg-white rounded-2xl border border-slate-200 shadow-sm">
+            <p class="text-xs text-slate-500">Checkout Conversion</p>
+            <p class="text-xl font-bold font-mono mt-1 text-slate-900">8.42%</p>
+            <p class="text-[10px] text-emerald-600 font-bold mt-1">Industry avg 1.8%</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- ============================================================= -->
+      <!-- VIEW 7: SETTINGS                                              -->
+      <!-- ============================================================= -->
+      <div id="view-settings" class="page-view hidden flex-1 flex flex-col p-6 gap-5 overflow-y-auto">
+        <div class="flex items-center justify-between pb-4 border-b border-slate-200">
+          <div>
+            <h2 class="text-lg font-extrabold text-slate-900">Platform Settings & API Keys</h2>
+            <p class="text-xs text-slate-500">LiveKit SFU config, Stripe Webhook secrets & Gemini RAG model parameters</p>
+          </div>
+        </div>
+
+        <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm max-w-2xl space-y-4 text-xs">
+          <div>
+            <label class="block font-bold text-slate-700 mb-1">Stripe Webhook HMAC Secret</label>
+            <input type="password" value="whsec_supernova_live_signature_key_2026" class="w-full p-2.5 bg-slate-50 border border-slate-200 rounded-xl font-mono text-xs" readonly>
+          </div>
+          <div>
+            <label class="block font-bold text-slate-700 mb-1">LiveKit WebRTC SFU WebSocket URL</label>
+            <input type="text" value="wss://sfu.supernova.live:7880" class="w-full p-2.5 bg-slate-50 border border-slate-200 rounded-xl font-mono text-xs" readonly>
+          </div>
+          <div>
+            <label class="block font-bold text-slate-700 mb-1">LL-HLS Fallback Viewer Threshold</label>
+            <input type="number" value="5000" class="w-full p-2.5 bg-slate-50 border border-slate-200 rounded-xl font-mono text-xs" readonly>
+          </div>
+        </div>
+      </div>
+
+    </main>
+
+    <!-- --------------------------------------------------------------- -->
+    <!-- 3. RIGHT COMMUNITY TRAY (CHAT, RAG AI, PRODUCT CATALOG)         -->
+    <!-- --------------------------------------------------------------- -->
+    <aside class="w-80 lg:w-[380px] bg-white border-l border-slate-200/80 flex flex-col z-20 flex-shrink-0 shadow-[-10px_0_30px_rgba(0,0,0,0.02)]">
+      
+      <!-- Top Header & Tabs -->
+      <div class="p-3.5 border-b border-slate-100 flex flex-col gap-2.5 bg-slate-50/40">
+        <div class="flex items-center justify-between">
+          <div class="flex items-center gap-2">
+            <h2 class="text-xs font-extrabold text-slate-900 tracking-tight">Live Broadcast Community</h2>
+            <span class="w-2 h-2 rounded-full bg-emerald-500"></span>
+          </div>
+          <div class="flex items-center gap-1 text-[10px] font-bold text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded-full">
+            AI Guard (Active)
+          </div>
+        </div>
+
+        <!-- Three Navigation Tabs -->
+        <div class="flex p-1 bg-slate-100 rounded-xl text-[11px] font-bold text-slate-600">
+          <button onclick="switchTrayTab('chat')" id="trayTab-chat" class="tray-tab flex-1 py-1.5 rounded-lg bg-white text-slate-900 shadow-sm transition-all">
+            Community Chat
+          </button>
+          <button onclick="switchTrayTab('rag')" id="trayTab-rag" class="tray-tab flex-1 py-1.5 rounded-lg text-slate-500 hover:text-slate-900 transition-all">
+            AI Q&A Grounding
+          </button>
+          <button onclick="switchTrayTab('catalog')" id="trayTab-catalog" class="tray-tab flex-1 py-1.5 rounded-lg text-slate-500 hover:text-slate-900 transition-all">
+            Catalog (12)
+          </button>
+        </div>
+      </div>
+
+      <!-- ------------------------------------------------------------- -->
+      <!-- TRAY CONTENT 1: COMMUNITY CHAT STREAM                         -->
+      <!-- ------------------------------------------------------------- -->
+      <div id="trayContent-chat" class="tray-panel flex-1 flex flex-col overflow-hidden">
+        
+        <!-- Pinned Host Announcement Banner -->
+        <div class="p-2.5 px-3 bg-gradient-to-r from-amber-50 to-orange-50 border-b border-amber-200/80 flex items-start gap-2.5 text-xs flex-shrink-0">
+          <span class="text-amber-600 text-sm mt-0.5">📌</span>
+          <div class="flex-1 min-w-0">
+            <div class="flex items-center gap-1.5">
+              <span class="font-black text-amber-950 text-[10px] tracking-wide">PINNED BY HOST</span>
+              <span class="px-1.5 py-0.2 rounded text-[8px] font-black bg-rose-600 text-white animate-pulse">41% FLASH DROP</span>
+            </div>
+            <p class="text-[11px] text-amber-900 leading-snug mt-0.5">
+              Limited 14 pieces remaining! Instant checkout available with JazzCash, EasyPaisa & COD across Pakistan. Ask specs below for live camera demo!
+            </p>
+          </div>
+        </div>
+
+        <!-- Chat Activity Status Bar -->
+        <div class="px-3 py-1 bg-slate-50/80 border-b border-slate-100 flex items-center justify-between text-[10px] text-slate-500 font-medium flex-shrink-0">
+          <span class="flex items-center gap-1.5">
+            <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-ping"></span>
+            <span class="font-bold text-slate-700">Live Chat Stream</span>
+            <span class="text-slate-400">· 14.8k watching</span>
+          </span>
+          <span class="text-[9px] font-mono text-emerald-700 bg-emerald-50 px-1.5 py-0.2 rounded font-bold">Auto-Moderation ON</span>
+        </div>
+
+        <!-- Messages List -->
+        <div id="chatMessagesStream" class="flex-1 overflow-y-auto p-3.5 space-y-2.5 text-xs">
+          <!-- Message 1 -->
+          <div class="flex items-start gap-2.5">
+            <img src="https://i.pravatar.cc/100?img=32" alt="User" class="w-7 h-7 rounded-full object-cover mt-0.5 border border-slate-200">
+            <div class="flex-1 min-w-0">
+              <div class="flex items-center gap-1.5">
+                <span class="font-bold text-slate-900">Sarah Jenkins</span>
+                <span class="px-1.5 py-0.2 rounded text-[8px] font-black bg-amber-100 text-amber-900 border border-amber-300">VIP</span>
+                <span class="text-[9px] text-slate-400 font-mono ml-auto">18:42</span>
+              </div>
+              <p class="text-slate-700 mt-0.5 leading-snug">Does the bracelet have micro-adjustments for smaller wrists?</p>
+            </div>
+          </div>
+
+          <!-- Message 2 (Host) -->
+          <div class="flex items-start gap-2.5 bg-rose-50/50 p-2 rounded-xl border border-rose-100">
+            <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=100&auto=format&fit=crop&q=80" alt="Host" class="w-7 h-7 rounded-full object-cover mt-0.5 ring-2 ring-rose-500">
+            <div class="flex-1 min-w-0">
+              <div class="flex items-center gap-1.5">
+                <span class="font-extrabold text-slate-900">Maison Horlogère</span>
+                <span class="px-1.5 py-0.2 rounded text-[8px] font-black bg-rose-600 text-white">HOST</span>
+                <span class="text-[9px] text-rose-500 font-mono ml-auto">18:42</span>
+              </div>
+              <p class="text-slate-900 mt-0.5 font-medium leading-snug">Yes Sarah! 3-point toolless micro-adjust clasp included. Demonstrating on camera now!</p>
+            </div>
+          </div>
+
+          <!-- Message 3 -->
+          <div class="flex items-start gap-2.5">
+            <img src="https://i.pravatar.cc/100?img=11" alt="User" class="w-7 h-7 rounded-full object-cover mt-0.5 border border-slate-200">
+            <div class="flex-1 min-w-0">
+              <div class="flex items-center gap-1.5">
+                <span class="font-bold text-slate-900">Hamza Tariq (Islamabad)</span>
+                <span class="px-1.5 py-0.2 rounded text-[8px] font-black bg-emerald-100 text-emerald-800 border border-emerald-300">VERIFIED BUYER</span>
+                <span class="text-[9px] text-slate-400 font-mono ml-auto">18:43</span>
+              </div>
+              <p class="text-slate-700 mt-0.5 leading-snug">Just paid via EasyPaisa! Super smooth prompt 🚀 Can't wait for delivery.</p>
+            </div>
+          </div>
+
+          <!-- Message 4 (With AI Translation Tag) -->
+          <div class="flex items-start gap-2.5">
+            <img src="https://i.pravatar.cc/100?img=44" alt="User" class="w-7 h-7 rounded-full object-cover mt-0.5 border border-slate-200">
+            <div class="flex-1 min-w-0">
+              <div class="flex items-center gap-1.5">
+                <span class="font-bold text-slate-900">Kenji Sato</span>
+                <span class="px-1.5 py-0.2 rounded text-[8px] font-bold bg-indigo-50 text-indigo-700 border border-indigo-200">AI auto-translated</span>
+                <span class="text-[9px] text-slate-400 font-mono ml-auto">18:44</span>
+              </div>
+              <p class="text-slate-700 mt-0.5 leading-snug">How long is international shipping to Tokyo? (Original: 東京への発送は何日かかりますか？)</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Quick Emoji Reaction Bar -->
+        <div class="px-3 py-1.5 border-t border-slate-100 flex items-center justify-around bg-slate-50/50 flex-shrink-0">
+          <button onclick="sendReaction('❤️')" class="text-lg hover:scale-125 transition-transform active:scale-95" title="Love">❤️</button>
+          <button onclick="sendReaction('🔥')" class="text-lg hover:scale-125 transition-transform active:scale-95" title="Fire">🔥</button>
+          <button onclick="sendReaction('👏')" class="text-lg hover:scale-125 transition-transform active:scale-95" title="Clap">👏</button>
+          <button onclick="sendReaction('💎')" class="text-lg hover:scale-125 transition-transform active:scale-95" title="Diamond">💎</button>
+          <button onclick="sendReaction('🚀')" class="text-lg hover:scale-125 transition-transform active:scale-95" title="Rocket">🚀</button>
+          <button onclick="sendReaction('🇵🇰')" class="text-lg hover:scale-125 transition-transform active:scale-95" title="Pakistan">🇵🇰</button>
+        </div>
+
+        <!-- Quick Inquiries Chips Bar -->
+        <div class="px-2.5 py-1.5 bg-slate-50 border-t border-slate-100 flex items-center gap-1.5 overflow-x-auto scrollbar-none flex-shrink-0">
+          <span class="text-[9px] font-black text-slate-400 uppercase tracking-wider flex-shrink-0">Ask:</span>
+          <button type="button" onclick="sendQuickChatMessage('🚚 What is the delivery time across Pakistan?')" class="flex-shrink-0 px-2 py-0.5 rounded-full bg-white hover:bg-slate-100 border border-slate-200 text-[10px] font-bold text-slate-700 shadow-2xs transition-all active:scale-95">
+            🚚 Delivery Time?
+          </button>
+          <button type="button" onclick="sendQuickChatMessage('🇵🇰 Can I pay via JazzCash / EasyPaisa?')" class="flex-shrink-0 px-2 py-0.5 rounded-full bg-white hover:bg-slate-100 border border-slate-200 text-[10px] font-bold text-slate-700 shadow-2xs transition-all active:scale-95">
+            🇵🇰 JazzCash?
+          </button>
+          <button type="button" onclick="sendQuickChatMessage('🛡️ Is 5-year international warranty included?')" class="flex-shrink-0 px-2 py-0.5 rounded-full bg-white hover:bg-slate-100 border border-slate-200 text-[10px] font-bold text-slate-700 shadow-2xs transition-all active:scale-95">
+            🛡️ 5-Yr Warranty?
+          </button>
+          <button type="button" onclick="sendQuickChatMessage('🔍 Can the host zoom in on the clasp?')" class="flex-shrink-0 px-2 py-0.5 rounded-full bg-white hover:bg-slate-100 border border-slate-200 text-[10px] font-bold text-slate-700 shadow-2xs transition-all active:scale-95">
+            🔍 Zoom Clasp
+          </button>
+        </div>
+
+        <!-- Chat Input Form -->
+        <form id="chatForm" class="p-2.5 border-t border-slate-100 flex items-center gap-2 bg-white flex-shrink-0">
+          <button type="button" onclick="openAITab()" class="p-2 rounded-xl bg-indigo-50 hover:bg-indigo-100 text-indigo-600 transition-colors" title="Ask AI RAG Concierge">
+            <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
+          </button>
+          <input
+            id="chatInput"
+            type="text"
+            placeholder="Type a message or click preset chips..."
+            class="flex-1 text-xs py-2 px-3 bg-slate-50 border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-slate-900/10 focus:border-slate-400 text-slate-800 placeholder-slate-400 font-medium"
+          >
+          <button type="submit" class="p-2 rounded-xl bg-slate-900 hover:bg-slate-800 text-white transition-colors">
+            <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </button>
+        </form>
+      </div>
+
+      <!-- ------------------------------------------------------------- -->
+      <!-- TRAY CONTENT 2: AI Q&A GROUNDING (RAG TERMINAL)               -->
+      <!-- ------------------------------------------------------------- -->
+      <div id="trayContent-rag" class="tray-panel hidden flex-1 flex flex-col p-3.5 gap-3 overflow-y-auto">
+        <div class="p-3 rounded-xl bg-indigo-50/70 border border-indigo-200/80">
+          <div class="flex items-center gap-2 text-indigo-700 font-bold text-xs">
+            <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
+            <span>Multilingual Catalog RAG Engine</span>
+          </div>
+          <p class="text-[10px] text-indigo-600 mt-1">Grounds answers strictly in live catalog specifications. Zero hallucinations.</p>
+        </div>
+
+        <!-- Quick Question Chips -->
+        <div>
+          <p class="text-[10px] font-bold uppercase tracking-wider text-slate-400 mb-1.5">Preset Inquiries in Any Language</p>
+          <div class="space-y-1.5">
+            <button onclick="askRAGPreset('Is the titanium hypoallergenic and scratch resistant?')" class="w-full text-left p-2 rounded-lg bg-slate-50 hover:bg-slate-100 text-xs text-slate-700 font-medium transition-colors border border-slate-200/60">
+              💎 "Is the titanium hypoallergenic & scratch resistant?"
+            </button>
+            <button onclick="askRAGPreset('¿Cuál es la política de garantía de 5 años?')" class="w-full text-left p-2 rounded-lg bg-slate-50 hover:bg-slate-100 text-xs text-slate-700 font-medium transition-colors border border-slate-200/60">
+              🇪🇸 "¿Cuál es la política de garantía de 5 años?"
+            </button>
+            <button onclick="askRAGPreset('کیا واٹر پروفنگ 100 میٹر تک محفوظ ہے؟')" class="w-full text-left p-2 rounded-lg bg-slate-50 hover:bg-slate-100 text-xs text-slate-700 font-medium transition-colors border border-slate-200/60">
+              🇵🇰 "کیا واٹر پروفنگ 100 میٹر تک محفوظ ہے؟"
+            </button>
+          </div>
+        </div>
+
+        <!-- Grounded Answer Display -->
+        <div class="flex-1 flex flex-col">
+          <div class="flex items-center justify-between text-[10px] font-bold text-slate-400 uppercase tracking-wider mb-1">
+            <span>Grounded Response</span>
+            <span id="ragScorePill" class="text-emerald-600 bg-emerald-50 px-1.5 py-0.2 rounded font-mono">Match: 0.94</span>
+          </div>
+          <div id="ragAnswerBox" class="flex-1 p-3.5 rounded-xl bg-slate-50 border border-slate-200 text-xs text-slate-800 leading-relaxed overflow-y-auto">
+            Select a preset question above or type your question below. The AI will translate and retrieve grounded technical specs directly from pgvector embeddings.
+          </div>
+        </div>
+
+        <!-- RAG Query Input Form -->
+        <form onsubmit="handleCustomRAG(event)" class="flex items-center gap-1.5 pt-2 border-t border-slate-100">
+          <input
+            id="ragCustomInput"
+            type="text"
+            placeholder="Ask specs in English, Urdu, French..."
+            class="flex-1 text-xs py-2 px-3 bg-slate-50 border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-indigo-500/20 text-slate-800"
+          >
+          <button type="submit" class="p-2 bg-indigo-600 hover:bg-indigo-700 text-white rounded-xl">
+            <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
+          </button>
+        </form>
+      </div>
+
+      <!-- ------------------------------------------------------------- -->
+      <!-- TRAY CONTENT 3: PRODUCT CATALOG (12 ITEMS SHOWCASE)           -->
+      <!-- ------------------------------------------------------------- -->
+      <div id="trayContent-catalog" class="tray-panel hidden flex-1 flex flex-col p-3.5 gap-3 overflow-y-auto">
+        <div class="flex items-center justify-between pb-1 border-b border-slate-100">
+          <span class="text-xs font-bold text-slate-900">Featured Showcase (12 Items)</span>
+          <span class="text-[10px] text-slate-400 font-mono">Live Drops</span>
+        </div>
+
+        <div id="catalogListContainer" class="space-y-2.5 overflow-y-auto pr-0.5">
+          <!-- Dynamically populated 12 luxury items -->
+        </div>
+      </div>
+    </aside>
+  </div>
+
+  <!-- ================================================================= -->
+  <!-- SLIDEOUT CART DRAWER WITH RESERVATION TIMER                       -->
+  <!-- ================================================================= -->
+  <div id="cartDrawerBackdrop" class="fixed inset-0 bg-slate-950/20 backdrop-blur-[2px] hidden z-40 transition-opacity" onclick="closeCart()"></div>
+  <div id="cartDrawer" class="fixed top-0 right-0 bottom-0 w-full max-w-md bg-white z-50 shadow-2xl border-l border-slate-200 transform translate-x-full transition-transform duration-300 flex flex-col">
+    <div class="p-5 border-b border-slate-100 flex items-center justify-between">
+      <div class="flex items-center gap-2">
+        <h3 class="text-base font-extrabold text-slate-900">Your Reserved Live Cart</h3>
+        <span id="cartHeaderBadge" class="px-2 py-0.5 rounded-full bg-slate-100 text-slate-700 text-xs font-bold">1 item</span>
+      </div>
+      <button onclick="closeCart()" class="p-1.5 rounded-lg text-slate-400 hover:text-slate-800 hover:bg-slate-100">✕</button>
+    </div>
+
+    <!-- 10-Minute Reservation Timer Banner -->
+    <div class="bg-amber-50 border-b border-amber-200/80 px-5 py-2.5 flex items-center justify-between text-xs text-amber-900">
+      <div class="flex items-center gap-2 font-medium">
+        <span class="w-2 h-2 rounded-full bg-amber-500 animate-ping"></span>
+        <span>Flash Sale Stock Locked (Redis):</span>
+      </div>
+      <span id="cartCountdownTimer" class="font-mono font-bold text-amber-800">09:42</span>
+    </div>
+
+    <div id="cartItemsList" class="flex-1 overflow-y-auto p-5 space-y-4">
+      <!-- Items dynamically populated -->
+    </div>
+
+    <div class="p-5 border-t border-slate-100 bg-slate-50/60">
+      <div class="flex items-center justify-between text-xs text-slate-500 mb-1">
+        <span>Subtotal</span>
+        <span id="cartSubtotalText" class="font-bold text-slate-900 font-mono">$249.80</span>
+      </div>
+      <div class="flex items-center justify-between text-xs text-emerald-600 mb-3">
+        <span>Broadcast Free Express Shipping</span>
+        <span>$0.00</span>
+      </div>
+      <button onclick="openPakistanCheckout()" class="w-full py-3.5 px-4 rounded-xl bg-slate-900 hover:bg-slate-800 text-white font-bold text-xs shadow-lg transition-transform active:scale-95 flex items-center justify-center gap-2">
+        <span>Instant Checkout (JazzCash / EasyPaisa)</span>
+        <span class="text-slate-400">·</span>
+        <span id="checkoutButtonTotal" class="font-mono">Rs. 69,900</span>
+      </button>
+      <p class="text-[10px] text-center text-slate-400 mt-2 flex items-center justify-center gap-1 font-medium">
+        <svg class="w-3.5 h-3.5 text-slate-400" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/></svg>
+        JazzCash, EasyPaisa & 1Link 256-Bit HMAC Security
+      </p>
+    </div>
+  </div>
+
+  <!-- ================================================================= -->
+  <!-- IN-STREAM PAKISTAN CHECKOUT MODAL (SLIDE-OVER)                    -->
+  <!-- ================================================================= -->
+  <div id="pkCheckoutBackdrop" class="fixed inset-0 bg-slate-950/25 backdrop-blur-[2px] hidden z-50 transition-opacity" onclick="closePakistanCheckout()"></div>
+  <div id="pkCheckoutModal" class="fixed top-0 right-0 bottom-0 w-full max-w-md bg-white/95 backdrop-blur-2xl z-50 shadow-2xl border-l border-slate-200 transform translate-x-full transition-transform duration-300 flex flex-col">
+    <!-- Header -->
+    <div class="p-5 border-b border-slate-100 flex items-center justify-between bg-gradient-to-r from-slate-50 to-white">
+      <div class="flex items-center gap-2.5">
+        <div class="w-8 h-8 rounded-xl bg-slate-900 text-white flex items-center justify-center font-bold text-xs shadow-sm">
+          🇵🇰
+        </div>
+        <div>
+          <h3 class="text-sm font-extrabold text-slate-900">In-Stream Instant Checkout</h3>
+          <p class="text-[10px] text-slate-500 font-medium">JazzCash · EasyPaisa · 1Link Bank</p>
+        </div>
+      </div>
+      <button onclick="closePakistanCheckout()" class="p-1.5 rounded-lg text-slate-400 hover:text-slate-800 hover:bg-slate-100">✕</button>
+    </div>
+
+    <!-- Product Summary -->
+    <div class="p-4 bg-slate-50/80 border-b border-slate-100 flex items-center gap-3">
+      <img src="https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=100&auto=format&fit=crop&q=80" class="w-12 h-12 rounded-xl object-cover border border-slate-200 bg-white">
+      <div class="flex-1 min-w-0">
+        <h4 class="text-xs font-bold text-slate-900 truncate">Aura Chrono 44mm Titanium</h4>
+        <div class="flex items-center gap-2 mt-0.5">
+          <span class="text-sm font-extrabold text-slate-900 font-mono">Rs. 69,900</span>
+          <span class="text-[10px] font-bold text-emerald-600 bg-emerald-50 px-1.5 py-0.2 rounded">Live Broadcast Drop</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Step Container -->
+    <div class="flex-1 overflow-y-auto p-5" id="pkCheckoutBody">
+      <!-- Step 1: Selection -->
+      <div id="pkStepSelect" class="space-y-3.5">
+        <p class="text-xs font-bold text-slate-700 uppercase tracking-wider">Select Payment Method</p>
+
+        <!-- JazzCash Option -->
+        <div onclick="selectPkGateway('JAZZCASH')" id="gatewayCard-JAZZCASH" class="p-3.5 rounded-2xl border-2 border-rose-500 bg-rose-50/40 cursor-pointer flex items-center justify-between transition-all">
+          <div class="flex items-center gap-3">
+            <div class="w-10 h-10 rounded-xl bg-[#DC2626] text-white flex items-center justify-center font-extrabold text-xs shadow-sm">
+              JC
+            </div>
+            <div>
+              <h5 class="text-xs font-bold text-slate-900">JazzCash Mobile Wallet</h5>
+              <p class="text-[10px] text-slate-500">Instant USSD prompt & MPIN on mobile screen</p>
+            </div>
+          </div>
+          <span class="w-4 h-4 rounded-full bg-rose-600 text-white flex items-center justify-center text-[10px]">✓</span>
+        </div>
+
+        <!-- EasyPaisa Option -->
+        <div onclick="selectPkGateway('EASYPAISA')" id="gatewayCard-EASYPAISA" class="p-3.5 rounded-2xl border border-slate-200 bg-white hover:bg-slate-50 cursor-pointer flex items-center justify-between transition-all">
+          <div class="flex items-center gap-3">
+            <div class="w-10 h-10 rounded-xl bg-[#00A859] text-white flex items-center justify-center font-extrabold text-xs shadow-sm">
+              EP
+            </div>
+            <div>
+              <h5 class="text-xs font-bold text-slate-900">EasyPaisa Mobile Account</h5>
+              <p class="text-[10px] text-slate-500">In-app push prompt & instant approval</p>
+            </div>
+          </div>
+          <span class="w-4 h-4 rounded-full border border-slate-300"></span>
+        </div>
+
+        <!-- Safepay Option -->
+        <div onclick="selectPkGateway('SAFEPAY')" id="gatewayCard-SAFEPAY" class="p-3.5 rounded-2xl border border-slate-200 bg-white hover:bg-slate-50 cursor-pointer flex items-center justify-between transition-all">
+          <div class="flex items-center gap-3">
+            <div class="w-10 h-10 rounded-xl bg-slate-900 text-white flex items-center justify-center font-extrabold text-xs shadow-sm">
+              1L
+            </div>
+            <div>
+              <h5 class="text-xs font-bold text-slate-900">Debit / Credit Card & 1Link</h5>
+              <p class="text-[10px] text-slate-500">Safepay Aggregator (Visa / PayPak / Bank)</p>
+            </div>
+          </div>
+          <span class="w-4 h-4 rounded-full border border-slate-300"></span>
+        </div>
+
+        <!-- Mobile Account Inputs -->
+        <div class="pt-2 space-y-3">
+          <div>
+            <label class="block text-xs font-semibold text-slate-700 mb-1">Mobile Account Number</label>
+            <div class="relative">
+              <span class="absolute left-3 top-1/2 -translate-y-1/2 text-xs font-bold text-slate-400">🇵🇰 +92</span>
+              <input type="text" id="pkMobileInput" value="03001234567" placeholder="0300 1234567" class="w-full pl-20 pr-4 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-xs font-bold text-slate-900 focus:outline-none focus:ring-2 focus:ring-slate-900/10">
+            </div>
+          </div>
+
+          <div id="pkCnicFieldGroup">
+            <label class="block text-xs font-semibold text-slate-700 mb-1">CNIC Last 6 Digits (Biometric Security)</label>
+            <input type="text" id="pkCnicInput" value="123456" maxlength="6" placeholder="e.g. 123456" class="w-full px-4 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-xs font-bold text-slate-900 focus:outline-none focus:ring-2 focus:ring-slate-900/10">
+          </div>
+        </div>
+
+        <button onclick="executePkPaymentInitiation()" id="pkDispatchBtn" class="w-full mt-3 py-3.5 rounded-xl bg-slate-900 hover:bg-slate-800 text-white font-bold text-xs shadow-md transition-all active:scale-98 flex items-center justify-center gap-2">
+          <span>Dispatch Mobile Prompt</span>
+          <span>·</span>
+          <span class="font-mono">Rs. 69,900</span>
+        </button>
+      </div>
+
+      <!-- Step 2: Waiting for USSD Prompt -->
+      <div id="pkStepWaiting" class="hidden py-8 flex flex-col items-center justify-center text-center space-y-4">
+        <div class="relative">
+          <div class="w-20 h-20 rounded-full bg-amber-50 border-4 border-amber-200 flex items-center justify-center text-3xl animate-pulse">
+            📱
+          </div>
+          <span class="absolute -bottom-1 -right-1 w-6 h-6 rounded-full bg-emerald-500 text-white text-xs font-bold flex items-center justify-center ring-2 ring-white">✓</span>
+        </div>
+
+        <div>
+          <h4 class="text-base font-extrabold text-slate-900">Check Your Mobile Screen!</h4>
+          <p class="text-xs text-slate-500 mt-1 max-w-xs">
+            A secure USSD prompt was sent to <strong id="pkWaitingPhoneText" class="text-slate-800 font-mono">03001234567</strong>. Please enter your MPIN now.
+          </p>
+        </div>
+
+        <div class="p-3 rounded-xl bg-slate-50 border border-slate-200 w-full text-xs font-mono flex items-center justify-between">
+          <span class="text-slate-500">Awaiting Webhook IPN:</span>
+          <span id="pkWaitingCountdown" class="font-bold text-amber-600">35s remaining</span>
+        </div>
+
+        <div class="w-full bg-slate-100 h-1.5 rounded-full overflow-hidden">
+          <div id="pkWaitingProgress" class="bg-amber-500 h-full transition-all duration-1000" style="width: 100%;"></div>
+        </div>
+      </div>
+
+      <!-- Step 3: Success -->
+      <div id="pkStepSuccess" class="hidden py-8 flex flex-col items-center justify-center text-center space-y-4">
+        <div class="w-16 h-16 rounded-full bg-emerald-100 text-emerald-600 flex items-center justify-center text-3xl shadow-sm">
+          🎉
+        </div>
+        <div>
+          <h4 class="text-base font-extrabold text-slate-900">Payment Confirmed!</h4>
+          <p class="text-xs text-slate-500 mt-1">
+            Order <strong id="pkSuccessOrderNum" class="font-mono">ORD-9481</strong> verified via <span id="pkSuccessGateway">JazzCash</span>.
+          </p>
+        </div>
+        <div class="p-3.5 rounded-xl bg-emerald-50 border border-emerald-200 text-xs text-emerald-800 w-full font-medium">
+          🚀 Live social proof notification has been broadcasted over the video stream!
+        </div>
+        <button onclick="closePakistanCheckout()" class="w-full py-3 rounded-xl bg-slate-900 text-white font-bold text-xs hover:bg-slate-800">
+          Back to Live Stream
+        </button>
+      </div>
+    </div>
+
+    <!-- Footer -->
+    <div class="p-4 border-t border-slate-100 bg-slate-50/50 text-[10px] text-center text-slate-400 flex items-center justify-center gap-1.5 font-medium">
+      <svg class="w-3.5 h-3.5 text-emerald-500" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg>
+      State Bank of Pakistan Compliant Payment Gateway Encryption
+    </div>
+  </div>
+
+  <!-- ================================================================= -->
+  <!-- MULTI-CATEGORY PRODUCT DETAIL MODAL & RELATED RECOMMENDATIONS     -->
+  <!-- ================================================================= -->
+  <div id="productDetailBackdrop" class="fixed inset-0 bg-slate-950/60 backdrop-blur-md hidden z-50 transition-opacity duration-200 flex items-center justify-center p-4" onclick="closeProductDetailModal(event)">
+    <div id="productDetailModal" class="relative w-full max-w-4xl max-h-[90vh] bg-white rounded-3xl shadow-2xl border border-slate-200 overflow-hidden flex flex-col scale-95 opacity-0 transition-all duration-300" onclick="event.stopPropagation()">
+      <!-- Modal Header -->
+      <div class="p-4 px-6 border-b border-slate-100 flex items-center justify-between bg-slate-50/70">
+        <div class="flex items-center gap-2">
+          <span id="modalCategoryBadge" class="px-2.5 py-0.5 rounded-full bg-indigo-50 text-indigo-700 font-bold text-xs uppercase tracking-wider">Watches</span>
+          <span id="modalSkuBadge" class="text-xs text-slate-400 font-mono">SKU: W-AURA-44</span>
+        </div>
+        <button onclick="closeProductDetailModal()" class="w-8 h-8 rounded-full bg-slate-100 hover:bg-slate-200 text-slate-600 flex items-center justify-center font-bold text-sm transition-colors">✕</button>
+      </div>
+
+      <!-- Scrollable Modal Content -->
+      <div class="flex-1 overflow-y-auto p-6 space-y-8">
+        <!-- Upper Region: Media Gallery & Full Specs -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+          <!-- Left: Media Gallery -->
+          <div class="space-y-3">
+            <div class="relative h-80 rounded-2xl overflow-hidden bg-slate-100 border border-slate-200">
+              <img id="modalMainImage" src="" alt="Product" class="w-full h-full object-cover">
+              <span id="modalDiscountBadge" class="absolute top-3 left-3 px-2 py-0.5 rounded bg-rose-600 text-white text-xs font-black">-41% OFF</span>
+            </div>
+            <!-- Thumbnails -->
+            <div id="modalThumbnailRow" class="flex items-center gap-2.5 overflow-x-auto pb-1">
+              <!-- Dynamically populated -->
+            </div>
+          </div>
+
+          <!-- Right: Product Overview, Specs & Purchase -->
+          <div class="flex flex-col justify-between space-y-4">
+            <div>
+              <p id="modalBrandText" class="text-xs font-bold uppercase tracking-wider text-slate-400">Supernova Luxury</p>
+              <h2 id="modalTitleText" class="text-xl font-black text-slate-900 mt-1 leading-snug">Aura Chrono 44mm Titanium Edition</h2>
+
+              <div class="flex items-center gap-2 mt-2">
+                <span id="modalRatingText" class="text-amber-500 text-xs font-bold font-mono">★ 4.9</span>
+                <span id="modalReviewsText" class="text-xs text-slate-400 font-medium">(324 customer reviews)</span>
+                <span class="text-slate-300">·</span>
+                <span id="modalOriginText" class="text-xs text-emerald-600 font-bold">Geneva, Switzerland</span>
+              </div>
+
+              <div class="mt-4 p-3.5 rounded-2xl bg-slate-50 border border-slate-100">
+                <div class="flex items-baseline gap-3">
+                  <span id="modalPricePkr" class="text-2xl font-black text-slate-900 font-mono">Rs. 69,900</span>
+                  <span id="modalOriginalPricePkr" class="text-sm text-slate-400 line-through font-mono">Rs. 117,600</span>
+                  <span id="modalPriceUsd" class="ml-auto text-xs font-bold font-mono text-slate-500">$249.80</span>
+                </div>
+                <p id="modalWarrantyText" class="text-[11px] text-emerald-700 font-semibold mt-1">
+                  ✓ In-Stock · Free Express Courier Delivery Across Pakistan
+                </p>
+              </div>
+
+              <p id="modalDescriptionText" class="text-xs text-slate-600 mt-4 leading-relaxed"></p>
+
+              <!-- Technical Specifications Table -->
+              <div class="mt-4">
+                <h4 class="text-xs font-bold text-slate-900 uppercase tracking-wider mb-2">Technical Specifications</h4>
+                <div id="modalSpecsGrid" class="grid grid-cols-2 gap-2 text-xs">
+                  <!-- Dynamically populated -->
+                </div>
+              </div>
+            </div>
+
+            <!-- CTAs -->
+            <div class="pt-4 border-t border-slate-100 flex items-center gap-3">
+              <button id="modalAddToCartBtn" class="flex-1 py-3.5 rounded-xl border border-slate-200 bg-white hover:bg-slate-50 text-slate-800 text-xs font-bold shadow-sm transition-all active:scale-95">
+                Add to Cart
+              </button>
+              <button id="modalInstantBuyBtn" class="flex-1 py-3.5 rounded-xl bg-slate-900 hover:bg-slate-800 text-white text-xs font-bold shadow-lg transition-all active:scale-95 flex items-center justify-center gap-1.5">
+                <span>Instant Buy Now (🇵🇰)</span>
+                <span class="text-slate-400">·</span>
+                <span id="modalCtaPricePkr" class="font-mono">Rs. 69,900</span>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- ============================================================= -->
+        <!-- RELATED PRODUCTS RECOMMENDATION CAROUSEL                       -->
+        <!-- ============================================================= -->
+        <div class="pt-6 border-t border-slate-200">
+          <div class="flex items-center justify-between mb-4">
+            <div>
+              <h3 class="text-sm font-extrabold text-slate-900 tracking-tight">Related Products</h3>
+              <p id="relatedSubheading" class="text-xs text-slate-500">Curated recommendations in Watches</p>
+            </div>
+            <span class="text-xs font-bold text-indigo-600 font-mono bg-indigo-50 px-2.5 py-1 rounded-full border border-indigo-100">
+              AI Cosine Match (0.94+)
+            </span>
+          </div>
+
+          <!-- Related Cards Horizontal Grid (4 to 6 items) -->
+          <div id="modalRelatedProductsGrid" class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4">
+            <!-- Dynamically populated -->
+          </div>
+        </div>
+
+        <!-- ============================================================= -->
+        <!-- VERIFIED CUSTOMER REVIEWS & RATINGS SCORECARD                  -->
+        <!-- ============================================================= -->
+        <div class="pt-6 border-t border-slate-200" id="productReviewsSection">
+          <!-- Section Title & Write Review Button -->
+          <div class="flex flex-col sm:flex-row sm:items-center justify-between mb-4 gap-2">
+            <div>
+              <div class="flex items-center gap-2">
+                <h3 class="text-sm font-extrabold text-slate-900 tracking-tight">Customer Reviews & Ratings</h3>
+                <span class="px-2 py-0.5 rounded-full bg-emerald-50 text-emerald-700 text-[10px] font-bold border border-emerald-200">
+                  ✓ 100% Verified Purchases
+                </span>
+              </div>
+              <p class="text-xs text-slate-500">Authentic buyer feedback from Pakistan & global collectors</p>
+            </div>
+            <button onclick="toggleWriteReviewForm()" id="btnToggleWriteReview" class="px-3.5 py-1.5 rounded-xl bg-slate-900 hover:bg-slate-800 text-white text-xs font-bold transition-all shadow-sm active:scale-95 flex items-center gap-1.5 self-start sm:self-auto">
+              <span>✍️</span>
+              <span>Write a Review</span>
+            </button>
+          </div>
+
+          <!-- Overall Rating Scorecard & Breakdown -->
+          <div class="p-4 rounded-2xl bg-slate-50/80 border border-slate-200/80 grid grid-cols-1 md:grid-cols-3 gap-6 items-center">
+            <!-- Col 1: Big Score -->
+            <div class="flex flex-col items-center md:items-start text-center md:text-left border-b md:border-b-0 md:border-r border-slate-200/80 pb-4 md:pb-0 md:pr-4">
+              <span id="scorecardRatingNum" class="text-4xl font-black text-slate-900 font-mono">4.9</span>
+              <div class="flex items-center gap-1 text-amber-500 text-sm my-1">
+                <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
+              </div>
+              <span id="scorecardTotalReviews" class="text-xs font-semibold text-slate-600">Based on 324 verified buyers</span>
+              <span class="text-[11px] text-emerald-600 font-bold mt-1">98% of customers recommend this item</span>
+            </div>
+
+            <!-- Col 2: Star Distribution Progress Bars -->
+            <div class="space-y-1.5 text-xs text-slate-600">
+              <div class="flex items-center gap-2">
+                <span class="w-12 font-bold text-[11px]">5 Stars</span>
+                <div class="flex-1 h-2 bg-slate-200 rounded-full overflow-hidden">
+                  <div class="h-full bg-amber-400 rounded-full" style="width: 88%;"></div>
+                </div>
+                <span class="w-8 text-right font-mono text-[10px] font-bold text-slate-700">88%</span>
+              </div>
+              <div class="flex items-center gap-2">
+                <span class="w-12 font-bold text-[11px]">4 Stars</span>
+                <div class="flex-1 h-2 bg-slate-200 rounded-full overflow-hidden">
+                  <div class="h-full bg-amber-400 rounded-full" style="width: 9%;"></div>
+                </div>
+                <span class="w-8 text-right font-mono text-[10px] font-bold text-slate-700">9%</span>
+              </div>
+              <div class="flex items-center gap-2">
+                <span class="w-12 font-bold text-[11px]">3 Stars</span>
+                <div class="flex-1 h-2 bg-slate-200 rounded-full overflow-hidden">
+                  <div class="h-full bg-amber-400 rounded-full" style="width: 2%;"></div>
+                </div>
+                <span class="w-8 text-right font-mono text-[10px] font-bold text-slate-700">2%</span>
+              </div>
+              <div class="flex items-center gap-2">
+                <span class="w-12 font-bold text-[11px]">2 Stars</span>
+                <div class="flex-1 h-2 bg-slate-200 rounded-full overflow-hidden">
+                  <div class="h-full bg-amber-400 rounded-full" style="width: 1%;"></div>
+                </div>
+                <span class="w-8 text-right font-mono text-[10px] font-bold text-slate-700">1%</span>
+              </div>
+              <div class="flex items-center gap-2">
+                <span class="w-12 font-bold text-[11px]">1 Star</span>
+                <div class="flex-1 h-2 bg-slate-200 rounded-full overflow-hidden">
+                  <div class="h-full bg-amber-400 rounded-full" style="width: 0%;"></div>
+                </div>
+                <span class="w-8 text-right font-mono text-[10px] font-bold text-slate-700">0%</span>
+              </div>
+            </div>
+
+            <!-- Col 3: Trust Badges -->
+            <div class="border-t md:border-t-0 md:border-l border-slate-200/80 pt-4 md:pt-0 md:pl-4 space-y-2">
+              <div class="flex items-center gap-2 text-xs">
+                <span class="w-5 h-5 rounded-md bg-emerald-100 text-emerald-700 flex items-center justify-center font-bold text-[10px]">✓</span>
+                <span class="text-slate-700 font-semibold">100% Genuine Atelier Origin</span>
+              </div>
+              <div class="flex items-center gap-2 text-xs">
+                <span class="w-5 h-5 rounded-md bg-emerald-100 text-emerald-700 flex items-center justify-center font-bold text-[10px]">✓</span>
+                <span class="text-slate-700 font-semibold">Express 24h Pakistan Dispatch</span>
+              </div>
+              <div class="flex items-center gap-2 text-xs">
+                <span class="w-5 h-5 rounded-md bg-emerald-100 text-emerald-700 flex items-center justify-center font-bold text-[10px]">✓</span>
+                <span class="text-slate-700 font-semibold">30-Day Hassle-Free Returns</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Interactive Review Submission Box (Initially Hidden) -->
+          <div id="writeReviewFormWrapper" class="hidden mt-4 p-4 rounded-2xl bg-white border-2 border-indigo-200 shadow-sm transition-all duration-300">
+            <div class="flex items-center justify-between pb-2 mb-3 border-b border-slate-100">
+              <h4 class="text-xs font-extrabold text-slate-900 uppercase tracking-wide">Write Your Verified Review</h4>
+              <button type="button" onclick="toggleWriteReviewForm()" class="text-slate-400 hover:text-slate-700 text-xs font-bold">✕ Close</button>
+            </div>
+            
+            <form id="productReviewForm" onsubmit="handleReviewSubmit(event)" class="space-y-3">
+              <!-- Rating Selector -->
+              <div>
+                <label class="block text-xs font-semibold text-slate-700 mb-1">Your Rating</label>
+                <div class="flex items-center gap-1.5" id="starPickerContainer">
+                  <button type="button" onclick="setReviewRating(1)" class="star-pick text-2xl text-amber-400 hover:scale-125 transition-transform">★</button>
+                  <button type="button" onclick="setReviewRating(2)" class="star-pick text-2xl text-amber-400 hover:scale-125 transition-transform">★</button>
+                  <button type="button" onclick="setReviewRating(3)" class="star-pick text-2xl text-amber-400 hover:scale-125 transition-transform">★</button>
+                  <button type="button" onclick="setReviewRating(4)" class="star-pick text-2xl text-amber-400 hover:scale-125 transition-transform">★</button>
+                  <button type="button" onclick="setReviewRating(5)" class="star-pick text-2xl text-amber-400 hover:scale-125 transition-transform">★</button>
+                  <span id="starRatingLabel" class="ml-2 text-xs font-bold text-slate-700">5 Stars · Outstanding!</span>
+                </div>
+              </div>
+
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                <div>
+                  <label class="block text-xs font-semibold text-slate-700 mb-1">Your Name</label>
+                  <input type="text" id="reviewAuthorInput" required placeholder="e.g. Asad Malik" class="w-full text-xs p-2.5 rounded-xl border border-slate-200 bg-slate-50 focus:outline-none focus:ring-2 focus:ring-slate-900/10 text-slate-900 font-medium">
+                </div>
+                <div>
+                  <label class="block text-xs font-semibold text-slate-700 mb-1">Location / City</label>
+                  <input type="text" id="reviewLocationInput" placeholder="e.g. Lahore, Pakistan" class="w-full text-xs p-2.5 rounded-xl border border-slate-200 bg-slate-50 focus:outline-none focus:ring-2 focus:ring-slate-900/10 text-slate-900 font-medium">
+                </div>
+              </div>
+
+              <div>
+                <label class="block text-xs font-semibold text-slate-700 mb-1">Review Details</label>
+                <textarea id="reviewTextInput" required rows="3" placeholder="Share your experience with craftsmanship, packaging, and delivery speed..." class="w-full text-xs p-2.5 rounded-xl border border-slate-200 bg-slate-50 focus:outline-none focus:ring-2 focus:ring-slate-900/10 text-slate-900 font-medium"></textarea>
+              </div>
+
+              <div class="flex items-center justify-end gap-2 pt-1">
+                <button type="button" onclick="toggleWriteReviewForm()" class="px-3 py-2 rounded-xl text-xs font-bold text-slate-600 hover:bg-slate-100">Cancel</button>
+                <button type="submit" class="px-4 py-2 rounded-xl bg-slate-900 hover:bg-slate-800 text-white text-xs font-bold shadow-sm">Submit Verified Review</button>
+              </div>
+            </form>
+          </div>
+
+          <!-- Reviews Filter Tabs & List -->
+          <div class="mt-4 space-y-3">
+            <div class="flex items-center justify-between pb-2 border-b border-slate-100">
+              <div class="flex items-center gap-1.5 text-xs font-bold text-slate-600">
+                <span class="text-slate-900">Buyer Reviews</span>
+                <span id="reviewsFilterCountBadge" class="px-2 py-0.5 rounded-full bg-slate-100 text-slate-700 font-mono text-[10px]">3 Verified</span>
+              </div>
+              <div class="text-[11px] text-slate-400 font-medium">Sorted by Most Recent</div>
+            </div>
+
+            <!-- Dynamic Customer Reviews Container -->
+            <div id="modalReviewsList" class="space-y-3">
+              <!-- Dynamically populated via JS renderProductReviews -->
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ================================================================= -->
+  <!-- JAVASCRIPT ORCHESTRATION ENGINE                                   -->
+  <!-- ================================================================= -->
+  <script>
+    // 12 Luxury Catalog Products (Right Tray)
+    const catalogProducts = [
+      { id: 'p_1', title: 'Aura Chrono 44mm Titanium', brand: 'Supernova Luxury', price: 249.80, originalPrice: 420.00, discount: '-41%', stock: 14, category: 'Watches', image: 'https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=300&auto=format&fit=crop&q=80' },
+      { id: 'p_2', title: 'Atelier Tourbillon Platinum Skeleton', brand: 'Maison Horlogère', price: 1850.00, originalPrice: 2400.00, discount: '-23%', stock: 4, category: 'Haute Horlogerie', image: 'https://images.unsplash.com/photo-1547996160-71dfabbce5ed?w=300&auto=format&fit=crop&q=80' },
+      { id: 'p_3', title: 'Elysian Diamond Pavé Ring 18K', brand: 'Atelier Paris', price: 640.00, originalPrice: 890.00, discount: '-28%', stock: 9, category: 'Jewelry', image: 'https://images.unsplash.com/photo-1605100804763-247f67b3557e?w=300&auto=format&fit=crop&q=80' },
+      { id: 'p_4', title: 'Chrono Heritage Rose Gold 41mm', brand: 'Geneva Atelier', price: 395.00, originalPrice: 520.00, discount: '-24%', stock: 12, category: 'Watches', image: 'https://images.unsplash.com/photo-1524805444758-089113d48a6d?w=300&auto=format&fit=crop&q=80' },
+      { id: 'p_5', title: 'Obsidian Carbon Diver 300m', brand: 'Supernova Tech', price: 320.00, originalPrice: 480.00, discount: '-33%', stock: 7, category: 'Watches', image: 'https://images.unsplash.com/photo-1508057198894-247b23fe5ade?w=300&auto=format&fit=crop&q=80' },
+      { id: 'p_6', title: 'Solstice 18K Gold Cuff Bracelet', brand: 'Atelier Paris', price: 510.00, originalPrice: 720.00, discount: '-29%', stock: 11, category: 'Jewelry', image: 'https://images.unsplash.com/photo-1611591475817-915b3c4371fa?w=300&auto=format&fit=crop&q=80' },
+      { id: 'p_7', title: 'Celestial Sapphire Automatic', brand: 'Maison Horlogère', price: 460.00, originalPrice: 610.00, discount: '-25%', stock: 6, category: 'Watches', image: 'https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?w=300&auto=format&fit=crop&q=80' },
+      { id: 'p_8', title: 'Vanguard Ceramic GMT Blackout', brand: 'Supernova Luxury', price: 580.00, originalPrice: 790.00, discount: '-26%', stock: 8, category: 'Watches', image: 'https://images.unsplash.com/photo-1533139502658-0198f920d8e8?w=300&auto=format&fit=crop&q=80' },
+      { id: 'p_9', title: 'Monaco Vintage Chronometer', brand: 'Geneva Atelier', price: 310.00, originalPrice: 450.00, discount: '-31%', stock: 15, category: 'Watches', image: 'https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?w=300&auto=format&fit=crop&q=80' },
+      { id: 'p_10', title: 'Sovereign Diamond Tennis Bracelet', brand: 'Atelier Paris', price: 920.00, originalPrice: 1250.00, discount: '-26%', stock: 5, category: 'Jewelry', image: 'https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?w=300&auto=format&fit=crop&q=80' },
+      { id: 'p_11', title: 'Mirage Kinetic Dual-Time 42mm', brand: 'Supernova Tech', price: 280.00, originalPrice: 390.00, discount: '-28%', stock: 16, category: 'Watches', image: 'https://images.unsplash.com/photo-1511556532299-8f662fc26c06?w=300&auto=format&fit=crop&q=80' },
+      { id: 'p_12', title: 'Astral Platinum Signet Ring', brand: 'Maison Horlogère', price: 430.00, originalPrice: 580.00, discount: '-25%', stock: 10, category: 'Jewelry', image: 'https://images.unsplash.com/photo-1603561591411-07134e71a2a9?w=300&auto=format&fit=crop&q=80' }
+    ];
+
+    // Complete 22 Multi-Category Luxury Marketplace Dataset
+    const allMarketplaceProducts = [
+      // WATCHES (6)
+      {
+        id: 'prod_w1',
+        sku: 'W-AURA-44',
+        title: 'Aura Chrono 44mm Titanium Edition',
+        brand: 'Supernova Luxury',
+        category: 'Watches',
+        pricePkr: 69900,
+        priceUsd: 249.80,
+        originalPricePkr: 117600,
+        originalPriceUsd: 420.00,
+        discountPercent: 41,
+        rating: 4.9,
+        reviewsCount: 324,
+        stock: 14,
+        isLiveFeatured: true,
+        liveBadgeText: 'LIVE DROP · 41% OFF',
+        image: 'https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=600&auto=format&fit=crop&q=80',
+        galleryImages: [
+          'https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=800&auto=format&fit=crop&q=80',
+          'https://images.unsplash.com/photo-1524805444758-089113d48a6d?w=800&auto=format&fit=crop&q=80',
+          'https://images.unsplash.com/photo-1547996160-71dfabbce5ed?w=800&auto=format&fit=crop&q=80'
+        ],
+        description: 'Crafted from aerospace Grade 5 titanium with dual-anti-reflective sapphire crystal and a 42-hour automatic kinetic reserve movement. Features toolless micro-adjust deployant clasp.',
+        specifications: {
+          'Case': '44mm Grade 5 Titanium',
+          'Movement': 'Calibre SN-842 Automatic Kinetic',
+          'Water Resistance': '100m (10 ATM) Screw-down Crown',
+          'Glass': 'Double-domed Sapphire Crystal',
+          'Strap': 'Integrated Titanium Bracelet'
+        },
+        origin: 'Geneva, Switzerland',
+        warranty: '5-Year International Manufacturer Warranty'
+      },
+      {
+        id: 'prod_w2',
+        sku: 'W-TOURB-01',
+        title: 'Atelier Tourbillon Platinum Skeleton',
+        brand: 'Maison Horlogère',
+        category: 'Watches',
+        pricePkr: 518000,
+        priceUsd: 1850.00,
+        originalPricePkr: 672000,
+        originalPriceUsd: 2400.00,
+        discountPercent: 23,
+        rating: 5.0,
+        reviewsCount: 88,
+        stock: 4,
+        isLiveFeatured: true,
+        liveBadgeText: 'LIMITED ATELIER PIECE',
+        image: 'https://images.unsplash.com/photo-1547996160-71dfabbce5ed?w=600&auto=format&fit=crop&q=80',
+        galleryImages: [
+          'https://images.unsplash.com/photo-1547996160-71dfabbce5ed?w=800&auto=format&fit=crop&q=80',
+          'https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?w=800&auto=format&fit=crop&q=80'
+        ],
+        description: 'Haute Horlogerie hand-finished skeleton tourbillon with 950 platinum casing and exposed blued titanium balance wheels.',
+        specifications: {
+          'Case': '41mm Solid 950 Platinum',
+          'Movement': 'Hand-wound Flying Tourbillon (21,600 vph)',
+          'Power Reserve': '72 Hours Dual Barrel',
+          'Glass': 'Sapphire Exhibition Front & Caseback'
+        },
+        origin: 'Le Locle, Switzerland',
+        warranty: 'Lifetime Atelier Care & 5-Year Warranty'
+      },
+      {
+        id: 'prod_w3',
+        sku: 'W-HERIT-RG',
+        title: 'Chrono Heritage Rose Gold 41mm',
+        brand: 'Geneva Atelier',
+        category: 'Watches',
+        pricePkr: 110600,
+        priceUsd: 395.00,
+        originalPricePkr: 145600,
+        originalPriceUsd: 520.00,
+        discountPercent: 24,
+        rating: 4.8,
+        reviewsCount: 142,
+        stock: 12,
+        isLiveFeatured: false,
+        image: 'https://images.unsplash.com/photo-1524805444758-089113d48a6d?w=600&auto=format&fit=crop&q=80',
+        galleryImages: ['https://images.unsplash.com/photo-1524805444758-089113d48a6d?w=800&auto=format&fit=crop&q=80'],
+        description: '18K Rose Gold PVD finish with sunburst slate dial and genuine alligator-pattern leather strap.',
+        specifications: {
+          'Case': '41mm 316L Stainless with Rose Gold PVD',
+          'Dial': 'Sunburst Slate Grey with Applied Indices',
+          'Strap': 'Hand-stitched Italian Calfskin'
+        },
+        origin: 'Geneva, Switzerland',
+        warranty: '3-Year International Warranty'
+      },
+      {
+        id: 'prod_w4',
+        sku: 'W-CARBON-300',
+        title: 'Obsidian Carbon Diver 300m',
+        brand: 'Supernova Tech',
+        category: 'Watches',
+        pricePkr: 89600,
+        priceUsd: 320.00,
+        originalPricePkr: 134400,
+        originalPriceUsd: 480.00,
+        discountPercent: 33,
+        rating: 4.9,
+        reviewsCount: 210,
+        stock: 7,
+        isLiveFeatured: false,
+        image: 'https://images.unsplash.com/photo-1508057198894-247b23fe5ade?w=600&auto=format&fit=crop&q=80',
+        galleryImages: ['https://images.unsplash.com/photo-1508057198894-247b23fe5ade?w=800&auto=format&fit=crop&q=80'],
+        description: 'Forged carbon fiber case resistant to extreme magnetic fields and pressures up to 30 atmospheres.',
+        specifications: {
+          'Case': '43mm Forged Carbon Matrix',
+          'Bezel': 'Unidirectional 120-Click Ceramic',
+          'Water Resistance': '300m (30 ATM) with Helium Escape Valve'
+        },
+        origin: 'Neuchâtel, Switzerland',
+        warranty: '5-Year Water Resistance Warranty'
+      },
+      {
+        id: 'prod_w5',
+        sku: 'W-CELEST-SAP',
+        title: 'Celestial Sapphire Automatic',
+        brand: 'Maison Horlogère',
+        category: 'Watches',
+        pricePkr: 128800,
+        priceUsd: 460.00,
+        originalPricePkr: 170800,
+        originalPriceUsd: 610.00,
+        discountPercent: 25,
+        rating: 4.7,
+        reviewsCount: 95,
+        stock: 6,
+        isLiveFeatured: false,
+        image: 'https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?w=600&auto=format&fit=crop&q=80',
+        galleryImages: ['https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?w=800&auto=format&fit=crop&q=80'],
+        description: 'Deep midnight blue enamel dial with moonphase aperture and micro-rotor automatic movement.',
+        specifications: {
+          'Case': '40mm High-Polish 904L Steel',
+          'Complication': 'Moonphase & Date Aperture',
+          'Crystal': 'Boxed Sapphire with AR Coating'
+        },
+        origin: 'Geneva, Switzerland',
+        warranty: '4-Year Warranty'
+      },
+      {
+        id: 'prod_w6',
+        sku: 'W-VANG-GMT',
+        title: 'Vanguard Ceramic GMT Blackout',
+        brand: 'Supernova Luxury',
+        category: 'Watches',
+        pricePkr: 162400,
+        priceUsd: 580.00,
+        originalPricePkr: 221200,
+        originalPriceUsd: 790.00,
+        discountPercent: 26,
+        rating: 4.9,
+        reviewsCount: 164,
+        stock: 8,
+        isLiveFeatured: false,
+        image: 'https://images.unsplash.com/photo-1533139502658-0198f920d8e8?w=600&auto=format&fit=crop&q=80',
+        galleryImages: ['https://images.unsplash.com/photo-1533139502658-0198f920d8e8?w=800&auto=format&fit=crop&q=80'],
+        description: 'High-tech matte black zirconium oxide ceramic case with dual-timezone GMT complication.',
+        specifications: {
+          'Case': '42mm Monobloc Black Ceramic',
+          'Movement': 'Automatic GMT with Independent 24h Hand',
+          'Lume': 'Super-LumiNova BGW9 Blue Glow'
+        },
+        origin: 'Biel/Bienne, Switzerland',
+        warranty: '5-Year International Warranty'
+      },
+
+      // APPAREL (4)
+      {
+        id: 'prod_a1',
+        sku: 'A-CASH-COAT',
+        title: 'Pure Mongolian Cashmere Overcoat',
+        brand: 'Sartorial Paris',
+        category: 'Apparel',
+        pricePkr: 84000,
+        priceUsd: 300.00,
+        originalPricePkr: 126000,
+        originalPriceUsd: 450.00,
+        discountPercent: 33,
+        rating: 4.9,
+        reviewsCount: 112,
+        stock: 9,
+        isLiveFeatured: true,
+        liveBadgeText: 'WINTER RUNWAY DROP',
+        image: 'https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?w=600&auto=format&fit=crop&q=80',
+        galleryImages: ['https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?w=800&auto=format&fit=crop&q=80'],
+        description: 'Unstructured double-faced coat crafted from 100% Grade A Mongolian cashmere. Hand-finished horn buttons.',
+        specifications: {
+          'Material': '100% Mongolian Cashmere (480gsm)',
+          'Lining': 'Cupro Silk Bemberg',
+          'Fit': 'Contemporary Tailored Silhouette',
+          'Care': 'Dry Clean Only'
+        },
+        origin: 'Florence, Italy',
+        warranty: 'Certified Woolmark Gold Guarantee'
+      },
+      {
+        id: 'prod_a2',
+        sku: 'A-SILK-KIMO',
+        title: 'Mulberry Silk Satin Evening Kimono',
+        brand: 'Atelier Kyoto',
+        category: 'Apparel',
+        pricePkr: 67200,
+        priceUsd: 240.00,
+        originalPricePkr: 95200,
+        originalPriceUsd: 340.00,
+        discountPercent: 29,
+        rating: 4.8,
+        reviewsCount: 76,
+        stock: 11,
+        isLiveFeatured: false,
+        image: 'https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?w=600&auto=format&fit=crop&q=80',
+        galleryImages: ['https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?w=800&auto=format&fit=crop&q=80'],
+        description: '22-Momme heavy mulberry silk with hand-painted gold botanical accents and draped belt.',
+        specifications: {
+          'Fabric': '100% Pure Mulberry Silk 22MM',
+          'Weave': 'Charmeuse Satin Finish',
+          'Dye': 'OEKO-TEX Certified Eco Pigment'
+        },
+        origin: 'Kyoto, Japan',
+        warranty: 'Pure Silk Authenticity Certificate'
+      },
+      {
+        id: 'prod_a3',
+        sku: 'A-WOOL-BLAZ',
+        title: 'Savile Row Wool Double-Breasted Blazer',
+        brand: 'Heritage London',
+        category: 'Apparel',
+        pricePkr: 98000,
+        priceUsd: 350.00,
+        originalPricePkr: 140000,
+        originalPriceUsd: 500.00,
+        discountPercent: 30,
+        rating: 5.0,
+        reviewsCount: 94,
+        stock: 8,
+        isLiveFeatured: false,
+        image: 'https://images.unsplash.com/photo-1507679799987-c73779587ccf?w=600&auto=format&fit=crop&q=80',
+        galleryImages: ['https://images.unsplash.com/photo-1507679799987-c73779587ccf?w=800&auto=format&fit=crop&q=80'],
+        description: 'Super 150s Merino wool woven in Huddersfield. Floating canvas chest piece with peak lapels.',
+        specifications: {
+          'Material': 'Super 150s Worsted Wool',
+          'Construction': 'Full Floating Canvas',
+          'Buttons': 'Engraved Mother of Pearl'
+        },
+        origin: 'London, United Kingdom',
+        warranty: 'Bespoke Tailoring Guarantee'
+      },
+      {
+        id: 'prod_a4',
+        sku: 'A-MERI-KNIT',
+        title: 'Chunky Ribbed Merino Rollneck Sweater',
+        brand: 'Nordic Atelier',
+        category: 'Apparel',
+        pricePkr: 53200,
+        priceUsd: 190.00,
+        originalPricePkr: 72800,
+        originalPriceUsd: 260.00,
+        discountPercent: 27,
+        rating: 4.7,
+        reviewsCount: 130,
+        stock: 15,
+        isLiveFeatured: false,
+        image: 'https://images.unsplash.com/photo-1434389677669-e08b4cac3105?w=600&auto=format&fit=crop&q=80',
+        galleryImages: ['https://images.unsplash.com/photo-1434389677669-e08b4cac3105?w=800&auto=format&fit=crop&q=80'],
+        description: 'Extra-fine 19.5 micron merino wool sourced sustainably from New Zealand Southern Alps.',
+        specifications: {
+          'Yarn': '100% Extra-Fine Merino Wool',
+          'Knit': '7-Gauge Full Cardigan Rib'
+        },
+        origin: 'Oslo, Norway',
+        warranty: 'Pill-Resistant Wool Guarantee'
+      },
+
+      // ELECTRONICS (4)
+      {
+        id: 'prod_e1',
+        sku: 'E-PLANAR-HP',
+        title: 'Nova Horizon Planar Magnetic Headphones',
+        brand: 'Supernova Audio',
+        category: 'Electronics',
+        pricePkr: 95200,
+        priceUsd: 340.00,
+        originalPricePkr: 140000,
+        originalPriceUsd: 500.00,
+        discountPercent: 32,
+        rating: 4.9,
+        reviewsCount: 248,
+        stock: 10,
+        isLiveFeatured: true,
+        liveBadgeText: 'STUDIO GRADE AUDIOPHILE',
+        image: 'https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=600&auto=format&fit=crop&q=80',
+        galleryImages: ['https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=800&auto=format&fit=crop&q=80'],
+        description: 'Open-back audiophile headphones with 90mm ultra-thin planar drivers and CNC milled walnut earcups.',
+        specifications: {
+          'Transducer': '90mm Planar Magnetic Diaphragm',
+          'Freq Response': '5Hz – 55,000Hz',
+          'Impedance': '32 Ohms (Easy to drive)',
+          'Cables': 'OCC Silver-plated Balanced 4.4mm + 6.35mm'
+        },
+        origin: 'Copenhagen, Denmark',
+        warranty: '3-Year Premium Replacement Warranty'
+      },
+      {
+        id: 'prod_e2',
+        sku: 'E-MECH-KB',
+        title: 'Lumina Cyber Aluminum Mechanical Keyboard',
+        brand: 'Atelier Tech',
+        category: 'Electronics',
+        pricePkr: 61600,
+        priceUsd: 220.00,
+        originalPricePkr: 86800,
+        originalPriceUsd: 310.00,
+        discountPercent: 29,
+        rating: 4.8,
+        reviewsCount: 180,
+        stock: 14,
+        isLiveFeatured: false,
+        image: 'https://images.unsplash.com/photo-1587829741301-dc798b83add3?w=600&auto=format&fit=crop&q=80',
+        galleryImages: ['https://images.unsplash.com/photo-1587829741301-dc798b83add3?w=800&auto=format&fit=crop&q=80'],
+        description: 'CNC anodized aircraft-grade aluminum chassis with gasket mounting, hot-swappable switches, and south-facing RGB.',
+        specifications: {
+          'Case': '6063 Aluminum CNC Anodized',
+          'Connectivity': 'Bluetooth 5.2, 2.4GHz Wireless, USB-C',
+          'Battery': '4000mAh (Up to 200 Hours)'
+        },
+        origin: 'Tokyo, Japan',
+        warranty: '2-Year Manufacturer Warranty'
+      },
+      {
+        id: 'prod_e3',
+        sku: 'E-AURA-RING',
+        title: 'Aura Pro Smart Wellness Ring Titanium',
+        brand: 'Supernova Bio',
+        category: 'Electronics',
+        pricePkr: 78400,
+        priceUsd: 280.00,
+        originalPricePkr: 106400,
+        originalPriceUsd: 380.00,
+        discountPercent: 26,
+        rating: 4.8,
+        reviewsCount: 310,
+        stock: 18,
+        isLiveFeatured: false,
+        image: 'https://images.unsplash.com/photo-1605100804763-247f67b3557e?w=600&auto=format&fit=crop&q=80',
+        galleryImages: ['https://images.unsplash.com/photo-1605100804763-247f67b3557e?w=800&auto=format&fit=crop&q=80'],
+        description: 'Medical-grade titanium biometric ring tracking sleep stages, continuous HRV, skin temperature, and SpO2 with 7-day battery.',
+        specifications: {
+          'Material': 'Grade 5 Titanium with Diamond-like Coating',
+          'Waterproofing': '100m Waterproof (Swim-ready)',
+          'Battery Life': '7 Days on Single Magnetic Charge'
+        },
+        origin: 'Helsinki, Finland',
+        warranty: '2-Year Hardware Warranty'
+      },
+      {
+        id: 'prod_e4',
+        sku: 'E-SOUND-360',
+        title: 'SoundSphere 360 Acoustic Aluminum Speaker',
+        brand: 'Nordic Sound',
+        category: 'Electronics',
+        pricePkr: 126000,
+        priceUsd: 450.00,
+        originalPricePkr: 168000,
+        originalPriceUsd: 600.00,
+        discountPercent: 25,
+        rating: 4.9,
+        reviewsCount: 84,
+        stock: 5,
+        isLiveFeatured: false,
+        image: 'https://images.unsplash.com/photo-1545454675-3531b543be5d?w=600&auto=format&fit=crop&q=80',
+        galleryImages: ['https://images.unsplash.com/photo-1545454675-3531b543be5d?w=800&auto=format&fit=crop&q=80'],
+        description: 'Sculptural omnidirectional spatial speaker with beryllium tweeter and room-sensing adaptive acoustic calibration.',
+        specifications: {
+          'Amplification': '120W Class-D Tri-Amp',
+          'Connectivity': 'AirPlay 2, Spotify Connect, Roon Ready, Wi-Fi 6',
+          'Weight': '4.2 kg Solid Aluminum'
+        },
+        origin: 'Stockholm, Sweden',
+        warranty: '5-Year Sound Warranty'
+      },
+
+      // BEAUTY (4)
+      {
+        id: 'prod_b1',
+        sku: 'B-ROSE-SER',
+        title: 'Elixir De Rose Cellular Repair Serum 50ml',
+        brand: 'Maison Botanique',
+        category: 'Beauty',
+        pricePkr: 42000,
+        priceUsd: 150.00,
+        originalPricePkr: 58800,
+        originalPriceUsd: 210.00,
+        discountPercent: 28,
+        rating: 4.9,
+        reviewsCount: 420,
+        stock: 22,
+        isLiveFeatured: true,
+        liveBadgeText: 'PARIS BEAUTY EXCLUSIVE',
+        image: 'https://images.unsplash.com/photo-1620916566398-39f1143ab7be?w=600&auto=format&fit=crop&q=80',
+        galleryImages: ['https://images.unsplash.com/photo-1620916566398-39f1143ab7be?w=800&auto=format&fit=crop&q=80'],
+        description: 'Formulated with organic Damascena rose stem cells, multi-molecular hyaluronic acid, and 24K colloidal gold suspension.',
+        specifications: {
+          'Volume': '50ml (1.7 fl oz) Frosted Glass Dropper',
+          'Key Actives': 'Rose Stem Cells, Niacinamide 5%, 24K Gold',
+          'Standards': 'Cruelty-Free, Paraben-Free, Dermatologist Approved'
+        },
+        origin: 'Grasse, France',
+        warranty: '100% Organic Purity Certification'
+      },
+      {
+        id: 'prod_b2',
+        sku: 'B-OUD-ROY',
+        title: 'Oud Royale Extrait De Parfum 100ml',
+        brand: 'Parfums De L’Orient',
+        category: 'Beauty',
+        pricePkr: 72800,
+        priceUsd: 260.00,
+        originalPricePkr: 98000,
+        originalPriceUsd: 350.00,
+        discountPercent: 25,
+        rating: 5.0,
+        reviewsCount: 190,
+        stock: 12,
+        isLiveFeatured: false,
+        image: 'https://images.unsplash.com/photo-1592945403244-b3fbafd7f539?w=600&auto=format&fit=crop&q=80',
+        galleryImages: ['https://images.unsplash.com/photo-1592945403244-b3fbafd7f539?w=800&auto=format&fit=crop&q=80'],
+        description: 'Aged wild Cambodian Agarwood infused with Taif rose, ambergris, and Madagascan vanilla bourbon.',
+        specifications: {
+          'Concentration': '38% Extrait De Parfum',
+          'Longevity': '18+ Hours Projection',
+          'Bottle': 'Heavy Hand-Cut Crystal Flacon with Gold Crest'
+        },
+        origin: 'Dubai / Grasse',
+        warranty: 'Authentic Wild Oud Guarantee'
+      },
+      {
+        id: 'prod_b3',
+        sku: 'B-PEPT-CREAM',
+        title: 'Botanical Radiance Bio-Peptide Cream',
+        brand: 'Atelier Cosmetique',
+        category: 'Beauty',
+        pricePkr: 36400,
+        priceUsd: 130.00,
+        originalPricePkr: 50400,
+        originalPriceUsd: 180.00,
+        discountPercent: 27,
+        rating: 4.8,
+        reviewsCount: 165,
+        stock: 19,
+        isLiveFeatured: false,
+        image: 'https://images.unsplash.com/photo-1571781926291-c477ebfd024b?w=600&auto=format&fit=crop&q=80',
+        galleryImages: ['https://images.unsplash.com/photo-1571781926291-c477ebfd024b?w=800&auto=format&fit=crop&q=80'],
+        description: 'Intense barrier restoration cream enriched with ceramide complexes and marine algae extracts.',
+        specifications: {
+          'Volume': '60ml Jar',
+          'Texture': 'Velvety Rich Whip',
+          'Skin Type': 'All Types (Sensitive Friendly)'
+        },
+        origin: 'Zurich, Switzerland',
+        warranty: 'Dermatologically Tested'
+      },
+      {
+        id: 'prod_b4',
+        sku: 'B-GOLD-LIP',
+        title: 'Velvet Matte 24K Gold Lipstick Set',
+        brand: 'Maison Botanique',
+        category: 'Beauty',
+        pricePkr: 25200,
+        priceUsd: 90.00,
+        originalPricePkr: 36400,
+        originalPriceUsd: 130.00,
+        discountPercent: 30,
+        rating: 4.7,
+        reviewsCount: 220,
+        stock: 30,
+        isLiveFeatured: false,
+        image: 'https://images.unsplash.com/photo-1586495777744-4413f21062fa?w=600&auto=format&fit=crop&q=80',
+        galleryImages: ['https://images.unsplash.com/photo-1586495777744-4413f21062fa?w=800&auto=format&fit=crop&q=80'],
+        description: 'Set of 4 statement shades infused with micro-fine 24K gold dust and nourishing argan butter.',
+        specifications: {
+          'Shades': 'Rouge Imperial, Nude Cashmere, Berry Royal, Rose Muse',
+          'Finish': 'Non-Drying Velvet Matte (12h Wear)'
+        },
+        origin: 'Paris, France',
+        warranty: 'Lead-Free & Paraben-Free'
+      },
+
+      // JEWELRY (4)
+      {
+        id: 'prod_j1',
+        sku: 'J-PAVE-RING',
+        title: 'Elysian Diamond Pavé Ring 18K Solid Gold',
+        brand: 'Atelier Haute Joaillerie',
+        category: 'Jewelry',
+        pricePkr: 179200,
+        priceUsd: 640.00,
+        originalPricePkr: 249200,
+        originalPriceUsd: 890.00,
+        discountPercent: 28,
+        rating: 5.0,
+        reviewsCount: 78,
+        stock: 9,
+        isLiveFeatured: true,
+        liveBadgeText: 'HANDMADE MILAN ATELIER',
+        image: 'https://images.unsplash.com/photo-1605100804763-247f67b3557e?w=600&auto=format&fit=crop&q=80',
+        galleryImages: ['https://images.unsplash.com/photo-1605100804763-247f67b3557e?w=800&auto=format&fit=crop&q=80'],
+        description: 'Set with 42 brilliant-cut round diamonds (VS1 clarity, F-color) along a scalloped 18K solid yellow gold band.',
+        specifications: {
+          'Metal': 'Solid 18K Yellow Gold (750 Stamped)',
+          'Diamond Weight': '0.85 Total Carat Weight',
+          'Clarity': 'VS1 / F Color (Conflict-Free)'
+        },
+        origin: 'Milan, Italy',
+        warranty: 'GIA Grading Certificate Included'
+      },
+      {
+        id: 'prod_j2',
+        sku: 'J-GOLD-CUFF',
+        title: 'Solstice 18K Gold Sculptural Cuff Bracelet',
+        brand: 'Atelier Paris',
+        category: 'Jewelry',
+        pricePkr: 142800,
+        priceUsd: 510.00,
+        originalPricePkr: 201600,
+        originalPriceUsd: 720.00,
+        discountPercent: 29,
+        rating: 4.9,
+        reviewsCount: 65,
+        stock: 11,
+        isLiveFeatured: false,
+        image: 'https://images.unsplash.com/photo-1611591475817-915b3c4371fa?w=600&auto=format&fit=crop&q=80',
+        galleryImages: ['https://images.unsplash.com/photo-1611591475817-915b3c4371fa?w=800&auto=format&fit=crop&q=80'],
+        description: 'Organic flowing architectural cuff bracelet hand-hammered by master goldsmiths in Place Vendôme.',
+        specifications: {
+          'Metal': '18K Yellow Gold Filled Brass Core (45g)',
+          'Finish': 'Satin Brushed with Mirror Polish Edges',
+          'Dimensions': 'Flexible 6.5" to 7.5" Wrist Fit'
+        },
+        origin: 'Paris, France',
+        warranty: 'Hallmarked Authenticity Stamp'
+      },
+      {
+        id: 'prod_j3',
+        sku: 'J-TENNIS-3CT',
+        title: 'Sovereign Diamond Tennis Bracelet 3.2ct',
+        brand: 'Atelier Haute Joaillerie',
+        category: 'Jewelry',
+        pricePkr: 257600,
+        priceUsd: 920.00,
+        originalPricePkr: 350000,
+        originalPriceUsd: 1250.00,
+        discountPercent: 26,
+        rating: 5.0,
+        reviewsCount: 52,
+        stock: 5,
+        isLiveFeatured: false,
+        image: 'https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?w=600&auto=format&fit=crop&q=80',
+        galleryImages: ['https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?w=800&auto=format&fit=crop&q=80'],
+        description: 'Continuous stream of 56 round brilliant diamonds mounted in 4-prong 18K white gold with double security clasp.',
+        specifications: {
+          'Metal': '18K White Gold (750)',
+          'Carats': '3.20 Total Carat Weight (VS/G)',
+          'Length': '7.0 Inches Standard'
+        },
+        origin: 'Antwerp, Belgium',
+        warranty: 'Lifetime Diamond Warranty & Valuation'
+      },
+      {
+        id: 'prod_j4',
+        sku: 'J-SIGNET-PLAT',
+        title: 'Astral Platinum Onyx Signet Ring',
+        brand: 'Maison Horlogère',
+        category: 'Jewelry',
+        pricePkr: 120400,
+        priceUsd: 430.00,
+        originalPricePkr: 162400,
+        originalPriceUsd: 580.00,
+        discountPercent: 25,
+        rating: 4.8,
+        reviewsCount: 71,
+        stock: 10,
+        isLiveFeatured: false,
+        image: 'https://images.unsplash.com/photo-1603561591411-07134e71a2a9?w=600&auto=format&fit=crop&q=80',
+        galleryImages: ['https://images.unsplash.com/photo-1603561591411-07134e71a2a9?w=800&auto=format&fit=crop&q=80'],
+        description: 'Solid 950 Platinum ring inlaid with natural black onyx stone and custom starburst engraving.',
+        specifications: {
+          'Metal': '950 Solid Platinum',
+          'Stone': 'Natural Untreated Black Onyx',
+          'Weight': '16.8 Grams'
+        },
+        origin: 'Rome, Italy',
+        warranty: 'Precious Metal Hallmark Certificate'
+      }
+    ];
+
+    // Global Cart State
+    let cart = [
+      { id: 'p_1', title: 'Aura Chrono 44mm Titanium', price: 249.80, qty: 1, image: 'https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=300&auto=format&fit=crop&q=80' }
+    ];
+
+    // Initialize UI on load
+    document.addEventListener('DOMContentLoaded', () => {
+      renderMultiCategoryGrid('All');
+      renderCatalogTab();
+      renderCart();
+      renderRAGTable();
+      startSocialProofToasts();
+      startReservationCountdown();
+      startTelemetryJitter();
+      startRealisticChatStream();
+    });
+
+    // 1. Sidebar Navigation Switcher
+    function switchTab(tabKey) {
+      document.querySelectorAll('.nav-item').forEach(el => {
+        el.className = 'nav-item w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-xs font-semibold text-slate-600 hover:text-slate-900 hover:bg-slate-50 transition-all';
+      });
+      const activeBtn = document.getElementById(`nav-${tabKey}`);
+      if (activeBtn) {
+        activeBtn.className = 'nav-item w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-xs font-bold transition-all bg-slate-900 text-white shadow-sm';
+      }
+
+      document.querySelectorAll('.page-view').forEach(view => view.classList.add('hidden'));
+      const activeView = document.getElementById(`view-${tabKey}`);
+      if (activeView) activeView.classList.remove('hidden');
+    }
+
+    // 2. Right Community Tray Tab Switcher
+    function switchTrayTab(trayKey) {
+      document.querySelectorAll('.tray-tab').forEach(btn => {
+        btn.className = 'tray-tab flex-1 py-1.5 rounded-lg text-slate-500 hover:text-slate-900 transition-all';
+      });
+      document.getElementById(`trayTab-${trayKey}`).className = 'tray-tab flex-1 py-1.5 rounded-lg bg-white text-slate-900 shadow-sm transition-all font-bold';
+
+      document.querySelectorAll('.tray-panel').forEach(panel => panel.classList.add('hidden'));
+      document.getElementById(`trayContent-${trayKey}`).classList.remove('hidden');
+    }
+
+    function openAITab() {
+      switchTrayTab('rag');
+    }
+
+    // 3. Render 12 Items in Right Tray
+    function renderCatalogTab() {
+      const container = document.getElementById('catalogListContainer');
+      container.innerHTML = catalogProducts.map(p => `
+        <div class="flex items-center gap-3 p-2.5 rounded-xl border border-slate-100 bg-white hover:border-slate-200 shadow-sm transition-all">
+          <div class="relative w-14 h-14 rounded-lg overflow-hidden bg-slate-50 flex-shrink-0 border border-slate-100">
+            <img src="${p.image}" alt="${p.title}" class="w-full h-full object-cover">
+            <span class="absolute bottom-0.5 left-0.5 px-1 py-0.2 rounded text-[8px] font-black bg-rose-600 text-white">${p.discount}</span>
+          </div>
+          <div class="flex-1 min-w-0">
+            <p class="text-[9px] font-bold uppercase tracking-wider text-slate-400">${p.brand}</p>
+            <h5 class="text-xs font-bold text-slate-900 truncate">${p.title}</h5>
+            <div class="flex items-baseline gap-1.5 mt-0.5">
+              <span class="text-xs font-extrabold text-slate-900 font-mono">$${p.price.toFixed(2)}</span>
+              <span class="text-[10px] text-slate-400 line-through font-mono">$${p.originalPrice.toFixed(2)}</span>
+            </div>
+            <div class="flex items-center gap-2 mt-1">
+              <span class="text-[9px] text-amber-700 font-bold">${p.stock} in stock</span>
+              <button onclick="triggerAddToCart('${p.title}', ${p.price})" class="ml-auto text-[10px] font-bold text-indigo-600 hover:text-indigo-800 bg-indigo-50 px-2 py-0.5 rounded-md">
+                + Add
+              </button>
+            </div>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    // 4. Render RAG Vector Table
+    function renderRAGTable() {
+      const tbody = document.getElementById('ragTableBody');
+      tbody.innerHTML = catalogProducts.map(p => `
+        <tr class="hover:bg-slate-50 transition-colors">
+          <td class="p-3.5">
+            <div class="flex items-center gap-2.5">
+              <img src="${p.image}" class="w-8 h-8 rounded-lg object-cover">
+              <div>
+                <span class="font-bold text-slate-900 block">${p.title}</span>
+                <span class="text-[10px] text-slate-400 font-mono">${p.id}</span>
+              </div>
+            </div>
+          </td>
+          <td class="p-3.5 font-medium text-slate-600">${p.category}</td>
+          <td class="p-3.5 font-mono font-bold">$${p.price.toFixed(2)}</td>
+          <td class="p-3.5"><span class="px-2 py-0.5 rounded-full bg-slate-100 text-slate-700 font-bold">${p.stock}</span></td>
+          <td class="p-3.5 font-mono text-[10px] text-indigo-600 font-bold">4 chunks (1536-d)</td>
+          <td class="p-3.5"><span class="px-2 py-0.5 rounded-full bg-emerald-50 text-emerald-700 font-bold font-mono">0.94 - 0.98</span></td>
+          <td class="p-3.5">
+            <button onclick="askRAGPreset('Tell me the technical specifications of ${p.title}')" class="text-[11px] font-bold text-indigo-600 hover:text-indigo-800">
+              Query Vector
+            </button>
+          </td>
+        </tr>
+      `).join('');
+    }
+
+    // 5. Add to Cart Logic with Flash Stock Decrement
+    function triggerAddToCart(title, price) {
+      const existing = cart.find(i => i.title === title);
+      if (existing) {
+        existing.qty += 1;
+      } else {
+        const prod = catalogProducts.find(p => p.title === title) || catalogProducts[0];
+        cart.push({ id: prod.id, title, price, qty: 1, image: prod.image });
+      }
+
+      // Flash feedback on pinned button
+      const pinnedBtn = document.getElementById('pinnedAddToCartBtn');
+      if (pinnedBtn && title.includes('Aura Chrono')) {
+        pinnedBtn.innerText = 'Reserved! (10m)';
+        pinnedBtn.className = 'flex-1 py-2 px-3 rounded-xl text-xs font-bold transition-all border border-emerald-300 bg-emerald-50 text-emerald-700 shadow-sm';
+        setTimeout(() => {
+          pinnedBtn.innerText = 'Add to Cart';
+          pinnedBtn.className = 'flex-1 py-2 px-3 rounded-xl text-xs font-bold transition-all border border-slate-200 bg-white hover:bg-slate-50 text-slate-800 shadow-sm';
+        }, 2200);
+      }
+
+      renderCart();
+      openCart();
+    }
+
+    function renderCart() {
+      const container = document.getElementById('cartItemsList');
+      const badge = document.getElementById('cartHeaderBadge');
+      const subtotalEl = document.getElementById('cartSubtotalText');
+      const checkoutTotalEl = document.getElementById('checkoutButtonTotal');
+
+      badge.innerText = `${cart.reduce((a, b) => a + b.qty, 0)} items`;
+
+      const subtotal = cart.reduce((sum, item) => sum + item.price * item.qty, 0);
+      subtotalEl.innerText = `$${subtotal.toFixed(2)}`;
+      checkoutTotalEl.innerText = `$${subtotal.toFixed(2)}`;
+
+      container.innerHTML = cart.map(item => `
+        <div class="flex items-center gap-3.5 p-3 rounded-xl border border-slate-100 bg-white shadow-sm">
+          <img src="${item.image}" alt="${item.title}" class="w-14 h-14 rounded-xl object-cover border border-slate-100">
+          <div class="flex-1 min-w-0">
+            <h4 class="text-xs font-bold text-slate-900 truncate">${item.title}</h4>
+            <p class="text-xs font-extrabold text-slate-900 mt-0.5 font-mono">$${item.price.toFixed(2)}</p>
+            <div class="flex items-center gap-2 mt-1.5">
+              <span class="text-[10px] text-slate-500">Qty: ${item.qty}</span>
+              <span class="text-[9px] text-emerald-600 font-semibold bg-emerald-50 px-1.5 py-0.2 rounded">Flash Locked</span>
+            </div>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    function openCart() {
+      document.getElementById('cartDrawer').classList.remove('translate-x-full');
+      document.getElementById('cartDrawerBackdrop').classList.remove('hidden');
+    }
+
+    function closeCart() {
+      document.getElementById('cartDrawer').classList.add('translate-x-full');
+      document.getElementById('cartDrawerBackdrop').classList.add('hidden');
+    }
+
+    function handleInstantCheckout() {
+      alert('Secure Stripe Checkout initiated with Webhook HMAC Verification and Idempotency Safety!');
+    }
+
+    // 6. RAG Grounding Execution
+    function askRAGPreset(query) {
+      openAITab();
+      const box = document.getElementById('ragAnswerBox');
+      const scorePill = document.getElementById('ragScorePill');
+      box.innerHTML = '<span class="text-indigo-600 font-medium animate-pulse">Retrieving 1536-dim vector chunks from pgvector...</span>';
+
+      setTimeout(() => {
+        if (query.includes('hypoallergenic')) {
+          scorePill.innerText = 'Match: 0.97';
+          box.innerHTML = `<strong>Grounding Source:</strong> [Product: Aura Chrono 44mm Titanium (SKU: p_1)]<br><br>The Aura Chrono is engineered from certified <strong>Grade 5 aerospace-grade titanium</strong> (Ti-6Al-4V), which is 100% biocompatible and hypoallergenic. Its satin bead-blasted surface features a diamond-like carbon (DLC) protective shield offering exceptional scratch resistance.`;
+        } else if (query.includes('5 años') || query.includes('garantía')) {
+          scorePill.innerText = 'Match: 0.95';
+          box.innerHTML = `<strong>Fuente oficial de catálogo:</strong><br><br>Cada reloj incluye una <strong>garantía internacional completa de 5 años</strong> que cubre el calibre automático, reserva de marcha cinética y estanqueidad hasta 100 metros. Envío asegurado gratuito en transmisión en vivo.`;
+        } else if (query.includes('واٹر پروفنگ')) {
+          scorePill.innerText = 'Match: 0.96';
+          box.innerHTML = `<strong>آفیشل کیٹلاگ کی تصدیق:</strong><br><br>جی ہاں، اورا ٹائٹینیم کرونو 100 میٹر (10 بار) واٹر ریزسٹنس کے لیے سکرو ڈاؤن کراؤن اور ڈبل سیلنٹ کے ساتھ مکمل طور پر محفوظ ہے۔ آپ اسے تیراکی اور روزمرہ کے تمام کاموں میں بے جھجھک استعمال کر سکتے ہیں۔`;
+        } else {
+          scorePill.innerText = 'Match: 0.94';
+          box.innerHTML = `<strong>Grounded Catalog Match:</strong><br><br>${query}<br><br>Grounded in live database specifications: Crafted with double-anti-reflective sapphire crystal, kinetic automatic movement with 42-hour power reserve, and 3-point micro-adjust deployment clasp.`;
+        }
+      }, 450);
+    }
+
+    function handleCustomRAG(e) {
+      e.preventDefault();
+      const input = document.getElementById('ragCustomInput');
+      const val = input.value.trim();
+      if (!val) return;
+      askRAGPreset(val);
+      input.value = '';
+    }
+
+    // 7. Dynamic Real-Based Chat Engine
+    const chatForm = document.getElementById('chatForm');
+    const chatInput = document.getElementById('chatInput');
+    const chatMessagesStream = document.getElementById('chatMessagesStream');
+
+    const realisticIncomingChatList = [
+      { name: 'Hamza Tariq (Islamabad)', role: 'VERIFIED BUYER', badgeClass: 'bg-emerald-100 text-emerald-800 border-emerald-300', avatar: 'https://i.pravatar.cc/100?img=11', text: 'Just received my tracking SMS! TCS express delivery is fast 🚀' },
+      { name: 'Ayesha Malik (Karachi)', role: 'VIP', badgeClass: 'bg-amber-100 text-amber-900 border-amber-300', avatar: 'https://i.pravatar.cc/100?img=47', text: 'Does the dial have Swiss Super-LumiNova luminescence in the dark?' },
+      { name: 'Zubair Khan (Lahore)', role: 'VERIFIED BUYER', badgeClass: 'bg-emerald-100 text-emerald-800 border-emerald-300', avatar: 'https://i.pravatar.cc/100?img=68', text: 'Cash on Delivery option bhi check out mein available hai?' },
+      { name: 'Marcus Vance (London)', role: 'MODERATOR', badgeClass: 'bg-indigo-100 text-indigo-800 border-indigo-300', avatar: 'https://i.pravatar.cc/100?img=53', text: 'Grade 5 titanium finish is immaculate. Looks incredible on video.' },
+      { name: 'Dr. Bilal Qureshi (Rawalpindi)', role: 'VIP', badgeClass: 'bg-amber-100 text-amber-900 border-amber-300', avatar: 'https://i.pravatar.cc/100?img=52', text: 'Ordered the Aura Chrono! 41% discount during live drop is unbeatable.' },
+      { name: 'Elena Rostova (Geneva)', role: 'WATCHMAKER', badgeClass: 'bg-purple-100 text-purple-800 border-purple-300', avatar: 'https://i.pravatar.cc/100?img=26', text: 'Movement beat rate is 28,800 vph — super smooth sweeping second hand.' },
+      { name: 'Usman Ghani (Peshawar)', role: 'BUYER', badgeClass: 'bg-slate-100 text-slate-700 border-slate-200', avatar: 'https://i.pravatar.cc/100?img=33', text: 'JazzCash se payment ki hai, confirmation turant mil gaya!' },
+      { name: 'Chloe Martin (Paris)', role: 'COLLECTOR', badgeClass: 'bg-rose-100 text-rose-800 border-rose-300', avatar: 'https://i.pravatar.cc/100?img=49', text: 'Sublime pièce! Can the host show the sapphire case back openwork?' },
+      { name: 'Saad Farooq (Multan)', role: 'VERIFIED BUYER', badgeClass: 'bg-emerald-100 text-emerald-800 border-emerald-300', avatar: 'https://i.pravatar.cc/100?img=59', text: 'Delivery kitne din mein hogi Multan mein?' },
+      { name: 'Tariq Mehmood (Faisalabad)', role: 'BUYER', badgeClass: 'bg-slate-100 text-slate-700 border-slate-200', avatar: 'https://i.pravatar.cc/100?img=60', text: '5-year international warranty card package ke sath aayega?' },
+      { name: 'Kenji Sato (Tokyo)', role: 'AI auto-translated', badgeClass: 'bg-indigo-50 text-indigo-700 border-indigo-200', avatar: 'https://i.pravatar.cc/100?img=44', text: 'Very impressive anti-reflective sapphire coating. Zero glare.' }
+    ];
+
+    let chatStreamIndex = 0;
+    function startRealisticChatStream() {
+      setInterval(() => {
+        if (!chatMessagesStream) return;
+        const msg = realisticIncomingChatList[chatStreamIndex % realisticIncomingChatList.length];
+        chatStreamIndex++;
+
+        const item = document.createElement('div');
+        item.className = 'flex items-start gap-2.5 animate-in fade-in duration-300';
+        const now = new Date();
+        const timeStr = now.getHours().toString().padStart(2, '0') + ':' + now.getMinutes().toString().padStart(2, '0');
+
+        item.innerHTML = `
+          <img src="${msg.avatar}" alt="${msg.name}" class="w-7 h-7 rounded-full object-cover mt-0.5 border border-slate-200">
+          <div class="flex-1 min-w-0">
+            <div class="flex items-center gap-1.5">
+              <span class="font-bold text-slate-900 truncate">${msg.name}</span>
+              <span class="px-1.5 py-0.2 rounded text-[8px] font-black border ${msg.badgeClass}">${msg.role}</span>
+              <span class="text-[9px] text-slate-400 font-mono ml-auto">${timeStr}</span>
+            </div>
+            <p class="text-slate-700 mt-0.5 leading-snug">${msg.text}</p>
+          </div>
+        `;
+
+        chatMessagesStream.appendChild(item);
+
+        // Keep max 50 chat nodes to maintain super fast rendering
+        if (chatMessagesStream.children.length > 50) {
+          chatMessagesStream.removeChild(chatMessagesStream.children[0]);
+        }
+        chatMessagesStream.scrollTop = chatMessagesStream.scrollHeight;
+      }, 4000);
+    }
+
+    // Quick Inquiry Chip Trigger
+    function sendQuickChatMessage(text) {
+      if (chatInput) {
+        chatInput.value = text;
+        chatForm.dispatchEvent(new Event('submit', { cancelable: true }));
+      }
+    }
+
+    // Form Submit with Intelligent Host Auto-Reply
+    chatForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const val = chatInput.value.trim();
+      if (!val) return;
+
+      const now = new Date();
+      const timeStr = now.getHours().toString().padStart(2, '0') + ':' + now.getMinutes().toString().padStart(2, '0');
+
+      // Add User Message
+      const item = document.createElement('div');
+      item.className = 'flex items-start gap-2.5 bg-indigo-50/70 p-2 rounded-xl border border-indigo-200/80 animate-in fade-in duration-200';
+      item.innerHTML = `
+        <img src="https://i.pravatar.cc/100?img=12" alt="You" class="w-7 h-7 rounded-full object-cover mt-0.5 ring-2 ring-indigo-500">
+        <div class="flex-1 min-w-0">
+          <div class="flex items-center gap-1.5">
+            <span class="font-bold text-indigo-950">You</span>
+            <span class="px-1.5 py-0.2 rounded text-[8px] font-black bg-indigo-600 text-white shadow-2xs">YOU (VIEWER)</span>
+            <span class="text-[9px] text-indigo-500 font-mono ml-auto">${timeStr}</span>
+          </div>
+          <p class="text-slate-800 mt-0.5 font-medium leading-snug">${val}</p>
+        </div>
+      `;
+      chatMessagesStream.appendChild(item);
+      chatMessagesStream.scrollTop = chatMessagesStream.scrollHeight;
+      chatInput.value = '';
+
+      // Intelligent Host / Concierge Auto-Reply after 1.1s
+      setTimeout(() => {
+        let replyText = "@You Thank you for asking! The host has noted your question and is demonstrating this live right now!";
+        const queryLower = val.toLowerCase();
+
+        if (queryLower.includes('delivery') || queryLower.includes('time') || queryLower.includes('din')) {
+          replyText = "@You Express delivery takes 24-48 hours across Karachi, Lahore, Islamabad, and all cities in Pakistan via insured courier! 🚚";
+        } else if (queryLower.includes('jazzcash') || queryLower.includes('easypaisa') || queryLower.includes('payment') || queryLower.includes('pay')) {
+          replyText = "@You Yes! In-stream checkout supports instant USSD push prompt for JazzCash & EasyPaisa without leaving the video! 🇵🇰";
+        } else if (queryLower.includes('warranty') || queryLower.includes('guarantee')) {
+          replyText = "@You Official 5-Year international warranty certificate is stamped and included inside the luxury presentation box! 🛡️";
+        } else if (queryLower.includes('clasp') || queryLower.includes('wrist') || queryLower.includes('zoom')) {
+          replyText = "@You Host is zooming in on the 3-point toolless micro-adjust clasp right now! Fits any wrist dimension perfectly. ✨";
+        } else if (queryLower.includes('price') || queryLower.includes('discount') || queryLower.includes('off')) {
+          replyText = "@You Today's live stream price is discounted by 41% (Rs. 69,900 / $249.80). Lock your stock with Instant Buy! 🔥";
+        }
+
+        const hostReply = document.createElement('div');
+        hostReply.className = 'flex items-start gap-2.5 bg-rose-50/70 p-2 rounded-xl border border-rose-200 animate-in fade-in duration-200';
+        hostReply.innerHTML = `
+          <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=100&auto=format&fit=crop&q=80" alt="Host" class="w-7 h-7 rounded-full object-cover mt-0.5 ring-2 ring-rose-500">
+          <div class="flex-1 min-w-0">
+            <div class="flex items-center gap-1.5">
+              <span class="font-extrabold text-slate-900">Maison Horlogère</span>
+              <span class="px-1.5 py-0.2 rounded text-[8px] font-black bg-rose-600 text-white">HOST</span>
+              <span class="text-[9px] text-rose-500 font-mono ml-auto">Just now</span>
+            </div>
+            <p class="text-slate-900 mt-0.5 font-medium leading-snug">${replyText}</p>
+          </div>
+        `;
+        chatMessagesStream.appendChild(hostReply);
+        chatMessagesStream.scrollTop = chatMessagesStream.scrollHeight;
+      }, 1100);
+    });
+
+    // 8. Reactions
+    function sendReaction(emoji) {
+      const canvas = document.getElementById('reactionsCanvas');
+      const el = document.createElement('div');
+      el.className = 'absolute text-3xl reaction-bubble';
+      el.innerText = emoji;
+      el.style.left = Math.floor(Math.random() * 50 + 20) + '%';
+      el.style.bottom = '10px';
+      canvas.appendChild(el);
+      setTimeout(() => el.remove(), 2000);
+    }
+
+    // 9. Ongoing Streams Switcher & Tray Toggle
+    function toggleOngoingStreams() {
+      const tray = document.getElementById('ongoingStreamsTray');
+      if (tray) {
+        tray.classList.toggle('hidden');
+      }
+    }
+
+    function switchStreamFeed(streamKey) {
+      const video = document.getElementById('mainLiveVideo');
+      if (streamKey === 'tokyo') {
+        video.src = 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4';
+      } else if (streamKey === 'geneva') {
+        video.src = 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4';
+      } else {
+        video.src = 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4';
+      }
+      video.play().catch(console.warn);
+    }
+
+    // 10. Social Proof Toasts
+    function startSocialProofToasts() {
+      const names = ['Sarah J.', 'David R.', 'Elena R.', 'Marcus V.', 'Kenji S.', 'Chloe M.'];
+      const items = ['Aura Chrono 44mm', 'Tourbillon Platinum', 'Diamond Pavé Ring', 'Carbon Diver 300m'];
+      let idx = 0;
+      setInterval(() => {
+        const toast = document.getElementById('livePurchaseToast');
+        const nameEl = document.getElementById('toastCustomerName');
+        const randomName = names[idx % names.length];
+        const randomItem = items[idx % items.length];
+        idx++;
+
+        toast.classList.add('opacity-0', 'translate-y-2');
+        setTimeout(() => {
+          nameEl.innerText = randomName;
+          toast.querySelector('.text-emerald-600').innerText = `just bought ${randomItem}!`;
+          toast.classList.remove('opacity-0', 'translate-y-2');
+        }, 300);
+      }, 5500);
+    }
+
+    // 11. 10-Minute Cart Countdown
+    function startReservationCountdown() {
+      let seconds = 582;
+      setInterval(() => {
+        if (seconds > 0) {
+          seconds--;
+          const m = Math.floor(seconds / 60);
+          const s = seconds % 60;
+          document.getElementById('cartCountdownTimer').innerText = `${m.toString().padStart(2, '0')}:${s.toString().padStart(2, '0')}`;
+        }
+      }, 1000);
+    }
+
+    // =================================================================
+    // 12. MULTI-CATEGORY MARKETPLACE ENGINE & RELATED RECOMMENDATIONS
+    // =================================================================
+    let selectedMarketplaceCategory = 'All';
+    let activeModalProduct = null;
+    let activeModalGalleryIndex = 0;
+
+    function renderMultiCategoryGrid(category = 'All') {
+      const grid = document.getElementById('multiCategoryProductGrid');
+      if (!grid) return;
+
+      const filtered = category === 'All'
+        ? allMarketplaceProducts
+        : allMarketplaceProducts.filter(p => p.category === category);
+
+      const countBadge = document.getElementById('gridItemCountBadge');
+      if (countBadge) {
+        countBadge.innerText = `${filtered.length} Items`;
+      }
+
+      grid.innerHTML = filtered.map(product => `
+        <div onclick="openProductDetailModal('${product.id}')" class="group relative bg-white rounded-2xl border border-slate-200/80 overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 hover:-translate-y-1 cursor-pointer flex flex-col justify-between">
+          <!-- Media Image Container -->
+          <div class="relative w-full h-52 bg-slate-100 overflow-hidden">
+            <img src="${product.image}" alt="${product.title}" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" loading="lazy">
+            <div class="absolute top-2.5 left-2.5 flex flex-col gap-1 z-10">
+              ${product.isLiveFeatured ? `
+                <span class="px-2 py-0.5 rounded-full bg-rose-600 text-white text-[9px] font-black tracking-wider uppercase shadow flex items-center gap-1">
+                  <span class="w-1.5 h-1.5 rounded-full bg-white animate-ping"></span>
+                  LIVE DROP
+                </span>
+              ` : ''}
+              <span class="px-1.5 py-0.5 rounded-md bg-slate-900/80 backdrop-blur-md text-white text-[9px] font-bold">
+                -${product.discountPercent}%
+              </span>
+            </div>
+            <span class="absolute bottom-2.5 right-2.5 px-2 py-0.5 rounded-full bg-white/90 backdrop-blur-md text-slate-800 text-[10px] font-bold shadow-sm">
+              ${product.category}
+            </span>
+          </div>
+
+          <!-- Product Info -->
+          <div class="p-3.5 flex-1 flex flex-col justify-between">
+            <div>
+              <div class="flex items-center justify-between text-[10px] text-slate-400 font-bold uppercase tracking-wider mb-1">
+                <span>${product.brand}</span>
+                <span class="text-amber-500 font-mono">★ ${product.rating}</span>
+              </div>
+              <h4 class="text-xs font-bold text-slate-900 line-clamp-2 leading-snug group-hover:text-indigo-600 transition-colors">
+                ${product.title}
+              </h4>
+            </div>
+
+            <div class="mt-2.5 pt-2.5 border-t border-slate-100">
+              <div class="flex items-baseline justify-between">
+                <div>
+                  <span class="text-sm font-extrabold text-slate-900 font-mono">
+                    Rs. ${product.pricePkr.toLocaleString('en-PK')}
+                  </span>
+                  <span class="text-[10px] text-slate-400 line-through font-mono ml-1.5">
+                    Rs. ${product.originalPricePkr.toLocaleString('en-PK')}
+                  </span>
+                </div>
+                <span class="text-[10px] font-mono text-slate-500">$${product.priceUsd.toFixed(2)}</span>
+              </div>
+
+              <!-- Stock Bar -->
+              <div class="mt-1.5 flex items-center justify-between text-[9px] mb-1 text-slate-500">
+                <span>Stock remaining</span>
+                <span class="font-bold text-amber-700 font-mono">${product.stock} units</span>
+              </div>
+              <div class="w-full h-1 bg-slate-100 rounded-full overflow-hidden">
+                <div class="h-full bg-amber-500 rounded-full" style="width: ${Math.min(100, (product.stock / 25) * 100)}%"></div>
+              </div>
+
+              <!-- CTAs -->
+              <div class="mt-2.5 flex items-center gap-1.5">
+                <button onclick="event.stopPropagation(); triggerAddToCart('${product.title}', ${product.priceUsd})" class="flex-1 py-1.5 px-2 rounded-lg border border-slate-200 hover:bg-slate-50 text-slate-800 text-[11px] font-bold transition-all shadow-sm active:scale-95">
+                  Add to Cart
+                </button>
+                <button onclick="event.stopPropagation(); openProductCheckoutModalById('${product.id}')" class="flex-1 py-1.5 px-2 rounded-lg bg-slate-900 hover:bg-slate-800 text-white text-[11px] font-bold transition-all shadow-md active:scale-95">
+                  Instant Buy
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    function filterGridCategory(category) {
+      selectedMarketplaceCategory = category;
+      const categories = ['All', 'Watches', 'Apparel', 'Electronics', 'Beauty', 'Jewelry'];
+      categories.forEach(cat => {
+        const btn = document.getElementById(`catPill-${cat}`);
+        if (!btn) return;
+        if (cat === category) {
+          btn.className = 'cat-pill flex-shrink-0 flex items-center gap-2 px-4 py-2 rounded-full text-xs font-bold transition-all bg-slate-900 text-white border border-slate-900 shadow-sm';
+          const badge = btn.querySelector('span:last-child');
+          if (badge) badge.className = 'text-[10px] px-1.5 py-0.2 rounded-full bg-white/20 font-mono';
+        } else {
+          btn.className = 'cat-pill flex-shrink-0 flex items-center gap-2 px-4 py-2 rounded-full text-xs font-bold transition-all bg-white text-slate-600 border border-slate-200 hover:border-slate-300';
+          const badge = btn.querySelector('span:last-child');
+          if (badge) badge.className = 'text-[10px] px-1.5 py-0.2 rounded-full bg-slate-100 font-mono';
+        }
+      });
+      renderMultiCategoryGrid(category);
+    }
+
+    function openProductDetailModal(productId) {
+      const product = allMarketplaceProducts.find(p => p.id === productId);
+      if (!product) return;
+
+      activeModalProduct = product;
+      activeModalGalleryIndex = 0;
+
+      // Populate elements
+      document.getElementById('modalCategoryBadge').innerText = product.category;
+      document.getElementById('modalSkuBadge').innerText = `SKU: ${product.sku}`;
+      document.getElementById('modalMainImage').src = product.image;
+      document.getElementById('modalDiscountBadge').innerText = `-${product.discountPercent}% OFF`;
+
+      // Thumbnails
+      const thumbRow = document.getElementById('modalThumbnailRow');
+      const gallery = (product.galleryImages && product.galleryImages.length > 0) ? product.galleryImages : [product.image];
+      thumbRow.innerHTML = gallery.map((img, idx) => `
+        <button onclick="setModalGalleryImage('${img}', ${idx})" class="w-14 h-14 rounded-xl overflow-hidden border-2 transition-all flex-shrink-0 ${idx === 0 ? 'border-slate-900 ring-2 ring-slate-900/20' : 'border-slate-200 opacity-70 hover:opacity-100'}">
+          <img src="${img}" alt="Thumbnail" class="w-full h-full object-cover">
+        </button>
+      `).join('');
+
+      document.getElementById('modalBrandText').innerText = product.brand;
+      document.getElementById('modalTitleText').innerText = product.title;
+      document.getElementById('modalRatingText').innerText = `★ ${product.rating}`;
+      document.getElementById('modalReviewsText').innerText = `(${product.reviewsCount} customer reviews)`;
+      document.getElementById('modalOriginText').innerText = product.origin;
+
+      document.getElementById('modalPricePkr').innerText = `Rs. ${product.pricePkr.toLocaleString('en-PK')}`;
+      document.getElementById('modalOriginalPricePkr').innerText = `Rs. ${product.originalPricePkr.toLocaleString('en-PK')}`;
+      document.getElementById('modalPriceUsd').innerText = `$${product.priceUsd.toFixed(2)}`;
+      document.getElementById('modalWarrantyText').innerText = `✓ In-Stock · Free Express Delivery Across Pakistan · ${product.warranty}`;
+      document.getElementById('modalDescriptionText').innerText = product.description;
+
+      // Specs
+      const specsGrid = document.getElementById('modalSpecsGrid');
+      specsGrid.innerHTML = Object.entries(product.specifications || {}).map(([key, val]) => `
+        <div class="p-2 rounded-lg bg-slate-50 border border-slate-100">
+          <span class="text-slate-400 block text-[10px] font-bold uppercase">${key}</span>
+          <span class="text-slate-800 font-semibold truncate block">${val}</span>
+        </div>
+      `).join('');
+
+      // CTA Buttons
+      document.getElementById('modalCtaPricePkr').innerText = `Rs. ${product.pricePkr.toLocaleString('en-PK')}`;
+      document.getElementById('modalAddToCartBtn').onclick = () => {
+        triggerAddToCart(product.title, product.priceUsd);
+        closeProductDetailModal();
+      };
+      document.getElementById('modalInstantBuyBtn').onclick = () => {
+        closeProductDetailModal();
+        openPakistanCheckout(product);
+      };
+
+      // Related Products (Strictly 4 to 6 items sharing the same category)
+      renderRelatedProducts(product.category, product.id);
+
+      // Customer Reviews & Ratings
+      renderProductReviews(product.id);
+
+      // Open Modal Animation
+      const backdrop = document.getElementById('productDetailBackdrop');
+      const modal = document.getElementById('productDetailModal');
+      backdrop.classList.remove('hidden');
+      setTimeout(() => {
+        modal.classList.remove('scale-95', 'opacity-0');
+        modal.classList.add('scale-100', 'opacity-100');
+      }, 10);
+    }
+
+    function setModalGalleryImage(url, idx) {
+      activeModalGalleryIndex = idx;
+      document.getElementById('modalMainImage').src = url;
+      const thumbRow = document.getElementById('modalThumbnailRow');
+      const buttons = thumbRow.querySelectorAll('button');
+      buttons.forEach((btn, i) => {
+        if (i === idx) {
+          btn.className = 'w-14 h-14 rounded-xl overflow-hidden border-2 transition-all flex-shrink-0 border-slate-900 ring-2 ring-slate-900/20';
+        } else {
+          btn.className = 'w-14 h-14 rounded-xl overflow-hidden border-2 transition-all flex-shrink-0 border-slate-200 opacity-70 hover:opacity-100';
+        }
+      });
+    }
+
+    function closeProductDetailModal(e) {
+      if (e && e.target && e.target.id !== 'productDetailBackdrop' && !e.target.closest('button')) return;
+      const modal = document.getElementById('productDetailModal');
+      const backdrop = document.getElementById('productDetailBackdrop');
+      modal.classList.remove('scale-100', 'opacity-100');
+      modal.classList.add('scale-95', 'opacity-0');
+      setTimeout(() => {
+        backdrop.classList.add('hidden');
+      }, 200);
+    }
+
+    function renderRelatedProducts(category, currentId) {
+      const heading = document.getElementById('relatedSubheading');
+      if (heading) {
+        heading.innerText = `Curated recommendations in ${category}`;
+      }
+      const grid = document.getElementById('modalRelatedProductsGrid');
+      if (!grid) return;
+
+      // Filter products of exact same category, excluding current product, take up to 6
+      let related = allMarketplaceProducts.filter(p => p.category === category && p.id !== currentId);
+      if (related.length < 4) {
+        const others = allMarketplaceProducts.filter(p => p.id !== currentId && !related.includes(p));
+        related = [...related, ...others].slice(0, 6);
+      } else {
+        related = related.slice(0, 6);
+      }
+
+      grid.innerHTML = related.map(rel => `
+        <div onclick="openProductDetailModal('${rel.id}')" class="group p-2.5 rounded-2xl border border-slate-200/80 bg-white hover:border-indigo-400 hover:shadow-lg transition-all duration-200 cursor-pointer hover:scale-[1.02] flex flex-col justify-between">
+          <div class="w-full h-28 rounded-xl bg-slate-100 overflow-hidden relative">
+            <img src="${rel.image}" alt="${rel.title}" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105">
+            <span class="absolute bottom-1 left-1 px-1.5 py-0.2 rounded text-[9px] font-bold bg-slate-900/80 text-white">
+              -${rel.discountPercent}%
+            </span>
+          </div>
+          <div class="mt-2">
+            <h5 class="text-xs font-bold text-slate-900 truncate group-hover:text-indigo-600 transition-colors">
+              ${rel.title}
+            </h5>
+            <p class="text-xs font-extrabold text-slate-900 font-mono mt-0.5">
+              Rs. ${rel.pricePkr.toLocaleString('en-PK')}
+            </p>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    function openProductCheckoutModalById(productId) {
+      const prod = allMarketplaceProducts.find(p => p.id === productId);
+      if (prod) {
+        openPakistanCheckout(prod);
+      } else {
+        openPakistanCheckout();
+      }
+    }
+
+    // =================================================================
+    // 13. PRODUCT REVIEWS & CUSTOMER RATINGS SYSTEM
+    // =================================================================
+    const productReviewsMap = {
+      'prod_w1': [
+        { author: 'Hamza Tariq', location: 'Islamabad, Pakistan', rating: 5, date: '2 days ago', verified: true, text: 'The Grade 5 titanium feel on the Aura Chrono is breathtaking. Weightless on wrist and the micro-adjust clasp is a game changer. Arrived in Islamabad via express courier in 24 hours!', helpful: 34 },
+        { author: 'Zubair Khan', location: 'Lahore, Pakistan', rating: 5, date: '4 days ago', verified: true, text: 'Authentic Swiss craftsmanship. Sapphire glass has zero glare in sunlight. Paid via EasyPaisa and confirmation was instantaneous!', helpful: 21 },
+        { author: 'Elena Rostova', location: 'Geneva, Switzerland', rating: 5, date: '1 week ago', verified: true, text: 'Movement beat rate is 28,800 vph with high precision. Exceptional finishing at this price tier.', helpful: 16 }
+      ],
+      'prod_w2': [
+        { author: 'Sarah Jenkins', location: 'London, UK', rating: 5, date: '3 days ago', verified: true, text: 'Skeleton dial openwork is mesmerizing. You can see the balance wheel oscillating with perfection.', helpful: 29 },
+        { author: 'Ali Raza', location: 'Karachi, Pakistan', rating: 5, date: '5 days ago', verified: true, text: 'Platinum case weight and luxury box set exceeded expectations. Outstanding concierge service.', helpful: 14 }
+      ],
+      'prod_j1': [
+        { author: 'Ayesha Malik', location: 'Karachi, Pakistan', rating: 5, date: 'Yesterday', verified: true, text: 'Elysian Diamond Pavé Ring sparkles like pure fire. 18K solid yellow gold hallmark verified. JazzCash checkout was seamless!', helpful: 42 },
+        { author: 'Chloe Martin', location: 'Paris, France', rating: 5, date: '3 days ago', verified: true, text: 'Pave setting is flawless under 10x loupe. Delightful luxury unboxing experience.', helpful: 19 }
+      ],
+      'prod_a1': [
+        { author: 'Dr. Bilal Qureshi', location: 'Rawalpindi, Pakistan', rating: 5, date: '4 days ago', verified: true, text: 'Italian cashmere has rich tactile hand-feel and drape. Fit is true to European tailored sizing.', helpful: 18 },
+        { author: 'Marcus Vance', location: 'New York, USA', rating: 5, date: '1 week ago', verified: true, text: 'Warm, lightweight, and exquisitely structured. Will order the charcoal colorway next.', helpful: 12 }
+      ],
+      'prod_e1': [
+        { author: 'Saad Farooq', location: 'Multan, Pakistan', rating: 5, date: '5 days ago', verified: true, text: 'Planar magnetic headphone drivers deliver pristine audio resolution. Micro-details in acoustic instruments are incredible.', helpful: 25 },
+        { author: 'Kenji Sato', location: 'Tokyo, Japan', rating: 5, date: '1 week ago', verified: true, text: 'CNC aluminum chassis with lambskin ear cushions. Supreme comfort for long listening sessions.', helpful: 17 }
+      ]
+    };
+
+    let currentReviewFormRating = 5;
+
+    function renderProductReviews(productId) {
+      const reviewsList = productReviewsMap[productId] || [
+        { author: 'Verified Connoisseur', location: 'Pakistan', rating: 5, date: '2 days ago', verified: true, text: 'Exceptional luxury quality, direct atelier packaging, and rapid domestic delivery. 10/10 recommended.', helpful: 19 },
+        { author: 'Luxury Collector', location: 'International', rating: 5, date: '5 days ago', verified: true, text: 'Craftsmanship completely matches live stream presentation. Seamless checkout process.', helpful: 11 }
+      ];
+
+      const container = document.getElementById('modalReviewsList');
+      if (!container) return;
+
+      const countBadge = document.getElementById('reviewsFilterCountBadge');
+      if (countBadge) countBadge.innerText = `${reviewsList.length} Verified`;
+
+      container.innerHTML = reviewsList.map(rev => `
+        <div class="p-3.5 rounded-2xl bg-slate-50/70 border border-slate-200/80 hover:bg-slate-50 transition-colors">
+          <div class="flex items-center justify-between mb-2">
+            <div class="flex items-center gap-2">
+              <div class="w-7 h-7 rounded-full bg-slate-900 text-white flex items-center justify-center font-bold text-xs uppercase">
+                ${rev.author.charAt(0)}
+              </div>
+              <div>
+                <div class="flex items-center gap-1.5">
+                  <span class="font-bold text-xs text-slate-900">${rev.author}</span>
+                  ${rev.verified ? `
+                    <span class="px-1.5 py-0.2 rounded text-[8px] font-black bg-emerald-100 text-emerald-800 border border-emerald-300">
+                      ✓ VERIFIED BUYER
+                    </span>
+                  ` : ''}
+                </div>
+                <span class="text-[10px] text-slate-400 font-medium">${rev.location} · ${rev.date}</span>
+              </div>
+            </div>
+            <div class="flex items-center gap-1 text-amber-400 text-xs font-mono font-bold">
+              ${'★'.repeat(rev.rating)}${'☆'.repeat(5 - rev.rating)}
+            </div>
+          </div>
+          <p class="text-xs text-slate-700 leading-relaxed font-medium">
+            "${rev.text}"
+          </p>
+          <div class="mt-2.5 pt-2 border-t border-slate-100 flex items-center justify-between text-[10px] text-slate-400">
+            <span>Verified Purchase via Supernova Live</span>
+            <button onclick="this.classList.toggle('text-indigo-600'); this.innerHTML = '👍 Helpful (' + (${rev.helpful} + 1) + ')'" class="hover:text-slate-700 transition-colors font-medium">
+              👍 Helpful (${rev.helpful})
+            </button>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    function toggleWriteReviewForm() {
+      const formWrap = document.getElementById('writeReviewFormWrapper');
+      if (formWrap) {
+        formWrap.classList.toggle('hidden');
+        if (!formWrap.classList.contains('hidden')) {
+          formWrap.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        }
+      }
+    }
+
+    function setReviewRating(stars) {
+      currentReviewFormRating = stars;
+      const labels = {
+        1: '1 Star · Poor',
+        2: '2 Stars · Fair',
+        3: '3 Stars · Good',
+        4: '4 Stars · Very Good',
+        5: '5 Stars · Outstanding!'
+      };
+      const labelEl = document.getElementById('starRatingLabel');
+      if (labelEl) labelEl.innerText = labels[stars] || `${stars} Stars`;
+
+      const buttons = document.querySelectorAll('#starPickerContainer .star-pick');
+      buttons.forEach((btn, idx) => {
+        if (idx < stars) {
+          btn.className = 'star-pick text-2xl text-amber-400 hover:scale-125 transition-transform';
+        } else {
+          btn.className = 'star-pick text-2xl text-slate-300 hover:scale-125 transition-transform';
+        }
+      });
+    }
+
+    function handleReviewSubmit(e) {
+      e.preventDefault();
+      const author = document.getElementById('reviewAuthorInput').value.trim();
+      const location = document.getElementById('reviewLocationInput').value.trim() || 'Pakistan';
+      const text = document.getElementById('reviewTextInput').value.trim();
+
+      if (!author || !text) return;
+
+      const targetId = activeModalProduct ? activeModalProduct.id : 'prod_w1';
+      if (!productReviewsMap[targetId]) {
+        productReviewsMap[targetId] = [];
+      }
+
+      const newRev = {
+        author: author,
+        location: location,
+        rating: currentReviewFormRating,
+        date: 'Just now',
+        verified: true,
+        text: text,
+        helpful: 1
+      };
+
+      productReviewsMap[targetId].unshift(newRev);
+
+      // Update modal reviews count
+      if (activeModalProduct) {
+        activeModalProduct.reviewsCount = (activeModalProduct.reviewsCount || 0) + 1;
+        document.getElementById('modalReviewsText').innerText = `(${activeModalProduct.reviewsCount} customer reviews)`;
+      }
+
+      renderProductReviews(targetId);
+      toggleWriteReviewForm();
+      document.getElementById('productReviewForm').reset();
+      setReviewRating(5);
+
+      alert(`Thank you, ${author}! Your verified review has been published.`);
+    }
+
+    // 13. Pakistan In-Stream Checkout Logic
+    let currentPkGateway = 'JAZZCASH';
+    let pkCountdownTimer = null;
+    let activeCheckoutProduct = null;
+
+    function openPakistanCheckout(product = null) {
+      closeCart();
+      activeCheckoutProduct = product || allMarketplaceProducts[0];
+
+      // Update in-stream modal product summary with active product
+      const modal = document.getElementById('pkCheckoutModal');
+      const img = modal.querySelector('img');
+      const title = modal.querySelector('h4');
+      const priceText = modal.querySelector('.font-mono');
+      const dispatchBtnTotal = document.getElementById('pkDispatchBtn').querySelector('.font-mono');
+
+      if (img && activeCheckoutProduct.image) img.src = activeCheckoutProduct.image;
+      if (title) title.innerText = activeCheckoutProduct.title;
+      if (priceText) priceText.innerText = `Rs. ${activeCheckoutProduct.pricePkr.toLocaleString('en-PK')}`;
+      if (dispatchBtnTotal) dispatchBtnTotal.innerText = `Rs. ${activeCheckoutProduct.pricePkr.toLocaleString('en-PK')}`;
+
+      document.getElementById('pkCheckoutModal').classList.remove('translate-x-full');
+      document.getElementById('pkCheckoutBackdrop').classList.remove('hidden');
+      document.getElementById('pkStepSelect').classList.remove('hidden');
+      document.getElementById('pkStepWaiting').classList.add('hidden');
+      document.getElementById('pkStepSuccess').classList.add('hidden');
+    }
+
+    function closePakistanCheckout() {
+      document.getElementById('pkCheckoutModal').classList.add('translate-x-full');
+      document.getElementById('pkCheckoutBackdrop').classList.add('hidden');
+      if (pkCountdownTimer) clearInterval(pkCountdownTimer);
+    }
+
+    function selectPkGateway(gw) {
+      currentPkGateway = gw;
+      ['JAZZCASH', 'EASYPAISA', 'SAFEPAY'].forEach(g => {
+        const card = document.getElementById(`gatewayCard-${g}`);
+        if (g === gw) {
+          card.className = `p-3.5 rounded-2xl border-2 ${g === 'JAZZCASH' ? 'border-rose-500 bg-rose-50/40' : g === 'EASYPAISA' ? 'border-emerald-500 bg-emerald-50/40' : 'border-indigo-500 bg-indigo-50/40'} cursor-pointer flex items-center justify-between transition-all`;
+          card.querySelector('span:last-child').className = `w-4 h-4 rounded-full ${g === 'JAZZCASH' ? 'bg-rose-600' : g === 'EASYPAISA' ? 'bg-emerald-600' : 'bg-slate-900'} text-white flex items-center justify-center text-[10px]`;
+          card.querySelector('span:last-child').innerText = '✓';
+        } else {
+          card.className = 'p-3.5 rounded-2xl border border-slate-200 bg-white hover:bg-slate-50 cursor-pointer flex items-center justify-between transition-all';
+          card.querySelector('span:last-child').className = 'w-4 h-4 rounded-full border border-slate-300';
+          card.querySelector('span:last-child').innerText = '';
+        }
+      });
+
+      const cnicGroup = document.getElementById('pkCnicFieldGroup');
+      if (gw === 'JAZZCASH') {
+        cnicGroup.classList.remove('hidden');
+      } else {
+        cnicGroup.classList.add('hidden');
+      }
+    }
+
+    async function executePkPaymentInitiation() {
+      const phone = document.getElementById('pkMobileInput').value.trim();
+      const cnic = document.getElementById('pkCnicInput').value.trim();
+      const btn = document.getElementById('pkDispatchBtn');
+      const targetProduct = activeCheckoutProduct || allMarketplaceProducts[0];
+      const amountPkr = targetProduct.pricePkr;
+
+      btn.innerHTML = '<span class="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin"></span> Connecting gateway...';
+
+      try {
+        const res = await fetch('/api/checkout/initiate', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            gateway: currentPkGateway,
+            totalAmountPkr: amountPkr,
+            customerPhone: phone,
+            cnicLast6Digits: cnic,
+            idempotencyKey: 'idemp_' + Date.now()
+          })
+        });
+        const data = await res.json();
+        const orderNum = data.orderNumber || 'ORD-9481';
+
+        document.getElementById('pkStepSelect').classList.add('hidden');
+        document.getElementById('pkStepWaiting').classList.remove('hidden');
+        document.getElementById('pkWaitingPhoneText').innerText = phone;
+
+        let seconds = 35;
+        pkCountdownTimer = setInterval(async () => {
+          seconds--;
+          document.getElementById('pkWaitingCountdown').innerText = `${seconds}s remaining`;
+          document.getElementById('pkWaitingProgress').style.width = `${(seconds / 35) * 100}%`;
+
+          if (seconds <= 20) {
+            clearInterval(pkCountdownTimer);
+            // Simulate Gateway Webhook IPN Confirmation
+            await fetch('/api/webhooks/' + (currentPkGateway === 'JAZZCASH' ? 'jazzcash' : 'easypaisa'), {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({
+                pp_BillReference: orderNum,
+                pp_ResponseCode: '000',
+                pp_MobileNumber: phone,
+                pp_Amount: (amountPkr * 100).toString(),
+                orderId: orderNum,
+                responseCode: '0000'
+              })
+            }).catch(console.warn);
+
+            document.getElementById('pkStepWaiting').classList.add('hidden');
+            document.getElementById('pkStepSuccess').classList.remove('hidden');
+            document.getElementById('pkSuccessOrderNum').innerText = orderNum;
+            document.getElementById('pkSuccessGateway').innerText = currentPkGateway;
+
+            // Trigger instant live toast over video
+            const toast = document.getElementById('livePurchaseToast');
+            document.getElementById('toastCustomerName').innerText = `You (${phone.slice(0, 4)}***${phone.slice(-3)})`;
+            toast.querySelector('.text-emerald-600').innerText = `just bought ${targetProduct.title} via ${currentPkGateway}! 🚀`;
+          }
+        }, 1000);
+      } catch (err) {
+        console.error(err);
+      } finally {
+        btn.innerHTML = `<span>Dispatch Mobile Prompt</span><span>·</span><span class="font-mono">Rs. ${amountPkr.toLocaleString('en-PK')}</span>`;
+      }
+    }
+  </script>
+</body>
+</html>
