@@ -1,0 +1,27 @@
+{
+  "name": "supernova-live-commerce",
+  "version": "1.0.0",
+  "description": "Next-Gen Ultra-Premium Live Video Commerce Platform with WebRTC/LL-HLS, Redis flash inventory, AI RAG catalog, and Enhanced Professional Light Theme.",
+  "main": "src/index.ts",
+  "scripts": {
+    "build": "tsc",
+    "start": "ts-node src/index.ts",
+    "test": "jest",
+    "test:load": "k6 run tests/load/live-flash-sale.js"
+  },
+  "dependencies": {
+    "@prisma/client": "^5.19.1",
+    "crypto": "^1.0.1",
+    "dotenv": "^16.4.5",
+    "ioredis": "^5.4.1",
+    "livekit-server-sdk": "^2.6.0",
+    "ws": "^8.18.0",
+    "zod": "^3.23.8"
+  },
+  "devDependencies": {
+    "@types/node": "^22.5.5",
+    "@types/ws": "^8.5.12",
+    "prisma": "^5.19.1",
+    "typescript": "^5.6.2"
+  }
+}
