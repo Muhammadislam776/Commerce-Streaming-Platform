@@ -5,7 +5,8 @@
   "main": "src/index.ts",
   "scripts": {
     "build": "tsc && node build.js",
-    "start": "ts-node src/index.ts",
+    "start": "node dev-server.js",
+    "dev": "node dev-server.js",
     "test": "jest",
     "test:load": "k6 run tests/load/live-flash-sale.js"
   },
