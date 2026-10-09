@@ -52,16 +52,18 @@ function broadcastSSE(eventType, data) {
   }
 }
 
-// Background simulation: viewer counts & telemetry
-setInterval(() => {
-  liveState.viewers += Math.floor(Math.random() * 25 - 12);
-  liveState.streamLatencyMs = Math.floor(180 + Math.random() * 15);
-  broadcastSSE('telemetry', {
-    viewers: liveState.viewers,
-    latencyMs: liveState.streamLatencyMs,
-    stock: liveState.stockAvailable,
-  });
-}, 3000);
+// Background simulation: started only in standalone mode
+function startTelemetrySimulation() {
+  return setInterval(() => {
+    liveState.viewers += Math.floor(Math.random() * 25 - 12);
+    liveState.streamLatencyMs = Math.floor(180 + Math.random() * 15);
+    broadcastSSE('telemetry', {
+      viewers: liveState.viewers,
+      latencyMs: liveState.streamLatencyMs,
+      stock: liveState.stockAvailable,
+    });
+  }, 3000);
+}
 
 const server = http.createServer((req, res) => {
   const url = new URL(req.url, `http://${req.headers.host}`);
@@ -316,13 +318,18 @@ const server = http.createServer((req, res) => {
   res.end('Not Found');
 });
 
-server.listen(PORT, () => {
-  console.log(`=======================================================`);
-  console.log(`🌟 PROJECT SUPERNOVA - PAKISTAN PAYMENTS ONLINE 🌟`);
-  console.log(`=======================================================`);
-  console.log(`> Interactive Live Room UI: http://localhost:${PORT}`);
-  console.log(`> Pakistan Checkout API:    http://localhost:${PORT}/api/checkout/initiate`);
-  console.log(`> JazzCash Webhook IPN:     http://localhost:${PORT}/api/webhooks/jazzcash`);
-  console.log(`> EasyPaisa Webhook IPN:    http://localhost:${PORT}/api/webhooks/easypaisa`);
-  console.log(`=======================================================`);
-});
+if (require.main === module) {
+  startTelemetrySimulation();
+  server.listen(PORT, () => {
+    console.log(`=======================================================`);
+    console.log(`🌟 PROJECT SUPERNOVA - PAKISTAN PAYMENTS ONLINE 🌟`);
+    console.log(`=======================================================`);
+    console.log(`> Interactive Live Room UI: http://localhost:${PORT}`);
+    console.log(`> Pakistan Checkout API:    http://localhost:${PORT}/api/checkout/initiate`);
+    console.log(`> JazzCash Webhook IPN:     http://localhost:${PORT}/api/webhooks/jazzcash`);
+    console.log(`> EasyPaisa Webhook IPN:    http://localhost:${PORT}/api/webhooks/easypaisa`);
+    console.log(`=======================================================`);
+  });
+}
+
+module.exports = server;
